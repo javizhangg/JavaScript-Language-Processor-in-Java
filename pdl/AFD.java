@@ -1,4 +1,4 @@
-package pdl12;
+package pdl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -88,16 +88,21 @@ class AFD{
 			else {
 				break;
 			}
+			if (car ==' ') {
+				System.out.print("espacio");
+				continue;
+			}
 			
 			if(car  == '\r') {
 				c = leer();
 					System.out.println("se ha leido \\r");
 				if(c == '\n') {
 					System.out.println("se ha leido \\n");
+					posicionDeLinea++;
 					continue;
 					//										c = leer();
 					//							
-					linea
+					
 				}
 			}
 			

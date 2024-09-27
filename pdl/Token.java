@@ -1,4 +1,4 @@
-package pdl12;
+package pdl;
 
 //CLASE TOKEN ---------------------------------------------------------------
 class Token{

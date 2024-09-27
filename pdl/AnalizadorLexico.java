@@ -1,4 +1,4 @@
-package pdl12;
+package pdl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,7 +33,7 @@ public class AnalizadorLexico{
 	}
 
 	public static void main (String[] args) throws IOException {
-		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\javi2\\eclipse-workspace\\pd\\src\\pdl\\prueba.txt");
+		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
 	
 		AFD afd = new AFD(br);
 		afd.getToken();
