@@ -41,29 +41,36 @@ class AFD{
 	int posicionDeLinea;
 
 	//Constructor de AFD que inicializa el set y el array de las palabras reservadas y recibe las lineas del fichero fuente
-	public AFD(BufferedReader br) {
-		this.estado = 0;
-		this.posicionDeLinea = 0;
-		mt = new HashMap<Integer,Map<Character,Pair<Integer,Character>>>();
-		Map<Character,Pair<Integer,Character>> colE0 = new HashMap<Character,Pair<Integer,Character>>();
-		Map<Character,Pair<Integer,Character>> colE1 = new HashMap<Character,Pair<Integer,Character>>();
-		colE0.put('a', new Pair<Integer,Character>(1,'A'));
-		colE1.put('a', new Pair<Integer,Character>(1,'B'));
-		//		colE1.put('a', new Pair<Integer,Character>(1,'B'));
-		colE1.put('z', new Pair<Integer,Character>(4,'C'));
-		mt.put(0, colE0);
-		mt.put(1, colE1);
-		this.palabrasReservadas = new ArrayList<String>(Arrays.asList("for","var","int","boolean","string","void","output","input","if","else","then","do","while","function","return"));
-		//		this.estadosFinales = new ArrayList<Integer>(Arrays.asList(1,10,1));
-		this.br = br;
-	}
+	//Constructor de AFD que inicializa el set y el array de las palabras reservadas y recibe las lineas del fichero fuente
+    public AFD(BufferedReader br) {
+        this.estado = 0;
+        this.posicionDeLinea = 0;
+        mt = new HashMap<Integer,Map<Character,Pair<Integer,Character>>>();
+        Map<Character,Pair<Integer,Character>> colE0 = new HashMap<Character,Pair<Integer,Character>>();
+        Map<Character,Pair<Integer,Character>> colE1 = new HashMap<Character,Pair<Integer,Character>>();
+        Map<Character,Pair<Integer,Character>> colE5 = new HashMap<Character,Pair<Integer,Character>>();
+        colE0.put('a', new Pair<Integer,Character>(1,'A'));
+        colE1.put('a', new Pair<Integer,Character>(1,'A'));
+//        colE1.put('a', new Pair<Integer,Character>(1,'B'));
+        colE1.put('z', new Pair<Integer,Character>(4,'C'));
+        colE0.put('(', new Pair<Integer,Character>(16,'F'));
+        colE0.put(')', new Pair<Integer,Character>(17,'G'));
+        colE0.put('b', new Pair<Integer,Character>(5,'H'));
+        colE5.put('b', new Pair<Integer,Character>(5,'I'));
+        colE5.put('z', new Pair<Integer,Character>(6,'J'));
+        mt.put(0, colE0);
+        mt.put(1, colE1);
+        mt.put(5, colE5);
+        this.palabrasReservadas = new ArrayList<String>(Arrays.asList("for","var","int","boolean","string","void","output","input","if","else","then","do","while","function","return"));
+//        this.estadosFinales = new ArrayList<Integer>(Arrays.asList(1,10,1));
+        this.br = br;
+    }
 
 	//	public void imprimirMapa() {
 	//		System.out.println(mt.get(0).get('a').getEstado());
 	//		System.out.println(mt.get(0).get('a').getAcciones());
 	//		
 	//	}
-
 	//Método principal que me devuelve el token generado
 	public Token getToken () throws IOException {
 		estado = 0;
@@ -77,43 +84,47 @@ class AFD{
 		int valor = 0;
 		Token token = null;
 		while(c != -1) {
-			c = leer();
+			if(estado == 0){
+				c = leer();
+			}
+			
 			if(c!=-1) {
 				//Si no hemos llegado al final, convertimos el dato leido de c y lo convertimos en char car
 				car = (char)c;
-				System.out.print(c);
-				System.out.print(car); 
+				System.out.print(car + "\n");
+			}
+			else{
+				break;
+			}				
+
+			if(car== ' ') {
+				c=leer();
+				//System.out.print("hay un espacio");
+				continue;
 
 			}
-			else {
-				break;
-			}
-			if (car ==' ') {
-				System.out.print("espacio");
-				continue;
-			}
-			
+
 			if(car  == '\r') {
-				c = leer();
-					System.out.println("se ha leido \\r");
+				
+				//System.out.println("se ha leido \r");
 				if(c == '\n') {
-					System.out.println("se ha leido \\n");
+					//System.out.println("se ha leido \n");
 					posicionDeLinea++;
-					continue;
-					//										c = leer();
-					//							
-					
+
+					//                                        c = leer();
+
 				}
 			}
-			
-			
+
+
+
 			accion = accion(estado,identificar(car));
-			//						System.out.println(accion);
+									//System.out.println(accion);
 			estado = estado(estado,identificar(car));
-			//						System.out.println(estado);
-			//									System.out.print(car); 
+									//System.out.println(estado);
+			//										System.out.print(car); 
 			if(estado == -1 ) {
-				//				if(car =='\r');
+				//					if(car =='\r');
 				car ='s';
 				genError("Se ha leido un caracter invalido: " + car, posicionDeLinea);
 			}
@@ -121,15 +132,14 @@ class AFD{
 				switch(accion) {
 				case 'A': //
 					lexema.append(car);
+					c = leer();
 					break;
+
 				case 'B':
-					lexema.append(car);
-					break;
-				case 'C':
 					auxLexema = lexema.toString();
 
 					auxLexema.trim();
-					//					System.out.println(auxLexema);
+					//						System.out.println(auxLexema);
 					if(esPalabraReservada(auxLexema)) {
 						genToken(20,auxLexema);
 						estado = 0;
@@ -139,63 +149,127 @@ class AFD{
 					else {
 						palabrasReservadas.add(auxLexema);
 						genToken(21,String.valueOf(palabrasReservadas.indexOf(auxLexema)));
+						estado=0;
 						lexema.delete(0, auxLexema.length());
 					}
 					break;
+				case 'C':
+					if (identificar(car)=='b'){
+						lexema.append(car);
+						c = leer();
+					}
+					break;
+
+				case 'D':
+					if(identificar(car)=='a' ||identificar(car)=='b'|| identificar(car)=='_'){
+						lexema.append(car); 
+						c = leer();
+					}
+					break;
+
+				case 'E':
+					if(!(identificar(car)=='a' ||identificar(car)=='b'|| identificar(car)=='_')){
+						auxLexema = lexema.toString();
+						palabrasReservadas.add(auxLexema);
+						genToken(21,String.valueOf(palabrasReservadas.indexOf(auxLexema)));
+						estado=0;
+					}
+					break;
+
+				case 'F':
+					if (identificar(car)=='('){
+						genToken(16, "");
+						estado=0;
+					}
+					break;
+
+				case 'G':
+					if (identificar(car)==')'){
+						genToken(17, "");
+						estado=0;
+					}
+					break;
+
+				case'H': //leer digito
+					
+					valor=(car-48);
+					//System.out.print("ESTOYS EN H: "+ car + " el valor es: "+ valor + "\n");
+					c=leer();
+					break;
+
+				case 'I':
+					if(identificar(car)=='b'){
+						valor=valor*10+(c-48); 
+						//System.out.print("ESTOYS EN I: "+ car + " el valor es: "+  valor+ "\n");
+						c = leer();
+					}
+					break;
+				case 'J':
+					if (!(identificar(car)=='b')){
+						System.out.print(valor);
+						genToken(2, String.valueOf(valor));
+						
+						valor=0;
+						estado=0;
+					}
+					break;
+
+				case 'K':
+					genToken(18, "");
+					estado=0;
+					break;
+
+				case 'L':
+					genToken(19, "");
+					estado=0;
+					break;
+
+				case 'M':
+					lexema.append('"');
+					c=leer();
+					break;
+
+				case 'N':
+					if(car!='"'){
+						lexema.append(car);
+						c=leer();
+						break;
+					}
 
 				}
 			}
+
 		}
+
 		return token;
 	}
+
 	//Devuelve a si es letra, y devuelve b si es numero......
-	//Devuelve el caracter c en caso contrario
-	private char identificar(char c) {
-		if(Character.isLetter(c)) {
-			return 'a';
-		}
-		else if(Character.isDigit(c)) {
-			return 'b';
-		}
-		else if( c=='"'){
-			return 'd';
-		}
-		else if (c=='+'){
-			return 'e';
-		}
-		else if(c=='='){
-			return 'f';
-		}
-		else if (c=='&'){
-			return 'g';
-		}
-		else if (c== '|'){
-			return 'h';
-		}
-		else if (c=='('){
-			return 'i';
-		}
-		else if (c==')'){
-			return 'j';
-		}
-		else if (c==','){
-			return 'k';
-		}
-		else if (c==';'){
-			return 'n';
-		}
-		else if (c=='{'){
-			return 'o';
-		}
-		else if (c=='}'){
-			return 'p';
-		}
-		else{
-			return 'z';
-		}
-
-	}
-
+    //Devuelve el caracter c en caso contrario
+    private char identificar(char c) {
+        switch (c) {
+            case '"': return '"'; 
+            case '+': return '+';
+            case '=': return '=';
+            case '&': return '&';
+            case '|': return '|';
+            case '(': return '(';
+            case ')': return ')';
+            case ',': return ',';
+            case ';': return ';';
+            case '{': return '{';
+            case '}': return '}';
+            case '_': return '_';
+            default:
+                if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')) {
+                    return 'a';
+                } else if (Character.isDigit(c)) {
+                    return 'b';
+                } else {
+                    return 'z';
+                }
+        }
+    }
 	//Método para ver si palabra es una palabra reservada
 	private boolean esPalabraReservada(String palabra) {
 		return palabrasReservadas.contains(palabra);
@@ -218,12 +292,13 @@ class AFD{
 	//TODO Crea un token con la correspondiente categoria lexica y lo escribe en el fichero de tokens
 	private Token genToken(int categoriaLexica, String cadena) {
 		Token token = null;
-		if(categoriaLexica <0);
+		if(categoriaLexica >0) {
 
-		else { //Si es una categoriaLexica que no necesita atributos
+		//Si es una categoriaLexica que no necesita atributos
 			token = new Token(categoriaLexica,cadena);
 			System.out.println((posicionDeLinea + 1) +  ":" + token);
 		}
+		estado =0;
 		return token;
 
 	}

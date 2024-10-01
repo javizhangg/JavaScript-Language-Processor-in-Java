@@ -1,4 +1,1 @@
-for for 
-int
-int var
-for
+(123)
