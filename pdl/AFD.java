@@ -34,43 +34,86 @@ class AFD{
 	ArrayList<String> palabrasReservadas; 
 	ArrayList<Integer> estadosFinales;
 	BufferedReader br;
-
+	
+	
+	ArrayList<Map<Character,Pair<Integer,Character>>> arraymap ;
 	//Variable que guarda el estado actual
 	int estado;
 	//Variable que nos dice la linea actual
 	int posicionDeLinea;
-
+	Character [] chars= {'a','b','"','+','=','&','|','(',')',',',';','{','}','/','*','_'};
 	//Constructor de AFD que inicializa el set y el array de las palabras reservadas y recibe las lineas del fichero fuente
 	//Constructor de AFD que inicializa el set y el array de las palabras reservadas y recibe las lineas del fichero fuente
-	public AFD(BufferedReader br) {
+	public AFD(BufferedReader br) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 0;
-		mt = new HashMap<Integer,Map<Character,Pair<Integer,Character>>>();
-		Map<Character,Pair<Integer,Character>> colE0 = new HashMap<Character,Pair<Integer,Character>>();
-		Map<Character,Pair<Integer,Character>> colE1 = new HashMap<Character,Pair<Integer,Character>>();
-		Map<Character,Pair<Integer,Character>> colE5 = new HashMap<Character,Pair<Integer,Character>>();
-		colE0.put('a', new Pair<Integer,Character>(1,'A'));
-		colE1.put('a', new Pair<Integer,Character>(1,'A'));
-		//        colE1.put('a', new Pair<Integer,Character>(1,'B'));
-		colE1.put('z', new Pair<Integer,Character>(4,'C'));
-		colE0.put('(', new Pair<Integer,Character>(16,'F'));
-		colE0.put(')', new Pair<Integer,Character>(17,'G'));
-		colE0.put('b', new Pair<Integer,Character>(5,'H'));
-		colE5.put('b', new Pair<Integer,Character>(5,'I'));
-		colE5.put('z', new Pair<Integer,Character>(6,'J'));
-		mt.put(0, colE0);
-		mt.put(1, colE1);
-		mt.put(5, colE5);
+		
+		this.arraymap = new ArrayList<>();
+		this.matriz();
+		
+
+	
 		this.palabrasReservadas = new ArrayList<String>(Arrays.asList("for","var","int","boolean","string","void","output","input","if","else","then","do","while","function","return"));
 		//        this.estadosFinales = new ArrayList<Integer>(Arrays.asList(1,10,1));
 		this.br = br;
 	}
 
-	//	public void imprimirMapa() {
-	//		System.out.println(mt.get(0).get('a').getEstado());
-	//		System.out.println(mt.get(0).get('a').getAcciones());
-	//		
-	//	}
+	public void matriz() throws IOException {
+		try {
+			FileReader fr = new FileReader("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+			br = new BufferedReader(fr);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String linea = null;
+		
+		while ((linea = br.readLine()) != null) {
+			Map<Character,Pair<Integer,Character>> colE = new HashMap<Character,Pair<Integer,Character>>();
+			Map<Character,Pair<Integer,Character>> colA= leerCSV(linea,colE);
+			arraymap.add(colA);
+		}
+	}
+
+
+	public Map<Character, Pair<Integer, Character>> leerCSV(String linea, Map<Character, Pair<Integer, Character>> col) {
+	    // Dividir la línea usando ';' como delimitador
+	    String[] arraylinea = linea.split(";");
+
+	    int n = 0;
+
+	    // Ajustar el bucle para evitar índices fuera de rango y cadenas vacías
+	    for (int i = 1; i < arraylinea.length; i += 2) {
+	        // Verificar si las celdas contienen datos
+	        if (!arraylinea[i].isEmpty() && !arraylinea[i - 1].isEmpty()) {
+	            char actual = arraylinea[i].charAt(0);  // Obtener el carácter
+	            int estado = Integer.parseInt(arraylinea[i - 1]);  // Convertir el estado a entero
+	            
+	            // Añadir al mapa
+	            col.put(chars[n], new Pair<Integer, Character>(estado, actual));
+	            n++;
+	            
+	            // Imprimir para seguimiento
+	            System.out.println("Caracter actual: " + actual + ", Estado anterior: " + estado);
+	        } else {
+	            // Manejar el caso donde la cadena está vacía
+	            System.out.println("Error: cadena vacía en posición " + i);
+	        }
+	    }
+	    
+	    return col;
+	}
+
+
+		public void imprimirMapa() throws IOException {
+			this.matriz();
+			
+			
+			System.out.println(arraymap.get(3).get('b').getAcciones());
+			System.out.println(arraymap.get(3).get('b').getEstado());
+			
+			
+		}
 	//Método principal que me devuelve el token generado
 	public Token getToken () throws IOException {
 		estado = 0;
@@ -91,7 +134,7 @@ class AFD{
 			if(c!=-1) {
 				//Si no hemos llegado al final, convertimos el dato leido de c y lo convertimos en char car
 				car = (char)c;
-				System.out.print(car + "\n");
+				//System.out.print(car + "\n");
 			}
 			else{
 				break;
@@ -306,12 +349,18 @@ class AFD{
 
 			//Si es una categoriaLexica que no necesita atributos
 			token = new Token(categoriaLexica,cadena);
-			System.out.println((posicionDeLinea + 1) +  ":" + token);
+			//System.out.println((posicionDeLinea + 1) +  ":" + token);
 		}
 		estado =0;
 		return token;
 
 	}
+	//Genera e imprime en la salida de err el error lexico detectado
+	private void genError(String mensaje, int linea) {
+		Error error = new Error(mensaje,linea + 1);
+		System.err.println(error);
+	}
+
 	//Leemos de la linea linea el caracter de la posicion posCaracter
 	private int leer() throws IOException { 
 		int c = br.read();
