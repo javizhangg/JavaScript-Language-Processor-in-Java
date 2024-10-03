@@ -10,33 +10,44 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 //prueba
-class Pair<I,D>{
-	private int estado;
-	private char acciones;
+class Pair {
+    private Integer estado;    // El estado puede ser null en caso de error
+    private Object accion;     // La acción puede ser un Character o un Integer
 
-	Pair(int estado,char acciones){
-		this.estado = estado;
-		this.acciones = acciones;
-	}
+    // Constructor para estado y acción (Character)
+    Pair(Integer estado, Character accion) {
+        this.estado = estado;
+        this.accion = accion;
+    }
 
-	public int getEstado() {
-		return estado;
-	}
+    // Constructor para error (null estado, Integer acción)
+    Pair(Integer error) {
+        this.estado = null;    // Estado es null en caso de error
+        this.accion = error;
+    }
 
-	public char getAcciones() {
-		return acciones;
-	}
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public Object getAccion() {
+        return accion;
+    }
+
+    public boolean esError() {
+        return estado == null;
+    }
 }
 //CLASE AFD ---------------------------------------------------------------
 class AFD{
 	//Pasamos estado->pasamos  caracter->elegimos Estado o Accion
-	Map<Integer, Map<Character, Pair<Integer, Character>>> mt;
+
 	ArrayList<String> palabrasReservadas; 
 	ArrayList<Integer> estadosFinales;
 	BufferedReader br;
 	
 	
-	ArrayList<Map<Character,Pair<Integer,Character>>> arraymap ;
+	ArrayList<Map<Character,Pair>> mt ;
 	//Variable que guarda el estado actual
 	int estado;
 	//Variable que nos dice la linea actual
@@ -48,7 +59,7 @@ class AFD{
 		this.estado = 0;
 		this.posicionDeLinea = 0;
 		
-		this.arraymap = new ArrayList<>();
+		this.mt = new ArrayList<>();
 		this.matriz();
 		
 
@@ -69,14 +80,14 @@ class AFD{
 		String linea = null;
 		
 		while ((linea = br.readLine()) != null) {
-			Map<Character,Pair<Integer,Character>> colE = new HashMap<Character,Pair<Integer,Character>>();
-			Map<Character,Pair<Integer,Character>> colA= leerCSV(linea,colE);
-			arraymap.add(colA);
+			Map<Character,Pair> colE = new HashMap<Character,Pair>();
+			Map<Character,Pair> colA= leerCSV(linea,colE);
+			mt.add(colA);
 		}
 	}
 
 
-	public Map<Character, Pair<Integer, Character>> leerCSV(String linea, Map<Character, Pair<Integer, Character>> col) {
+	public Map<Character, Pair> leerCSV(String linea, Map<Character, Pair> col) {
 	    // Dividir la línea usando ';' como delimitador
 	    String[] arraylinea = linea.split(";");
 
@@ -90,15 +101,20 @@ class AFD{
 	            int estado = Integer.parseInt(arraylinea[i - 1]);  // Convertir el estado a entero
 	            
 	            // Añadir al mapa
-	            col.put(chars[n], new Pair<Integer, Character>(estado, actual));
-	            n++;
+	            col.put(chars[n], new Pair(estado, actual));
+	            
 	            
 	            // Imprimir para seguimiento
-	            System.out.println("Caracter actual: " + actual + ", Estado anterior: " + estado);
+	            System.out.println("Funcion: " + actual + ", Estado : " + estado);
 	        } else {
+	        	  // Obtener el carácter
+	            int error = Integer.parseInt(arraylinea[i ]);  // Convertir el estado a entero
+	            
+	        	col.put(chars[n], new Pair(error));
 	            // Manejar el caso donde la cadena está vacía
-	            System.out.println("Error: cadena vacía en posición " + i);
+	        	System.out.println("Funcion: " + null + ", Error: " + error);
 	        }
+	        n++;
 	    }
 	    
 	    return col;
@@ -109,8 +125,8 @@ class AFD{
 			this.matriz();
 			
 			
-			System.out.println(arraymap.get(3).get('b').getAcciones());
-			System.out.println(arraymap.get(3).get('b').getEstado());
+			System.out.println(mt.get(3).get('b').getAccion());
+			System.out.println(mt.get(3).get('b').getEstado());
 			
 			
 		}
