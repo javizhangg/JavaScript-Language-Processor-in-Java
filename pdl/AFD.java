@@ -121,15 +121,15 @@ class AFD{
 	}
 
 
-		public void imprimirMapa() throws IOException {
-			this.matriz();
+		// public void imprimirMapa() throws IOException {
+		// 	this.matriz();
 			
 			
-			System.out.println(mt.get(3).get('b').getAccion());
-			System.out.println(mt.get(3).get('b').getEstado());
+		// 	System.out.println(mt.get(3).get('b').getAccion());
+		// 	System.out.println(mt.get(3).get('b').getEstado());
 			
 			
-		}
+		// }
 	//Método principal que me devuelve el token generado
 	public Token getToken () throws IOException {
 		estado = 0;
@@ -143,7 +143,7 @@ class AFD{
 		int valor = 0;
 		Token token = null;
 		while(c != -1) {
-			if(estado == 0){
+			if(estado == 0 && lexema.isEmpty() && valor == 0){
 				c = leer();
 			}
 
@@ -178,14 +178,15 @@ class AFD{
 
 
 			accion = accion(estado,identificar(car));
+			if(){
+				continue;
+			}
 			//System.out.println(accion);
 			estado = estado(estado,identificar(car));
 			//System.out.println(estado);
 			//										System.out.print(car); 
 			if(estado == -1 ) {
-				//					if(car =='\r');
-				car ='s';
-				genError("Se ha leido un caracter invalido: " + car, posicionDeLinea);
+				genError(105, valor);
 			}
 			else {
 				switch(accion) {
@@ -334,28 +335,51 @@ class AFD{
 		return palabrasReservadas.contains(palabra);
 	}
 
-	//Nos devuelve el valor de accion en la matriz 
-	public char accion(int estado,char c) {
-		if(mt.get(estado).get(c)==null)
-			return 1;
-		return mt.get(estado).get(c).getAcciones();
-	}
+	
 	//Genera e imprime en la salida de err el error lexico detectado
 	private void genError(int codError, int linea) {
+		Error error;
 		switch(codError) {
-
-		//Si por ejemplo: leemos error 100
-		case 100:
-			break;
-
+		case 100 -> {
+                    error = new Error("No se puede empezar con el caracter '*'", linea);
+                    System.err.println(error);
+                }
+			case 101 -> {
+                            error = new Error("No se puede empezar con el caracter '_'", linea);
+                            System.err.println(error);
+                }
+			case 102 -> {
+                            error = new Error("se esperaba caracter '&'", linea);
+                            System.err.println(error);
+                }
+			case 103 -> {
+                            error = new Error("se esperaba caracter '='", linea);
+                            System.err.println(error);
+                }
+			case 104 -> {
+                            error = new Error("se esperaba caracter '*'", linea);
+                            System.err.println(error);
+                }
 		}
-	} 
+            	} 
 
 	//Nos devuelve el valor de estado en la matriz 
 	public int estado(int estado,char c) {
 		if(mt.get(estado).get(c) == null)
 			return -1;
 		return mt.get(estado).get(c).getEstado();
+	}
+
+	//Nos devuelve el valor de accion en la matriz 
+	public Object accion(int estado,char c) {
+		Object dato = mt.get(estado).get(c);
+		if(dato==null)
+			return 1;
+		if(dato instanceof Character)
+			return (char)dato;
+		else 
+			return (int)dato;
+		}
 	}
 
 	//TODO Crea un token con la correspondiente categoria lexica y lo escribe en el fichero de tokens
