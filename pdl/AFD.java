@@ -42,29 +42,29 @@ class AFD{
 
 	//Constructor de AFD que inicializa el set y el array de las palabras reservadas y recibe las lineas del fichero fuente
 	//Constructor de AFD que inicializa el set y el array de las palabras reservadas y recibe las lineas del fichero fuente
-    public AFD(BufferedReader br) {
-        this.estado = 0;
-        this.posicionDeLinea = 0;
-        mt = new HashMap<Integer,Map<Character,Pair<Integer,Character>>>();
-        Map<Character,Pair<Integer,Character>> colE0 = new HashMap<Character,Pair<Integer,Character>>();
-        Map<Character,Pair<Integer,Character>> colE1 = new HashMap<Character,Pair<Integer,Character>>();
-        Map<Character,Pair<Integer,Character>> colE5 = new HashMap<Character,Pair<Integer,Character>>();
-        colE0.put('a', new Pair<Integer,Character>(1,'A'));
-        colE1.put('a', new Pair<Integer,Character>(1,'A'));
-//        colE1.put('a', new Pair<Integer,Character>(1,'B'));
-        colE1.put('z', new Pair<Integer,Character>(4,'C'));
-        colE0.put('(', new Pair<Integer,Character>(16,'F'));
-        colE0.put(')', new Pair<Integer,Character>(17,'G'));
-        colE0.put('b', new Pair<Integer,Character>(5,'H'));
-        colE5.put('b', new Pair<Integer,Character>(5,'I'));
-        colE5.put('z', new Pair<Integer,Character>(6,'J'));
-        mt.put(0, colE0);
-        mt.put(1, colE1);
-        mt.put(5, colE5);
-        this.palabrasReservadas = new ArrayList<String>(Arrays.asList("for","var","int","boolean","string","void","output","input","if","else","then","do","while","function","return"));
-//        this.estadosFinales = new ArrayList<Integer>(Arrays.asList(1,10,1));
-        this.br = br;
-    }
+	public AFD(BufferedReader br) {
+		this.estado = 0;
+		this.posicionDeLinea = 0;
+		mt = new HashMap<Integer,Map<Character,Pair<Integer,Character>>>();
+		Map<Character,Pair<Integer,Character>> colE0 = new HashMap<Character,Pair<Integer,Character>>();
+		Map<Character,Pair<Integer,Character>> colE1 = new HashMap<Character,Pair<Integer,Character>>();
+		Map<Character,Pair<Integer,Character>> colE5 = new HashMap<Character,Pair<Integer,Character>>();
+		colE0.put('a', new Pair<Integer,Character>(1,'A'));
+		colE1.put('a', new Pair<Integer,Character>(1,'A'));
+		//        colE1.put('a', new Pair<Integer,Character>(1,'B'));
+		colE1.put('z', new Pair<Integer,Character>(4,'C'));
+		colE0.put('(', new Pair<Integer,Character>(16,'F'));
+		colE0.put(')', new Pair<Integer,Character>(17,'G'));
+		colE0.put('b', new Pair<Integer,Character>(5,'H'));
+		colE5.put('b', new Pair<Integer,Character>(5,'I'));
+		colE5.put('z', new Pair<Integer,Character>(6,'J'));
+		mt.put(0, colE0);
+		mt.put(1, colE1);
+		mt.put(5, colE5);
+		this.palabrasReservadas = new ArrayList<String>(Arrays.asList("for","var","int","boolean","string","void","output","input","if","else","then","do","while","function","return"));
+		//        this.estadosFinales = new ArrayList<Integer>(Arrays.asList(1,10,1));
+		this.br = br;
+	}
 
 	//	public void imprimirMapa() {
 	//		System.out.println(mt.get(0).get('a').getEstado());
@@ -87,7 +87,7 @@ class AFD{
 			if(estado == 0){
 				c = leer();
 			}
-			
+
 			if(c!=-1) {
 				//Si no hemos llegado al final, convertimos el dato leido de c y lo convertimos en char car
 				car = (char)c;
@@ -105,7 +105,7 @@ class AFD{
 			}
 
 			if(car  == '\r') {
-				
+
 				//System.out.println("se ha leido \r");
 				if(c == '\n') {
 					//System.out.println("se ha leido \n");
@@ -119,9 +119,9 @@ class AFD{
 
 
 			accion = accion(estado,identificar(car));
-									//System.out.println(accion);
+			//System.out.println(accion);
 			estado = estado(estado,identificar(car));
-									//System.out.println(estado);
+			//System.out.println(estado);
 			//										System.out.print(car); 
 			if(estado == -1 ) {
 				//					if(car =='\r');
@@ -191,7 +191,7 @@ class AFD{
 					break;
 
 				case'H': //leer digito
-					
+
 					valor=(car-48);
 					//System.out.print("ESTOYS EN H: "+ car + " el valor es: "+ valor + "\n");
 					c=leer();
@@ -208,7 +208,7 @@ class AFD{
 					if (!(identificar(car)=='b')){
 						System.out.print(valor);
 						genToken(2, String.valueOf(valor));
-						
+
 						valor=0;
 						estado=0;
 					}
@@ -245,31 +245,31 @@ class AFD{
 	}
 
 	//Devuelve a si es letra, y devuelve b si es numero......
-    //Devuelve el caracter c en caso contrario
-    private char identificar(char c) {
-        switch (c) {
-            case '"': return '"'; 
-            case '+': return '+';
-            case '=': return '=';
-            case '&': return '&';
-            case '|': return '|';
-            case '(': return '(';
-            case ')': return ')';
-            case ',': return ',';
-            case ';': return ';';
-            case '{': return '{';
-            case '}': return '}';
-            case '_': return '_';
-            default:
-                if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')) {
-                    return 'a';
-                } else if (Character.isDigit(c)) {
-                    return 'b';
-                } else {
-                    return 'z';
-                }
-        }
-    }
+	//Devuelve el caracter c en caso contrario
+	private char identificar(char c) {
+		switch (c) {
+		case '"': return '"'; 
+		case '+': return '+';
+		case '=': return '=';
+		case '&': return '&';
+		case '|': return '|';
+		case '(': return '(';
+		case ')': return ')';
+		case ',': return ',';
+		case ';': return ';';
+		case '{': return '{';
+		case '}': return '}';
+		case '_': return '_';
+		default:
+			if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')) {
+				return 'a';
+			} else if (Character.isDigit(c)) {
+				return 'b';
+			} else {
+				return 'z';
+			}
+		}
+	}
 	//Método para ver si palabra es una palabra reservada
 	private boolean esPalabraReservada(String palabra) {
 		return palabrasReservadas.contains(palabra);
@@ -281,6 +281,16 @@ class AFD{
 			return 1;
 		return mt.get(estado).get(c).getAcciones();
 	}
+	//Genera e imprime en la salida de err el error lexico detectado
+	private void genError(int codError, int linea) {
+		switch(codError) {
+
+		//Si por ejemplo: leemos error 100
+		case 100:
+			break;
+
+		}
+	} 
 
 	//Nos devuelve el valor de estado en la matriz 
 	public int estado(int estado,char c) {
@@ -294,7 +304,7 @@ class AFD{
 		Token token = null;
 		if(categoriaLexica >0) {
 
-		//Si es una categoriaLexica que no necesita atributos
+			//Si es una categoriaLexica que no necesita atributos
 			token = new Token(categoriaLexica,cadena);
 			System.out.println((posicionDeLinea + 1) +  ":" + token);
 		}
@@ -302,12 +312,6 @@ class AFD{
 		return token;
 
 	}
-	//Genera e imprime en la salida de err el error lexico detectado
-	private void genError(String mensaje, int linea) {
-		Error error = new Error(mensaje,linea + 1);
-		System.err.println(error);
-	}
-
 	//Leemos de la linea linea el caracter de la posicion posCaracter
 	private int leer() throws IOException { 
 		int c = br.read();
