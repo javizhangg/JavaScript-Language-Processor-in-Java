@@ -23,7 +23,7 @@ public class AnalizadorLexico{
 	}
 
 	public static void main (String[] args) throws IOException {
-		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\xiaol\\OneDrive\\Escritorio\\pdlTRABAJO\\pdl123\\pdl\\prueba.txt");
+		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
 	
 		AFD afd = new AFD(br);
 		afd.getToken();

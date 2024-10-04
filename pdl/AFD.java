@@ -73,7 +73,7 @@ class AFD {
 	public void matriz() throws IOException {
 		try {
 			FileReader fr = new FileReader(
-					"C:\\Users\\xiaol\\OneDrive\\Escritorio\\pdlTRABAJO\\pdl123\\pdl\\Matriz.txt");
+					"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 			br = new BufferedReader(fr);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -131,10 +131,16 @@ class AFD {
 		// Si no lee EOF, hacemos un casting de char a c
 		char car;
 		Object accion;
+		
+		
 		StringBuilder lexema = new StringBuilder();
+		
 		String auxLexema;
 		int valor = 0;
+		
 		Token token = null;
+		
+		
 		while (c != -1) {
 			if (estado == 0 && lexema.isEmpty() && valor == 0) {
 				c = leer();
@@ -144,7 +150,7 @@ class AFD {
 				// Si no hemos llegado al final, convertimos el dato leido de c y lo convertimos
 				// en char car
 				car = (char) c;
-				// System.out.print(car + "\n");
+				 System.out.print(car + "\n");
 			} else {
 				break;
 			}
@@ -165,12 +171,12 @@ class AFD {
 
 			accion = accion(estado, identificar(car));
 			if (accion == null) {
-				genError(105, posicionDeLinea);
+				genError(105,car, posicionDeLinea);
 				estado = 0;
 				continue;
 			}
 			if (accion instanceof Integer) {
-				genError((int) accion, posicionDeLinea);
+				genError((int) accion,car, posicionDeLinea);
 				continue;
 			}
 			// System.out.println(accion);
@@ -179,12 +185,14 @@ class AFD {
 			// System.out.print(car);
 
 			if (estado == -1) {
-				genError(105, valor);
+				genError(105,car, valor);
 			} else {
 				switch ((char) accion) {
 					case 'A':
+						c=leer();
 						break;
 					case 'B':
+						
 						break;
 					case 'C':
 						break;
@@ -281,35 +289,35 @@ class AFD {
 	}
 
 	// Genera e imprime en la salida de err el error lexico detectado
-	private void genError(int codError, int linea) {
+	private void genError(int codError, char car , int linea) {
 		Error error;
 		switch (codError) {
 			case 100 -> {
-				error = new Error("No se puede empezar con el caracter '*'", linea + 1);
+				error = new Error("No se puede empezar con el caracter :",car, linea + 1);
 				System.err.println(error);
 			}
 			case 101 -> {
-				error = new Error("No se puede empezar con el caracter '_'", linea + 1);
+				error = new Error("No se puede empezar con el caracter :" , car , linea + 1);
 				System.err.println(error);
 				break;
 			}
 			case 102 -> {
-				error = new Error("se esperaba caracter '&'", linea + 1);
+				error = new Error("se esperaba caracter :", car , linea + 1);
 				System.err.println(error);
 				break;
 			}
 			case 103 -> {
-				error = new Error("se esperaba caracter '='", linea + 1);
+				error = new Error("se esperaba caracter :", car , linea + 1);
 				System.err.println(error);
 				break;
 			}
 			case 104 -> {
-				error = new Error("se esperaba caracter '*'", linea + 1);
+				error = new Error("se esperaba caracter :",  car ,linea + 1);
 				System.err.println(error);
 				break;
 			}
 			case 105 -> {
-				error = new Error("Se ha leido un caracter erroneo", linea + 1);
+				error = new Error("Se ha leido un caracter erroneo",  car ,linea + 1);
 				System.err.println(error);
 				break;
 			}
