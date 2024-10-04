@@ -1,6 +1,5 @@
 package pdl;
 
-//CLASE TOKEN ---------------------------------------------------------------
 class Token{
 	private final int codigo;
 	private final String atributo;

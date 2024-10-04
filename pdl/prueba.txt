@@ -1,4 +1,5 @@
-"adfasdgadfbardfafasdfvasvasefwefscvavadbfafdvadfasfsasvascsvasgSBADAVASCBASDFASF"
-32767
-()
-"hola"
+int cont = 0;
+String palabras = "ESTO ES UNA PRUEBA";
+while (cont  && & && $ ){
+    palabras = " ;
+}
