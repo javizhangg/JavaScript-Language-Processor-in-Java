@@ -24,7 +24,6 @@ public class AnalizadorLexico{
 
 	public static void main (String[] args) throws IOException {
 		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
-	
 		AFD afd = new AFD(br);
 		afd.getToken();
 		// afd.imprimirMapa();

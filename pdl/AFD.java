@@ -42,7 +42,7 @@ class Pair {
 // CLASE AFD ---------------------------------------------------------------
 class AFD {
 	// Pasamos estado->pasamos caracter->elegimos Estado o Accion
-	private ArrayList<String> palabrasReservadas;
+	private Map<String,Integer> palabrasReservadas;
 	private BufferedReader br;
 
 	private ArrayList<Map<Character, Pair>> mt;
@@ -51,7 +51,8 @@ class AFD {
 	// Variable que nos dice la linea actual
 	private int posicionDeLinea;
 	private Character[] chars;
-
+	private ArrayList<String> tablaSimbolo;
+	
 
 	// Constructor de AFD que inicializa el set y el array de las palabras
 	// reservadas y recibe las lineas del fichero fuente
@@ -61,11 +62,31 @@ class AFD {
 
 		this.mt = new ArrayList<>();
 		// Inicializar la matriz de transiciones
-		chars = new Character[] { 'a', 'b', '"', '+', '=', '&', '|', '(', ')', ',', ';', '{', '}', '/', '*', '_' };
-		matriz();
+		chars = new Character[] { 'a', 'b', '"', '+', '=', '&', '|', '(', ')', ',', ';', '{', '}', '/', '*', '_' ,' ', '\r'};
+		this.matriz();
 
-		this.palabrasReservadas = new ArrayList<String>(Arrays.asList("var", "int", "boolean", "string", "void",
-				"output", "input", "if", "else", "then", "do", "while", "function", "return"));
+
+		this.palabrasReservadas= new HashMap<>();
+
+		palabrasReservadas.put("var", 9);
+		palabrasReservadas.put("int", 10);
+		palabrasReservadas.put("boolean", 11);
+		palabrasReservadas.put("string", 12);
+		palabrasReservadas.put("void", 13);
+		palabrasReservadas.put("output", 14);
+		palabrasReservadas.put("input", 15);
+		palabrasReservadas.put("if", 22);
+		palabrasReservadas.put("else", 23);
+		palabrasReservadas.put("then", 24);
+		palabrasReservadas.put("do", 25);
+		palabrasReservadas.put("while", 26);
+		palabrasReservadas.put("function", 27);
+		palabrasReservadas.put("return", 28);
+
+		this.tablaSimbolo= new ArrayList<>();
+		
+
+			
 		this.br = br;
 	}
 
@@ -131,114 +152,207 @@ class AFD {
 		// Si no lee EOF, hacemos un casting de char a c
 		char car;
 		Object accion;
-		
-		
 		StringBuilder lexema = new StringBuilder();
-		
 		String auxLexema;
 		int valor = 0;
-		
 		Token token = null;
 		
-		
+		boolean leido=false;
 		while (c != -1) {
-			if (estado == 0 && lexema.isEmpty() && valor == 0) {
+			if (estado == 0 && lexema.isEmpty() && valor == 0 && leido==false) {
 				c = leer();
 			}
-
+			
 			if (c != -1) {
 				// Si no hemos llegado al final, convertimos el dato leido de c y lo convertimos
 				// en char car
 				car = (char) c;
-				 System.out.print(car + "\n");
+				//System.out.println(car);
 			} else {
 				break;
 			}
 
-			if (car == ' ') {
-				c = leer();
-				continue;
 
-			}
-
-			if (car == '\r') {
-				c = leer();
-				if (c == '\n') {
-					posicionDeLinea++;
-					continue;
-				}
-			}
+			
 
 			accion = accion(estado, identificar(car));
 			if (accion == null) {
-				genError(105,car, posicionDeLinea);
-				estado = 0;
+				genError(106, posicionDeLinea);
+				valor = 0;
+				lexema.delete(0,lexema.length());
+				leido = false;
+				estado=0;
+				
 				continue;
 			}
 			if (accion instanceof Integer) {
-				genError((int) accion,car, posicionDeLinea);
+				genError((int) accion, posicionDeLinea);
+				valor = 0;
+				lexema.delete(0,lexema.length());
+				leido = false;
+				estado=0;
 				continue;
 			}
-			// System.out.println(accion);
+			//System.out.println(accion);
 			estado = estado(estado, identificar(car));
 			// System.out.println(estado);
 			// System.out.print(car);
 
 			if (estado == -1) {
-				genError(105,car, valor);
+				genError(105, valor);
+//				c=leer();
+				valor = 0;
+				lexema.delete(0,lexema.length());
+				leido = false;
+				estado=0;
+				continue;
 			} else {
 				switch ((char) accion) {
-					case 'A':
-						c=leer();
-						break;
-					case 'B':
-						
-						break;
-					case 'C':
-						break;
-					case 'D':
-						break;
-					case 'E':
-						estado = 0;
-						genToken(16, "");
-						break;
-					case 'F':
-						estado = 0;
-						genToken(17, "");
-						break;
-					case 'G':
-						estado = 0;
-						genToken(18, "");
-						break;
-					case 'H':
-						break;
-					case 'I':
-						break;
-					case 'J':
-						break;
-					case 'K':
-						break;
-					case 'L':
-						break;
-					case 'M':
-						break;
-					case 'N':
-						break;
-					case 'O':
-						break;
-					case 'P':
-						break;
-					case 'Q':
-						break;
-					case 'R':
-						break;
-					case 'S':
-						break;
-					case 'T':
-						break;
+				  case 'A':
+					  if(car=='\r') {
+						  c=leer();
+						  if(c== '\n') {
+						  posicionDeLinea++;
+						  
+						  }
+					  }else {
+						  c=leer();
+						  leido=true;
+					  }
+				      break;
+				  case 'B':
+				      lexema.append(car);
+				      c=leer();
+				      break;
+				  case 'C':
+				      auxLexema=lexema.toString();
+				      if(esPalabraReservada(auxLexema)) {
+				    	  
+				          genToken(palabrasReservadas.get(auxLexema),"");
+				          
+		
+				          
+				      }else if(!tablaSimbolo.contains(auxLexema)){
+				    	  genToken(1,String.valueOf(tablaSimbolo.size()) );
+				    	  tablaSimbolo.add(auxLexema);
+				    	  
+				      }
+				      lexema.delete(0, lexema.length());
+				      estado=0;
+			          leido=true;
+				      break;
+				  case 'D':
+					  auxLexema=lexema.toString();
+					  if(!tablaSimbolo.contains(auxLexema)){
+				    	  genToken(1,String.valueOf(tablaSimbolo.size()) );
+				    	  tablaSimbolo.add(auxLexema);
+				    	  
+				      }
+				      lexema.delete(0, lexema.length());
+				      estado=0;
+			          leido=true;
+				     
+				      break;
+				      
+				  case 'E':
+				      genToken(16, "");
+				      leido=false;
+				      estado=0;
+				      break;
+				      
+				  case 'F':
+				      genToken(17, "");
+				      leido=false;
+				      estado=0;
+				      
+				      break;
+				  case 'G':
+					  
+			      valor = valor*10 + (c-48); 
+			      c=leer();
+			      
+				      break;
+				  case 'H':
+					  if(valor <= 32767) {
+				      genToken(2, String.valueOf(valor));
+				      leido=true;
+				      valor=0;
+					  }else {
+						  genError(107,posicionDeLinea);
+						  valor = 0;
+							lexema.delete(0,lexema.length());
+							leido = false;
+							estado=0;
+					  }
+				      estado=0;
+				      
+				      break;
+				  case 'I':
+				      genToken(18,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'J':
+				      genToken(19,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'K':
+					  lexema.append(car);
+					  auxLexema=lexema.toString();
+					  if(auxLexema.length()<=64) {
+					  
+					  genToken(3,auxLexema);
+				      lexema.delete(0, lexema.length());
+				      c=leer();
+				      estado=0;		
+					  }else {
+						  genError(108,posicionDeLinea);
+						  valor = 0;
+							lexema.delete(0,lexema.length());
+							leido = false;
+							estado=0;
+					  }
+			          break;
+				  case 'L':
+				      genToken(5,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				      
+				  case 'M':
+				      genToken(7,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'N':
+				      genToken(20,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'O':
+				      genToken(21,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'P':
+				      genToken(6,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'Q':
+				      genToken(8,"");
+				      leido=false;
+				      estado=0;
+				      break;
+				  case 'R':
+				      genToken(4,"");
+				      leido=false;
+				      estado=0;
+				      break;
 
 				}
-			}
+				}
 
 		}
 
@@ -248,86 +362,112 @@ class AFD {
 	// Devuelve a si es letra, y devuelve b si es numero......
 	private char identificar(char c) {
 		switch (c) {
-			case '"':
-				return '"';
-			case '+':
-				return '+';
-			case '=':
-				return '=';
-			case '&':
-				return '&';
-			case '|':
-				return '|';
-			case '(':
-				return '(';
-			case ')':
-				return ')';
-			case ',':
-				return ',';
-			case ';':
-				return ';';
-			case '{':
-				return '{';
-			case '}':
-				return '}';
-			case '_':
-				return '_';
-			default:
-				if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')) {
-					return 'a';
-				} else if (Character.isDigit(c)) {
-					return 'b';
-				} else {
-					return 'z';
-				}
+		case '"':
+			return '"';
+		case '+':
+			return '+';
+		case '=':
+			return '=';
+		case '&':
+			return '&';
+		case '|':
+			return '|';
+		case '(':
+			return '(';
+		case ')':
+			return ')';
+		case '/':
+			return '/';
+		case ',':
+			return ',';
+		case ';':
+			return ';';
+		case '{':
+			return '{';
+		case '}':
+			return '}';
+		case '_':
+			return '_';
+		case '*':
+			return '*';
+		case ' ':
+			return ' ';
+		case '\r':
+		case '\n':  // Asegúrate de manejar los saltos de línea
+	            return '\r';
+		default:
+			if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')) {
+				return 'a';
+			} else if (Character.isDigit(c)) {
+				return 'b';
+			} else {
+				return 'z';
+			}
 		}
 	}
 
 	// Método para ver si palabra es una palabra reservada
 	private boolean esPalabraReservada(String palabra) {
-		return palabrasReservadas.contains(palabra);
+		return palabrasReservadas.containsKey(palabra);
 	}
 
 	// Genera e imprime en la salida de err el error lexico detectado
-	private void genError(int codError, char car , int linea) {
+	private void genError(int codError, int linea) {
+		
 		Error error;
 		switch (codError) {
-			case 100 -> {
-				error = new Error("No se puede empezar con el caracter :",car, linea + 1);
-				System.err.println(error);
-			}
-			case 101 -> {
-				error = new Error("No se puede empezar con el caracter :" , car , linea + 1);
-				System.err.println(error);
-				break;
-			}
-			case 102 -> {
-				error = new Error("se esperaba caracter :", car , linea + 1);
-				System.err.println(error);
-				break;
-			}
-			case 103 -> {
-				error = new Error("se esperaba caracter :", car , linea + 1);
-				System.err.println(error);
-				break;
-			}
-			case 104 -> {
-				error = new Error("se esperaba caracter :",  car ,linea + 1);
-				System.err.println(error);
-				break;
-			}
-			case 105 -> {
-				error = new Error("Se ha leido un caracter erroneo",  car ,linea + 1);
-				System.err.println(error);
-				break;
-			}
+		case 100 -> {
+			error = new Error("No se puede empezar con el caracter '*'", linea + 1);
+			System.out.println(error);
+		}
+		case 101 -> {
+			error = new Error("No se puede empezar con el caracter '_'", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 102 -> {
+			error = new Error("se esperaba caracter '&'", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 103 -> {
+			error = new Error("se esperaba caracter '='", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 104 -> {
+			error = new Error("se esperaba caracter '*'", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 105 -> {
+			error = new Error("Una cadena no puede tener salto de linea ", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 106 -> {
+			error = new Error("Se ha leido un caracter erroneo ", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 107 -> {
+			error = new Error("Supera el maximo entero valido ", linea + 1);
+			System.out.println(error);
+			break;
+		}
+		case 108 -> {
+			error = new Error("Supera el maximo de 64 caracteres ", linea + 1);
+			System.out.println(error);
+			break;
+		}
 		}
 	}
 
 	// Nos devuelve el valor de estado en la matriz
 	public int estado(int estado, char c) {
-		if (mt.get(estado).get(c) == null)
+		if (mt.get(estado).get(c) == null) {
 			return -1;
+		}
 		return mt.get(estado).get(c).getEstado();
 	}
 
@@ -335,8 +475,8 @@ class AFD {
 	public Object accion(int estado, char c) {
 		Object dato;
 
-		if (mt.get(estado).get(c) == null)
-			return null;
+		if (mt.get(estado).get(c) == null ) {
+			return null;}
 
 		dato = mt.get(estado).get(c).getAccion();
 
@@ -355,15 +495,15 @@ class AFD {
 
 		// Si es una categoriaLexica que no necesita atributos
 		if(categoriaLexica == 1 || categoriaLexica == 2 || categoriaLexica == 3){
-		token = new Token(categoriaLexica, cadena);
-		System.out.println((posicionDeLinea + 1) + ":" + token);
+			token = new Token(categoriaLexica, cadena);
+			System.out.println((posicionDeLinea + 1) + ":" + token);
 		}
 		else{
 			token = new Token(categoriaLexica, "_");
-		System.out.println((posicionDeLinea + 1) + ":" + token);
+			System.out.println((posicionDeLinea + 1) + ":" + token);
 		}
-		estado = 0; // Reseteamos el estado para la siguiente palabra
-			return token;
+//		estado = 0; // Reseteamos el estado para la siguiente palabra
+		return token;
 
 	}
 
