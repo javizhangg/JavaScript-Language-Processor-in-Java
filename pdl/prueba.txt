@@ -1,5 +1,2 @@
-int cont = 0;
-String palabras = "ESTO ES UNA PRUEBA";
-while (cont  && & && $ ){
-    palabras = " ;
-}
+var int = 0;
+"hola" for(int = 0; int < 10 && "Hola" /*troleado*/

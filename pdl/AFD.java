@@ -3,6 +3,7 @@ package pdl;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ class AFD {
 	// Pasamos estado->pasamos caracter->elegimos Estado o Accion
 	private Map<String, Integer> palabrasReservadas;
 	private BufferedReader br;
-
+	private FileWriter fw;
 	private ArrayList<Map<Character, Pair>> mt;
 	// Variable que guarda el estado actual
 	private int estado;
@@ -51,11 +52,11 @@ class AFD {
 
 	// Constructor de AFD que inicializa el set y el array de las palabras
 	// reservadas y recibe las lineas del fichero fuente
-	public AFD(BufferedReader br) throws IOException {
+	public AFD(BufferedReader br, FileWriter fw) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 0;
 		this.mt = new ArrayList<>();
-
+		this.fw = fw;
 		// Inicializar la matriz de transiciones
 		chars = new Character[] { 'a', 'b', '"', '+', '=', '&', '|', '(', ')', ',', ';', '{', '}', '/', '*', '_', ' ',
 				'\r' };
@@ -170,9 +171,7 @@ class AFD {
 				estado = 0;
 				continue;
 			}
-
 			estado = estado(estado, identificar(car));
-			// System.out.print(car);
 
 			if (estado == -1) {
 				genError(105, valor);
@@ -209,6 +208,7 @@ class AFD {
 						}
 						lexema.delete(0, lexema.length());
 						leido = true;
+						estado = 0;
 						break;
 					case 'D':
 						auxLexema = lexema.toString();
@@ -218,6 +218,7 @@ class AFD {
 						}
 						lexema.delete(0, lexema.length());
 						leido = true;
+						estado = 0;
 						break;
 					case 'E':
 						genToken(16, "");
@@ -355,46 +356,46 @@ class AFD {
 		switch (codError) {
 			case 100 -> {
 				error = new Error("No se puede empezar con el caracter '*'", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 			}
 			case 101 -> {
 				error = new Error("No se puede empezar con el caracter '_'", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 102 -> {
 				error = new Error("se esperaba caracter '&'", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 103 -> {
 				error = new Error("se esperaba caracter '='", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 104 -> {
 				error = new Error("se esperaba caracter '*'", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 105 -> {
 				error = new Error("Una cadena no puede tener salto de linea ", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 106 -> {
 				error = new Error("Se ha leido un caracter erroneo ", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 107 -> {
 				error = new Error("Supera el maximo entero valido ", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 			case 108 -> {
 				error = new Error("Supera el maximo de 64 caracteres ", linea + 1);
-				System.out.println(error);
+				System.err.println(error);
 				break;
 			}
 		}
@@ -433,16 +434,18 @@ class AFD {
 
 	// Crea un token con la correspondiente categoria lexica y lo escribe en el
 	// fichero de tokens
-	private Token genToken(int categoriaLexica, String cadena) {
+	private Token genToken(int categoriaLexica, String cadena) throws IOException {
 		Token token = null;
 
 		// Si es una categoriaLexica que no necesita atributos
 		if (categoriaLexica == 1 || categoriaLexica == 2 || categoriaLexica == 3) {
 			token = new Token(categoriaLexica, cadena);
-			System.out.println((posicionDeLinea + 1) + ":" + token);
+			fw.write(token + "\n");
+			// fw.write((posicionDeLinea + 1) + ":" + token + "\n");
 		} else {
-			token = new Token(categoriaLexica, "_");
-			System.out.println((posicionDeLinea + 1) + ":" + token);
+			token = new Token(categoriaLexica, "");
+			fw.write(token + "\n");
+			// fw.write((posicionDeLinea + 1) + ":" + token + "\n");
 		}
 		this.estado = 0; // Reseteamos el estado para la siguiente palabra
 		return token;
