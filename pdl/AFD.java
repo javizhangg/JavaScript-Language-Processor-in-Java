@@ -48,7 +48,9 @@ class AFD {
 	// Variable que nos dice la linea actual
 	private int posicionDeLinea;
 	private Character[] chars;
-	private ArrayList<String> tablaSimbolo;
+	private Map<String,Integer> tablaSimbolo;
+	
+	private int contsimb;
 
 	// Constructor de AFD que inicializa el set y el array de las palabras
 	// reservadas y recibe las lineas del fichero fuente
@@ -77,8 +79,9 @@ class AFD {
 		palabrasReservadas.put("while", 26);
 		palabrasReservadas.put("function", 27);
 		palabrasReservadas.put("return", 28);
-
-		this.tablaSimbolo = new ArrayList<>();
+		
+		this.contsimb=0;
+		this.tablaSimbolo = new HashMap<>();
 		this.br = br;
 	}
 
@@ -86,7 +89,7 @@ class AFD {
 	public void matriz() throws IOException {
 		try {
 			FileReader fr = new FileReader(
-					"C:\\Users\\xiaol\\eclipse-workspace\\pdl\\pdl123\\pdl\\Matriz.txt");
+					"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 			br = new BufferedReader(fr);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -145,14 +148,9 @@ class AFD {
 			if (estado == 0 && lexema.isEmpty() && valor == 0 && leido == false) {
 				c = leer();
 			}
-			if (c != -1) {
-				// Si no hemos llegado al final, convertimos el dato leido de c y lo convertimos
-				// en char car
-				car = (char) c;
-				System.out.print(car);
-			} else {
-				break;
-			}
+			car = (char) c;
+			System.out.print(car);
+			
 
 			accion = accion(estado, identificar(car));
 //			if (accion == null) {
@@ -187,7 +185,6 @@ class AFD {
 							c = leer();
 							if (c == '\n') {
 								posicionDeLinea++;
-
 							}
 						} else {
 							c = leer();
@@ -202,10 +199,13 @@ class AFD {
 						auxLexema = lexema.toString();
 						if (esPalabraReservada(auxLexema)) {
 							genToken(palabrasReservadas.get(auxLexema), "");
-						} else if (!tablaSimbolo.contains(auxLexema)) {
+						} else if (!tablaSimbolo.containsKey(auxLexema)) {
 							InsertarTS(auxLexema);
+							genToken(1, String.valueOf(tablaSimbolo.get(auxLexema)));
+						}else {
+							genToken(1, String.valueOf(tablaSimbolo.get(auxLexema)));
 						}
-						genToken(1, String.valueOf(tablaSimbolo.size()));
+						
 						
 						lexema.delete(0, lexema.length());
 						leido = true;
@@ -213,10 +213,10 @@ class AFD {
 						break;
 					case 'D':
 						auxLexema = lexema.toString();
-						if (!tablaSimbolo.contains(auxLexema)) {
+						if (!tablaSimbolo.containsKey(auxLexema)) {
 							InsertarTS(auxLexema);
 						}
-						genToken(1, String.valueOf(tablaSimbolo.size()));
+						genToken(1, String.valueOf(tablaSimbolo.get(auxLexema)));
 						lexema.delete(0, lexema.length());
 						leido = true;
 						estado = 0;
@@ -276,7 +276,7 @@ class AFD {
 
 					case 'M':
 						genToken(7, "");
-						leido = false;
+						leido = true;
 						break;
 					case 'N':
 						genToken(20, "");
@@ -453,7 +453,8 @@ class AFD {
 	}
 	
 	private void InsertarTS(String lexema) throws IOException {
-		tablaSimbolo.add(lexema);
+		tablaSimbolo.put(lexema, contsimb);
+		contsimb++;
 	}
 	// Leemos de la linea linea el caracter de la posicion posCaracter
 	private int leer() throws IOException {

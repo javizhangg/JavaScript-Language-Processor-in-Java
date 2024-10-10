@@ -30,7 +30,7 @@ public class AnalizadorLexico{
 	}
 
 	public static void main (String[] args) throws IOException {
-		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\pdl123\\pdl\\prueba.txt","C:\\Users\\xiaol\\eclipse-workspace\\pdl\\pdl123\\pdl\\FicheroDeTokens");
+		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt","C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens");
 		AFD afd = new AFD(br,fw);
 		afd.getToken();
 		fw.close();
