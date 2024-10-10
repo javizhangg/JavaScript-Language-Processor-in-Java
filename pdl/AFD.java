@@ -86,7 +86,7 @@ class AFD {
 	public void matriz() throws IOException {
 		try {
 			FileReader fr = new FileReader(
-					"C:\\Users\\xiaol\\OneDrive\\Escritorio\\pdlTRABAJO\\pdl123\\pdl\\Matriz.txt");
+					"C:\\Users\\xiaol\\eclipse-workspace\\pdl\\pdl123\\pdl\\Matriz.txt");
 			br = new BufferedReader(fr);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -155,14 +155,14 @@ class AFD {
 			}
 
 			accion = accion(estado, identificar(car));
-			if (accion == null) {
-				genError(106, posicionDeLinea);
-				valor = 0;
-				lexema.delete(0, lexema.length());
-				leido = false;
-				estado = 0;
-				continue;
-			}
+//			if (accion == null) {
+//				genError(106, posicionDeLinea);
+//				valor = 0;
+//				lexema.delete(0, lexema.length());
+//				leido = false;
+//				estado = 0;
+//				continue;
+//			}
 			if (accion instanceof Integer) {
 				genError((int) accion, posicionDeLinea);
 				valor = 0;
@@ -174,7 +174,7 @@ class AFD {
 			estado = estado(estado, identificar(car));
 
 			if (estado == -1) {
-				genError(105, valor);
+				genError(106, valor);
 				valor = 0;
 				lexema.delete(0, lexema.length());
 				leido = false;
@@ -203,8 +203,7 @@ class AFD {
 						if (esPalabraReservada(auxLexema)) {
 							genToken(palabrasReservadas.get(auxLexema), "");
 						} else if (!tablaSimbolo.contains(auxLexema)) {
-							genToken(1, String.valueOf(tablaSimbolo.size()));
-							tablaSimbolo.add(auxLexema);
+							InsertarTS(auxLexema);
 						}
 						lexema.delete(0, lexema.length());
 						leido = true;
@@ -213,8 +212,7 @@ class AFD {
 					case 'D':
 						auxLexema = lexema.toString();
 						if (!tablaSimbolo.contains(auxLexema)) {
-							genToken(1, String.valueOf(tablaSimbolo.size()));
-							tablaSimbolo.add(auxLexema);
+							InsertarTS(auxLexema);
 						}
 						lexema.delete(0, lexema.length());
 						leido = true;
@@ -356,46 +354,46 @@ class AFD {
 		switch (codError) {
 			case 100 -> {
 				error = new Error("No se puede empezar con el caracter '*'", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 			}
 			case 101 -> {
 				error = new Error("No se puede empezar con el caracter '_'", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 102 -> {
 				error = new Error("se esperaba caracter '&'", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 103 -> {
 				error = new Error("se esperaba caracter '='", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 104 -> {
 				error = new Error("se esperaba caracter '*'", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 105 -> {
 				error = new Error("Una cadena no puede tener salto de linea ", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 106 -> {
 				error = new Error("Se ha leido un caracter erroneo ", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 107 -> {
 				error = new Error("Supera el maximo entero valido ", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 			case 108 -> {
 				error = new Error("Supera el maximo de 64 caracteres ", linea + 1);
-				System.err.println(error);
+				System.out.println(error);
 				break;
 			}
 		}
@@ -450,7 +448,11 @@ class AFD {
 		this.estado = 0; // Reseteamos el estado para la siguiente palabra
 		return token;
 	}
-
+	
+	private void InsertarTS(String lexema) throws IOException {
+		genToken(1, String.valueOf(tablaSimbolo.size()));
+		tablaSimbolo.add(lexema);
+	}
 	// Leemos de la linea linea el caracter de la posicion posCaracter
 	private int leer() throws IOException {
 		int c = br.read();

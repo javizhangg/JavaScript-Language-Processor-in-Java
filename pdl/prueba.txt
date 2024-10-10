@@ -1,2 +1,5 @@
 var int = 0;
 "hola" for(int = 0; int < 10 && "Hola" /*troleado*/
+hola hola hola holas
+(
+)
