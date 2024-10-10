@@ -205,6 +205,8 @@ class AFD {
 						} else if (!tablaSimbolo.contains(auxLexema)) {
 							InsertarTS(auxLexema);
 						}
+						genToken(1, String.valueOf(tablaSimbolo.size()));
+						
 						lexema.delete(0, lexema.length());
 						leido = true;
 						estado = 0;
@@ -214,6 +216,7 @@ class AFD {
 						if (!tablaSimbolo.contains(auxLexema)) {
 							InsertarTS(auxLexema);
 						}
+						genToken(1, String.valueOf(tablaSimbolo.size()));
 						lexema.delete(0, lexema.length());
 						leido = true;
 						estado = 0;
@@ -450,7 +453,6 @@ class AFD {
 	}
 	
 	private void InsertarTS(String lexema) throws IOException {
-		genToken(1, String.valueOf(tablaSimbolo.size()));
 		tablaSimbolo.add(lexema);
 	}
 	// Leemos de la linea linea el caracter de la posicion posCaracter

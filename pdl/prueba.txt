@@ -1,5 +1,14 @@
-var int = 0;
-"hola" for(int = 0; int < 10 && "Hola" /*troleado*/
-hola hola hola holas
-(
-)
+var int a ;
+var  int   b  ;
+var boolean bbb ;
+a = 3;
+b=a;                                                                                                                                               ;
+    var
+        boolean
+                c
+                    ;
+c = a == b;
+if (c) bbb |= bbb &&c;
+a = a + b;
+output a ;
+output b;
