@@ -148,19 +148,22 @@ class AFD {
 			if (estado == 0 && lexema.isEmpty() && valor == 0 && leido == false) {
 				c = leer();
 			}
+			if(c!=-1) {
 			car = (char) c;
 			System.out.print(car);
-			
+			}else {
+				break;
+			}
 
 			accion = accion(estado, identificar(car));
-//			if (accion == null) {
-//				genError(106, posicionDeLinea);
-//				valor = 0;
-//				lexema.delete(0, lexema.length());
-//				leido = false;
-//				estado = 0;
-//				continue;
-//			}
+			if (accion == null) {
+				genError(106, posicionDeLinea);
+				valor = 0;
+				lexema.delete(0, lexema.length());
+				leido = false;
+				estado = 0;
+				continue;
+			}
 			if (accion instanceof Integer) {
 				genError((int) accion, posicionDeLinea);
 				valor = 0;

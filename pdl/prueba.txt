@@ -1,14 +1,11 @@
-var int a ;
-var  int   b  ;
-var boolean bbb ;
-a = 3;
-b=a;                                                                                                                                               ;
-    var
-        boolean
-                c
-                    ;
-c = a == b;
-if (c) bbb |= bbb &&c;
-a = a + b;
-output a ;
-output b;
+
+output "Introduce el segundo operando";input 
+	b;
+function int operacion (int num1, int num2)
+{
+	return num1+num2;
+}
+
+number = operacion (a, b);
+output number;
+ ;
