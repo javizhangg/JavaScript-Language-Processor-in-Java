@@ -1,36 +1,38 @@
-<14,>
-<3,"Introduce el segundo operando">
-<19,>
-<15,>
-<1,0>
-<19,>
-<27,>
-<10,>
-<1,1>
-<16,>
-<10,>
-<1,2>
-<18,>
-<10,>
-<1,3>
-<17,>
-<20,>
-<28,>
-<1,2>
-<4,>
-<1,3>
-<19,>
-<21,>
-<1,4>
-<7,>
-<1,1>
-<16,>
-<1,5>
-<18,>
-<1,0>
-<17,>
-<19,>
-<14,>
-<1,4>
-<19,>
-<19,>
+<1,0> //es el identificador: a
+<19,> //tipo: ;
+<1,1> //es el identificador: b
+<19,> //tipo: ;
+<1,2> //es el identificador: number
+<19,> //tipo: ;
+<3,"Introduce el primer operando"> //es la cadena: "Introduce el primer operando"
+<19,> //tipo: ;
+<1,0> //es el identificador: a
+<19,> //tipo: ;
+<3,"Introduce el segundo operando"> //es la cadena: "Introduce el segundo operando"
+<19,> //tipo: ;
+<1,1> //es el identificador: b
+<19,> //tipo: ;
+<1,3> //es el identificador: operacion
+<16,> //tipo: (
+<1,4> //es el identificador: num1
+<18,> //tipo: ,
+<1,5> //es el identificador: num2
+<17,> //tipo: )
+<20,> //tipo: {
+<1,4> //es el identificador: num1
+<4,> //tipo: +
+<1,5> //es el identificador: num2
+<19,> //tipo: ;
+<21,> //tipo: }
+<1,2> //es el identificador: number
+<7,> //tipo: =
+<1,3> //es el identificador: operacion
+<16,> //tipo: (
+<1,0> //es el identificador: a
+<18,> //tipo: ,
+<1,1> //es el identificador: b
+<17,> //tipo: )
+<19,> //tipo: ;
+<1,2> //es el identificador: number
+<19,> //tipo: ;
+<19,> //tipo: ;
