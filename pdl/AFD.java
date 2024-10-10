@@ -144,7 +144,8 @@ class AFD {
 		// caso de generar token
 		boolean leido = false;
 
-		while (c != -1) {
+		// Salimos del bucle después de procesar el último token
+		while (true) {
 			if (estado == 0 && leido == false) {
 				c = leer();
 			}
@@ -152,8 +153,28 @@ class AFD {
 				car = (char) c;
 				System.out.print(car);
 			}else {
-				break;
+				if(valor != 0) {
+					genToken(2,String.valueOf(valor),"entero");
+					break;
+				}
+				auxLexema = lexema.toString();
+				if(auxLexema.length()>0) {
+					if (esPalabraReservada(auxLexema)) {
+						genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
+					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
+						simbolo = new Simbolo(auxLexema);
+						posEnTablaSimbolo.InsertarTS(auxLexema, simbolo);
+						genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
+					} else {
+						genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
+
+						lexema.delete(0, lexema.length());
+					}
+				}
+				break; 
 			}
+
+
 
 			accion = accion(estado, identificar(car));
 			//			System.out.print(" accion: " + accion);
@@ -450,7 +471,7 @@ class AFD {
 		switch(categoriaLexica) {
 		case 1:
 			fwTokens.write(token + " //es el identificador: " + comentario + "\n");
-//			 fw.write((posicionDeLinea + 1) + ":" + token + "\n");
+			//			 fw.write((posicionDeLinea + 1) + ":" + token + "\n");
 			break;
 		case 2:
 			fwTokens.write(token + " //es el numero: " + comentario + "\n");
@@ -500,7 +521,7 @@ class AFD {
 	public void ImprimirTabla() throws IOException {
 		posEnTablaSimbolo.imprimirTabla();
 	}
-	
+
 	// Leemos de la linea linea el caracter de la posicion posCaracter
 	private int leer() throws IOException {
 		int c = br.read();

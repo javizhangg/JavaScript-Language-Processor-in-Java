@@ -49,7 +49,7 @@ public class TS {
 			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
 
 			// Imprimir línea de atributos
-			fw.write("  Atributos :");
+			fw.write("  Atributos :" + "\n");
 
 			fw.write("  --------- ---------- " + "\n");
 		}
