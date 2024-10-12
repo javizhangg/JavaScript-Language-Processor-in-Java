@@ -151,7 +151,7 @@ class AFD {
 			}
 			if(c!=-1) {
 				car = (char) c;
-				System.out.print(car);
+//				System.out.print(car);
 			}else {
 				if(valor != 0) {
 					genToken(2,String.valueOf(valor),"entero");
@@ -190,7 +190,14 @@ class AFD {
 				genError((int) accion, posicionDeLinea);
 				valor = 0;
 				lexema.delete(0, lexema.length());
-				leido = false;
+				leido = true;
+				
+				if(car == '*') {
+					c = leer();
+				}
+				if(car == '_') {
+					c = leer();
+				}
 				estado = 0;
 				continue;
 			}
@@ -266,15 +273,14 @@ class AFD {
 				case 'H':
 					if (valor <= 32767) {
 						genToken(2, String.valueOf(valor),"entero");
-						leido = true;
 						valor = 0;
 					} else {
 						genError(107, posicionDeLinea);
 						valor = 0;
 						lexema.delete(0, lexema.length());
-						leido = false;
 						estado = 0;
 					}
+					leido = true;
 					break;
 				case 'I':
 					genToken(18, "",",");
@@ -395,17 +401,17 @@ class AFD {
 			break;
 		}
 		case 102 -> {
-			error = new Error("se esperaba caracter '&'", linea + 1);
+			error = new Error("se esperaba caracter '&' despues de '&'", linea + 1);
 			System.out.println(error);
 			break;
 		}
 		case 103 -> {
-			error = new Error("se esperaba caracter '='", linea + 1);
+			error = new Error("se esperaba caracter '=' despues de '|'", linea + 1);
 			System.out.println(error);
 			break;
 		}
 		case 104 -> {
-			error = new Error("se esperaba caracter '*'", linea + 1);
+			error = new Error("se esperaba caracter '*' despues de '/'", linea + 1);
 			System.out.println(error);
 			break;
 		}
@@ -512,7 +518,12 @@ class AFD {
 		case 21:
 			fwTokens.write(token + " //tipo: " + comentario + "\n");
 			break;
+		default:
+			fwTokens.write(token + " //Palabra reservada: " + comentario + "\n");
+			break;
 		}
+		
+					
 		this.estado = 0; // Reseteamos el estado para la siguiente palabra
 		return token;
 	}

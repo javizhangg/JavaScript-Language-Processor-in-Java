@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TS {
@@ -17,7 +18,7 @@ public class TS {
 		this.numeroTabla = numeroTabla;
 		this.fw = fw;
 		posEnTablaSimbolo=new HashMap<>();
-		tablaSimbolo = new HashMap<>();
+		tablaSimbolo = new LinkedHashMap<>();
 		st = new StringBuilder();
 		contsimb=0;
 	}
