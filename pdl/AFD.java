@@ -88,7 +88,7 @@ class AFD {
 	public void matriz() throws IOException {
 		try {
 			FileReader fr = new FileReader(
-					"C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+					"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 			br = new BufferedReader(fr);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -372,6 +372,7 @@ class AFD {
 		case '*':
 			return '*';
 		case ' ':
+		case '\t':
 			return ' ';
 		case '\r':
 		case '\n': //Manejamos de esta manera los saltos de linea

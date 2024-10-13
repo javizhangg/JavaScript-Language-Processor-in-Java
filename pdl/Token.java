@@ -11,7 +11,7 @@ class Token{
 		this.codigo = codigo;
 		this.atributo = atributo;
 	}
-
+ 
 	//Imprime <codigo,atributo>
 	public String toString() {                
 		st.append("<").append(codigo).append(",").append(atributo).append(">");

@@ -1,4 +1,4 @@
-*
+*				
 string boolean int output input 
 {(}) 812*3 |= 12 && PDL #%
 "Analizador Lexico" Esto no lo puedes ver*/
