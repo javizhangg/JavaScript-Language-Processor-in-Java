@@ -35,13 +35,24 @@ public class AnalizadorLexico{
 	}
 
 	public static void main (String[] args) throws IOException {
-		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt",
-				"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens",
-				"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-		AFD afd = new AFD(br,fwTokens,fwTS);
 		
-		afd.getToken();
-		afd.ImprimirTabla();
+		/*  "C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt",
+				"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens",
+				"C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS"  */
+		
+		/*  "C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt",
+				"C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens",
+				"C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS" */
+		AnalizadorLexico al = new AnalizadorLexico("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt",
+				"C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens",
+				"C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+		AFD afd = new AFD(br,fwTokens,fwTS);
+		Token token;
+		for(int i = 0; i<10 ; i++) {
+		token = afd.getToken();
+		System.out.println(token);
+		}
+		
 		
 		fwTokens.close();
 		fwTS.close();

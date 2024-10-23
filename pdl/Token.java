@@ -4,7 +4,6 @@ class Token{
 	private final int codigo;
 	private final String atributo;
 
-	StringBuilder st = new StringBuilder();
 
 	//Constructor de la clase Token
 	public Token(int codigo,String atributo) { 
@@ -14,8 +13,7 @@ class Token{
  
 	//Imprime <codigo,atributo>
 	public String toString() {                
-		st.append("<").append(codigo).append(",").append(atributo).append(">");
-		return st.toString();
+		return "<" + codigo + "," + atributo + ">";
 	}
 
 	public int getCodigo() {
