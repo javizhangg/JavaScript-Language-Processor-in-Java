@@ -1,0 +1,8 @@
+"hoala hola"
+123
+
+var hoal
+
+"ho
+int
+"ho
