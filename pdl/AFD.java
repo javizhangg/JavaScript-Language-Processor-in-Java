@@ -30,13 +30,12 @@ class AFD {
 	public AFD(BufferedReader br, FileWriter fwTokens,FileWriter fwTS) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
+		//"C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\Matriz.txt""C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt"
 		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
 		
-	
-
 		this.palabrasReservadas = new HashMap<>();
 		palabrasReservadas.put("var", 9);
 		palabrasReservadas.put("int", 10);
@@ -56,10 +55,6 @@ class AFD {
 		this.posEnTablaSimbolo = new TS(1,fwTS);
 		this.br = br;
 	}
-
-	
-
-	
 
 	// Método principal que me devuelve el token generado
 	public Token getToken() throws IOException {
@@ -86,11 +81,6 @@ class AFD {
 			}
 			car = (char) c;
 			
-			
-			
-
-
-
 			accion = accion(estado, identificar(c));
 			//			System.out.print(" accion: " + accion);
 			if (accion == null) {
@@ -153,47 +143,47 @@ class AFD {
 				case 'C':
 					auxLexema = lexema.toString();
 					if (esPalabraReservada(auxLexema)) {
-						genToken(palabrasReservadas.get(auxLexema), "",auxLexema);
+						token = genToken(palabrasReservadas.get(auxLexema), "",auxLexema);
 					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema,simbolo);
-						genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
+						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					}else {
-						genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
+						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					}
 
 
 					lexema.delete(0, lexema.length());
 					leido = true;
 					estado = 0;
-					break;
+					return token;
 				case 'D':
 					auxLexema = lexema.toString();
 					if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema,simbolo);
 					}
-					genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
+					token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					lexema.delete(0, lexema.length());
 					leido = true;
 					estado = 0;
-					break;
+					return token;
 				case 'E':
-					genToken(16, "","(");
+					token = genToken(16, "","(");
 					leido = false;
-					break;
+					return token;
 				case 'F':
-					genToken(17, "",")");
+					token = genToken(17, "",")");
 					leido = false;
-					break;
+					return token;
 				case 'G':
 					valor = valor * 10 + (c - 48);
 					c = leer();
 					leido = false;
-					break;
+					return token;
 				case 'H':
 					if (valor <= 32767) {
-						genToken(2, String.valueOf(valor),"entero");
+						token = genToken(2, String.valueOf(valor),"entero");
 						valor = 0;
 					} else {
 						genError(107, posicionDeLinea);
@@ -202,20 +192,20 @@ class AFD {
 						estado = 0;
 					}
 					leido = true;
-					break;
+					return token;
 				case 'I':
-					genToken(18, "",",");
+					token = genToken(18, "",",");
 					leido = false;
-					break;
+					return token;
 				case 'J':
-					genToken(19, "",";");
+					token = genToken(19, "",";");
 					leido = false;
-					break;
+					return token;
 				case 'K':
 					lexema.append(car);
 					auxLexema = lexema.toString();
 					if (auxLexema.length() <= 64) {
-						genToken(3, auxLexema,auxLexema);
+						token = genToken(3, auxLexema,auxLexema);
 						lexema.delete(0, lexema.length());
 						c = leer();
 					} else {
@@ -227,41 +217,41 @@ class AFD {
 						estado = 0;
 					}
 					esSimbolo=true;
-					break;
+					return token;
 				case 'L':
-					genToken(5, "","==");
+					token = genToken(5, "","==");
 					leido = false;
-					break;
+					return token;
 
 				case 'M':
-					genToken(7, "","=");
+					token = genToken(7, "","=");
 					leido = true;
-					break;
+					return token;
 				case 'N':
-					genToken(20, "","{");
+					token = genToken(20, "","{");
 					leido = false;
-					break;
+					return token;
 				case 'O':
-					genToken(21, "","}");
+					token = genToken(21, "","}");
 					leido = false;
-					break;
+					return token;
 				case 'P':
-					genToken(6, "","&&");
+					token = genToken(6, "","&&");
 					leido = false;
-					break;
+					return token;
 				case 'Q':
-					genToken(8, "","|=");
+					token = genToken(8, "","|=");
 					leido = false;
-					break;
+					return token;
 				case 'R':
-					genToken(4, "","+");
+					token = genToken(4, "","+");
 					leido = false;
-					break;
+					return token;
 				case 'S':
-					genToken(26,"","eof");
+					token = genToken(26,"","eof");
 					eofLeido=false;
 					ultimaint=true;
-					break;
+					return token;
 				}
 				
 			}
@@ -271,30 +261,29 @@ class AFD {
 			}else if(c==-1 ) {
 			
 					if(valor != 0) {
-						genToken(2,String.valueOf(valor),"entero");
-						break;
+						token = genToken(2,String.valueOf(valor),"entero");
+						return token;
 					}
 					auxLexema = lexema.toString();
 					if(!esSimbolo) {
 						genError(106, posicionDeLinea);
 					}else if(auxLexema.length()>0 ) {
 						if (esPalabraReservada(auxLexema)) {
-							genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
+							token = genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
 						} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 							simbolo = new Simbolo(auxLexema);
 							posEnTablaSimbolo.InsertarTS(auxLexema, simbolo);
-							genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
+							token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
 						} else {
-							genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
+							token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
 
 							lexema.delete(0, lexema.length());
 						}
 					}
-					break;
+					return token;
 				}
 			
 		}
-		return token;
 	}
 
 	// Devuelve a si es letra, y devuelve b si es numero....
@@ -376,7 +365,7 @@ class AFD {
 			break;
 		}
 		case 105 -> {
-			error = new Error("Una cadena no puede tener salto de linea ", linea +1);
+			error = new Error("No se ha cerrado la cadena correctamente", linea +1);
 			System.out.println(error);
 			break;
 		}
