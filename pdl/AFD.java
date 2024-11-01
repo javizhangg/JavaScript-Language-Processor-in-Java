@@ -30,8 +30,8 @@ class AFD {
 	public AFD(BufferedReader br, FileWriter fwTokens,FileWriter fwTS) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
-		//"C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\Matriz.txt""C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt"
-		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		//"C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\Matriz.txt" "C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt"
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
@@ -180,7 +180,7 @@ class AFD {
 					valor = valor * 10 + (c - 48);
 					c = leer();
 					leido = false;
-					return token;
+					break;
 				case 'H':
 					if (valor <= 32767) {
 						token = genToken(2, String.valueOf(valor),"entero");
@@ -262,6 +262,7 @@ class AFD {
 			
 					if(valor != 0) {
 						token = genToken(2,String.valueOf(valor),"entero");
+						valor = 0;
 						return token;
 					}
 					auxLexema = lexema.toString();
@@ -280,6 +281,7 @@ class AFD {
 							lexema.delete(0, lexema.length());
 						}
 					}
+					lexema.delete(0, lexema.length());
 					return token;
 				}
 			

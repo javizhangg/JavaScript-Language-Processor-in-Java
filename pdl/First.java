@@ -11,23 +11,69 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class First {
-	Map<Character,ArrayList<Integer>> first; 
+	Map<String,ArrayList<Integer>> first; 
+	Map<String,ArrayList<Integer>> follow;
+	public First() {
+		this.first=new HashMap<String, ArrayList<Integer>>();
+		this.follow = new HashMap<>();
+		follow.put("E'", new ArrayList<>(Arrays.asList(17,18,19)));
+		follow.put("R'", new ArrayList<>(Arrays.asList(17,18,19)));
+		follow.put("U'", new ArrayList<>(Arrays.asList(17,18,19)));
+		follow.put("V'", new ArrayList<>(Arrays.asList(17,18,19)));
+		follow.put("X", new ArrayList<>(Arrays.asList(19)));
+		follow.put("L", new ArrayList<>(Arrays.asList(17)));
+		follow.put("Q", new ArrayList<>(Arrays.asList(17)));
+		follow.put("C", new ArrayList<>(Arrays.asList(21)));
+		follow.put("K", new ArrayList<>(Arrays.asList(17)));
+		
+		
+		first.put("B", new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
+		first.put("F", new ArrayList<>(Arrays.asList(27)));
+		first.put("P", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28,27)));
+		first.put("E", new ArrayList<>(Arrays.asList(1,16,2,3)));
+		first.put("E'", new ArrayList<>(Arrays.asList(6)));
+		first.put("R", new ArrayList<>(Arrays.asList(1,16,2,3)));
+		first.put("R'", new ArrayList<>(Arrays.asList(5)));
+		first.put("U", new ArrayList<>(Arrays.asList(1,16,2,3)));
+		first.put("U'", new ArrayList<>(Arrays.asList(4)));
+		
+		first.put("V", new ArrayList<>(Arrays.asList(1,16,2,3)));
+		first.put("V'", new ArrayList<>(Arrays.asList(16)));
+		first.put("S", new ArrayList<>(Arrays.asList(1,14,15,28)));
+		first.put("S'", new ArrayList<>(Arrays.asList(1,14,15,28)));
+		first.put("X", new ArrayList<>(Arrays.asList(1,16,2,3)));
+		first.put("L", new ArrayList<>(Arrays.asList(1,16,2,3)));
+		first.put("Q", new ArrayList<>(Arrays.asList(18)));
+		first.put("T", new ArrayList<>(Arrays.asList(10,11,12)));
+		first.put("H", new ArrayList<>(Arrays.asList(10,11,12)));
+		first.put("A", new ArrayList<>(Arrays.asList(10,11,12,13)));
+		first.put("K", new ArrayList<>(Arrays.asList(18)));
+		first.put("C", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28)));
 
-	public First(char ch) {
-		this.first=new HashMap<Character, ArrayList<Integer>>();
-		
-		first.put('B', new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
-		first.put('F', new ArrayList<>(Arrays.asList()));
-		first.put('B', new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
-		first.put('B', new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
-		first.put('B', new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
-		first.put('B', new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
-		
+
+//		follow.put("E'", new ArrayList<>(Arrays.asList(17,18,19)));
+//		first.put("B", new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
+//		first.put("F", new ArrayList<>(Arrays.asList(27)));
+//		first.put("P", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28,27,λ)));
+//		first.put("E", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
+//		first.put("E'", new ArrayList<>(Arrays.asList(6,λ)));
+//		first.put("R", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
+//		first.put("R'", new ArrayList<>(Arrays.asList(5,λ)));
+//		first.put("U", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
+//		first.put("U'", new ArrayList<>(Arrays.asList(4,λ)));
+//		
+//		first.put("V", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
+//		first.put("V'", new ArrayList<>(Arrays.asList(16,λ)));
+//		first.put("S", new ArrayList<>(Arrays.asList(1,14,15,28)));
+//		first.put("S'", new ArrayList<>(Arrays.asList(1,14,15,28)));
+//		first.put("X", new ArrayList<>(Arrays.asList(1,16,ent,cad,λ)));
+//		first.put("L", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
+//		first.put("Q", new ArrayList<>(Arrays.asList(18,λ)));
+//		first.put("T", new ArrayList<>(Arrays.asList(10,11,12)));
+//		first.put("H", new ArrayList<>(Arrays.asList(10,11,12)));
+//		first.put("A", new ArrayList<>(Arrays.asList(10,11,12,13)));
+//		first.put("K", new ArrayList<>(Arrays.asList(18,λ)));
+//		first.put("C", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28,λ)));
 	}
-	public static <Integer> ArrayList<Integer> unirArrayLists(ArrayList<Integer> lista1, ArrayList<Integer> lista2) {
-        ArrayList<Integer> resultado = new ArrayList<>(lista1);  // Copiamos todos los elementos de lista1
-        resultado.addAll(lista2);  // Agregamos todos los elementos de lista2
-        return resultado;
-    }
-	
+
 }
