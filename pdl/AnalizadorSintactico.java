@@ -11,11 +11,15 @@ public class AnalizadorSintactico {
 		sig_token = An.getToken();
 	}
 	public void empareja(int idToken) throws IOException {
-		if(sig_token.getCodigo()==idToken) {
-			sig_token=An.getToken();
-			System.out.println("token siguiente " + sig_token.getCodigo());
+		if(sig_token.getCodigo()!=26) {
+			if(sig_token.getCodigo()==idToken) {
+				sig_token=An.getToken();
+				System.out.println("token siguiente " + sig_token.getCodigo());
+			}else {
+				new Error(201,An.getLinea()).getError();;
+			}
 		}else {
-			System.out.println("error en emparejar");
+			System.out.print("ha acabado correctamente");
 		}
 	}
 
@@ -35,7 +39,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -58,7 +62,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -81,7 +85,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -104,7 +108,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -144,7 +148,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -207,7 +211,7 @@ public class AnalizadorSintactico {
 			System.out.println(27);
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();;
 		}
 	}
 
@@ -222,7 +226,8 @@ public class AnalizadorSintactico {
 			System.out.println(29);
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();;
+			
 		}
 	}
 
@@ -239,7 +244,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -317,7 +322,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 	}
 
@@ -334,7 +339,7 @@ public class AnalizadorSintactico {
 		empareja(21);
 
 	}
-	
+
 	public void H() throws IOException {
 		if(first.first.get("H").contains(sig_token.getCodigo())) {
 			System.out.println(44);
@@ -345,7 +350,7 @@ public class AnalizadorSintactico {
 			empareja(13);
 		}
 	}
-	
+
 	public void K() throws IOException {
 		if(sig_token.getCodigo() == 18) {
 			System.out.println(46);
@@ -359,14 +364,18 @@ public class AnalizadorSintactico {
 			System.out.println(47);
 		}
 		else {
-			System.out.println("Error en la producción...");
+			new Error(200,An.getLinea()).getError();
 		}
 
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		AnalizadorSintactico an = new AnalizadorSintactico();
 		an.P();
+
+
+		an.An.fwTokens.close();
+		an.An.fwTS.close();
 	}
 
 }

@@ -45,7 +45,7 @@ public class First {
 		first.put("L", new ArrayList<>(Arrays.asList(1,16,2,3)));
 		first.put("Q", new ArrayList<>(Arrays.asList(18)));
 		first.put("T", new ArrayList<>(Arrays.asList(10,11,12)));
-		first.put("H", new ArrayList<>(Arrays.asList(10,11,12)));
+		first.put("H", new ArrayList<>(Arrays.asList(10,11,12,13)));
 		first.put("A", new ArrayList<>(Arrays.asList(10,11,12,13)));
 		first.put("K", new ArrayList<>(Arrays.asList(18)));
 		first.put("C", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28)));

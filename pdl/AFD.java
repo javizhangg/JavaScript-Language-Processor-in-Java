@@ -15,23 +15,27 @@ class AFD {
 	// Pasamos estado->pasamos caracter->elegimos Estado o Accion
 	private Map<String, Integer> palabrasReservadas;
 	private BufferedReader br;
-	private FileWriter fwTokens;
-	private FileWriter fwTS;
+	public FileWriter fwTokens;
+	public FileWriter fwTS;
 	private Matriz mt;
 	// Variable que guarda el estado actual
 	private int estado;
 	// Variable que nos dice la linea actual
-	private int posicionDeLinea;
+	public int posicionDeLinea;
 
 	private TS posEnTablaSimbolo;
-
+	  private final boolean leido = false;
+	    private final boolean esSimbolo = true;
+	    private final boolean eofLeido = false;
+	    private final boolean ultimaint = false;
 	// Constructor de AFD que inicializa el set y el array de las palabras
 	// reservadas y recibe las lineas del fichero fuente
 	public AFD(BufferedReader br, FileWriter fwTokens,FileWriter fwTS) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
-		//"C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\Matriz.txt" "C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt"
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		
+//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
@@ -58,6 +62,9 @@ class AFD {
 
 	// Método principal que me devuelve el token generado
 	public Token getToken() throws IOException {
+		
+
+		
 		// Nos servirá para detectar EOF
 		int c = 0;
 		// Si no lee EOF, hacemos un casting de char a c
@@ -76,15 +83,16 @@ class AFD {
 		boolean ultimaint=false;
 		// Salimos del bucle después de procesar el último token
 		while (true) {
-			if (estado == 0 && leido == false && !eofLeido) {
+			if (estado == 0 && !leido && !eofLeido) {
 				c = leer();
 			}
 			car = (char) c;
-			
+			System.out.print(car);
 			accion = accion(estado, identificar(c));
 			//			System.out.print(" accion: " + accion);
 			if (accion == null) {
-				genError(106, posicionDeLinea);
+				new Error(106, posicionDeLinea).getError();;
+
 				esSimbolo=true;
 				valor = 0;
 				lexema.delete(0, lexema.length());
@@ -93,7 +101,7 @@ class AFD {
 				continue;
 			}
 			if (accion instanceof Integer) {
-				genError((int) accion, posicionDeLinea);
+				new Error((int) accion, posicionDeLinea).getError();
 				esSimbolo=true;
 				valor = 0;
 				lexema.delete(0, lexema.length());
@@ -114,7 +122,8 @@ class AFD {
 				esSimbolo=false;
 			}
 			if (estado == -1) {
-				genError(106, valor);
+				new Error(106, posicionDeLinea).getError();
+				
 				esSimbolo=false;
 				valor = 0;
 				lexema.delete(0, lexema.length());
@@ -186,7 +195,7 @@ class AFD {
 						token = genToken(2, String.valueOf(valor),"entero");
 						valor = 0;
 					} else {
-						genError(107, posicionDeLinea);
+						new Error(106, posicionDeLinea).getError();
 						valor = 0;
 						lexema.delete(0, lexema.length());
 						estado = 0;
@@ -209,7 +218,7 @@ class AFD {
 						lexema.delete(0, lexema.length());
 						c = leer();
 					} else {
-						genError(108, posicionDeLinea);
+						new Error(106, posicionDeLinea).getError();
 						
 						valor = 0;
 						lexema.delete(0, lexema.length());
@@ -267,7 +276,7 @@ class AFD {
 					}
 					auxLexema = lexema.toString();
 					if(!esSimbolo) {
-						genError(106, posicionDeLinea);
+						new Error(106, posicionDeLinea).getError();
 					}else if(auxLexema.length()>0 ) {
 						if (esPalabraReservada(auxLexema)) {
 							token = genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
@@ -338,56 +347,7 @@ class AFD {
 		}
 	}
 
-	// Genera e imprime en la salida de err el error lexico detectado
-	private void genError(int codError, int linea) {
-		Error error;
-		switch (codError) {
-		case 100 -> {
-			error = new Error("No se puede empezar con el caracter '*'", linea +1  );
-			System.out.println(error);
-		}
-		case 101 -> {
-			error = new Error("No se puede empezar con el caracter '_'", linea +1);
-			System.out.println(error);
-			break;
-		}
-		case 102 -> {
-			error = new Error("se esperaba caracter '&' despues de '&'", linea +1);
-			System.out.println(error);
-			break;
-		}
-		case 103 -> {
-			error = new Error("se esperaba caracter '=' despues de '|'", linea +1);
-			System.out.println(error);
-			break;
-		}
-		case 104 -> {
-			error = new Error("se esperaba caracter '*' despues de '/'", linea +1);
-			System.out.println(error);
-			break;
-		}
-		case 105 -> {
-			error = new Error("No se ha cerrado la cadena correctamente", linea +1);
-			System.out.println(error);
-			break;
-		}
-		case 106 -> {
-			error = new Error("Se ha leido un caracter erroneo ", linea +1);
-			System.out.println(error);
-			break;
-		}
-		case 107 -> {
-			error = new Error("Supera el maximo entero valido ", linea + 1);
-			System.out.println(error);
-			break;
-		}
-		case 108 -> {
-			error = new Error("Supera el maximo de 64 caracteres ", linea + 1);
-			System.out.println(error);
-			break;
-		}
-		}
-	}
+	
 
 	// Método para ver si palabra es una palabra reservada
 	private boolean esPalabraReservada(String palabra) {
