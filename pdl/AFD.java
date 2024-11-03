@@ -140,7 +140,7 @@ class AFD {
 				case 'B':
 					lexema.append(car);
 					c = leer();
-					break;
+					break; 
 				case 'C':
 					auxLexema = lexema.toString();
 					if (esPalabraReservada(auxLexema)) {
@@ -148,6 +148,7 @@ class AFD {
 					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema,simbolo);
+						posEnTablaSimbolo.imprimirTabla();
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					}else {
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
@@ -163,6 +164,7 @@ class AFD {
 					if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema,simbolo);
+						posEnTablaSimbolo.imprimirTabla();
 					}
 					token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					lexema.delete(0, lexema.length());
@@ -260,7 +262,7 @@ class AFD {
 				eofLeido=true;
 				continue;
 			}else if(c==-1 ) {
-
+				System.out.println("LLEGA");
 				if(valor != 0) {
 					token = genToken(2,String.valueOf(valor),"entero");
 					valor = 0;
@@ -275,6 +277,7 @@ class AFD {
 					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema, simbolo);
+						posEnTablaSimbolo.imprimirTabla();
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
 					} else {
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
