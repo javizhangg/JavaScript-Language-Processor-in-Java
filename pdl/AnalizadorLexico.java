@@ -17,24 +17,24 @@ public class AnalizadorLexico{
 	public static FileWriter fwTS;
 	public static BufferedReader br;
 	private Token token;
-	private AFD afdtoken;
+	public AFD afdtoken;
 
 	//Constructor del Analizador Lexico con la ruta del fichero fuente
 	public AnalizadorLexico() throws IOException {
 		
-//		archivoEntrada = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
-//		archivoSalidaTokens = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
-//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-		archivoEntrada = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
-		archivoSalidaTokens = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens");
-		archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+		archivoEntrada = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
+		archivoSalidaTokens = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
+		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+//		archivoEntrada = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
+//		archivoSalidaTokens = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens");
+//		archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 		try {
-//			fr = new FileReader("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
-//			fwTokens = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
-//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-			fr = new FileReader("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
-			fwTokens = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens");
-			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+			fr = new FileReader("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
+			fwTokens = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
+			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+//			fr = new FileReader("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\prueba.txt");
+//			fwTokens = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTokens");
+//			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			br = new BufferedReader(fr);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -55,9 +55,14 @@ public class AnalizadorLexico{
 		AnalizadorLexico al = new AnalizadorLexico();
 	
 		
-		al.afdtoken.getToken();
-		al.afdtoken.ImprimirTabla();
-		
+		al.getToken();
+		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
+		al.getToken();
+		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
+//		al.getToken();
+		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
+		al.getToken();
+		al.getToken();
 		fwTokens.close();
 		fwTS.close();
 

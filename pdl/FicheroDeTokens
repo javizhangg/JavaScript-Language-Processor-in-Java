@@ -1,1 +1,5 @@
 <9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,0> //es el identificador: hola
+<19,> //tipo: ;
+<26,> //Palabra reservada: eof

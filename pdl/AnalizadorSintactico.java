@@ -4,19 +4,22 @@ import java.io.IOException;
 
 public class AnalizadorSintactico {
 	Token sig_token;
-	AnalizadorLexico An;
+	AnalizadorLexico al;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-		this.An=new AnalizadorLexico();
-		sig_token = An.getToken();
+		this.al=new AnalizadorLexico();
+		sig_token = al.getToken();
+//		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
 	public void empareja(int idToken) throws IOException {
 		if(sig_token.getCodigo()!=26) {
 			if(sig_token.getCodigo()==idToken) {
-				sig_token=An.getToken();
-				System.out.println("token siguiente " + sig_token.getCodigo());
+				sig_token=al.getToken();
+//				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
+
+//				System.out.println("token siguiente " + sig_token.getCodigo());
 			}else {
-				new Error(201,An.getLinea()).getError();;
+				new Error(201,al.getLinea()).getError();;
 			}
 		}else {
 			System.out.print("ha acabado correctamente");
@@ -39,7 +42,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -62,7 +65,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -85,7 +88,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -108,7 +111,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -148,7 +151,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -211,7 +214,7 @@ public class AnalizadorSintactico {
 			System.out.println(27);
 		}
 		else {
-			new Error(200,An.getLinea()).getError();;
+			new Error(200,al.getLinea()).getError();;
 		}
 	}
 
@@ -226,7 +229,7 @@ public class AnalizadorSintactico {
 			System.out.println(29);
 		}
 		else {
-			new Error(200,An.getLinea()).getError();;
+			new Error(200,al.getLinea()).getError();;
 			
 		}
 	}
@@ -244,7 +247,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -322,7 +325,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 	}
 
@@ -364,18 +367,18 @@ public class AnalizadorSintactico {
 			System.out.println(47);
 		}
 		else {
-			new Error(200,An.getLinea()).getError();
+			new Error(200,al.getLinea()).getError();
 		}
 
 	}
 
 	public static void main(String[] args) throws IOException {
-		AnalizadorSintactico an = new AnalizadorSintactico();
-		an.P();
+		AnalizadorSintactico as = new AnalizadorSintactico();
+		as.P();
 
 
-		an.An.fwTokens.close();
-		an.An.fwTS.close();
+		as.al.fwTokens.close();
+		as.al.fwTS.close();
 	}
 
 }

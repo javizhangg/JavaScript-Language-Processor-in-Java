@@ -1,11 +1,8 @@
 package pdl;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,27 +16,30 @@ class AFD {
 	public FileWriter fwTS;
 	private Matriz mt;
 	// Variable que guarda el estado actual
-	private int estado;
+	public int estado;
 	// Variable que nos dice la linea actual
 	public int posicionDeLinea;
 
 	private TS posEnTablaSimbolo;
-	  private final boolean leido = false;
-	    private final boolean esSimbolo = true;
-	    private final boolean eofLeido = false;
-	    private final boolean ultimaint = false;
+	// Esta variable nos sirve para no perder el caracter que hemos leido, en el
+			// caso de generar token
+	public boolean leido = false;
+	public boolean esSimbolo = true;
+	public boolean eofLeido = false;
+	public boolean ultimaint = false;
+	public int c = 0;
 	// Constructor de AFD que inicializa el set y el array de las palabras
 	// reservadas y recibe las lineas del fichero fuente
 	public AFD(BufferedReader br, FileWriter fwTokens,FileWriter fwTS) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
-		
-//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
-		
+
 		this.palabrasReservadas = new HashMap<>();
 		palabrasReservadas.put("var", 9);
 		palabrasReservadas.put("int", 10);
@@ -62,11 +62,8 @@ class AFD {
 
 	// Método principal que me devuelve el token generado
 	public Token getToken() throws IOException {
-		
-
-		
 		// Nos servirá para detectar EOF
-		int c = 0;
+		
 		// Si no lee EOF, hacemos un casting de char a c
 		char car;
 		Object accion;
@@ -75,12 +72,7 @@ class AFD {
 		int valor = 0;
 		Token token = null;
 		Simbolo simbolo = null;
-		// Esta variable nos sirve para no perder el caracter que hemos leido, en el
-		// caso de generar token
-		boolean leido = false;
-		boolean esSimbolo=true;
-		boolean eofLeido = false;
-		boolean ultimaint=false;
+		
 		// Salimos del bucle después de procesar el último token
 		while (true) {
 			if (estado == 0 && !leido && !eofLeido) {
@@ -106,7 +98,7 @@ class AFD {
 				valor = 0;
 				lexema.delete(0, lexema.length());
 				leido = true;
-				
+
 				if(car == '*') {
 					c = leer();
 				}
@@ -123,7 +115,7 @@ class AFD {
 			}
 			if (estado == -1) {
 				new Error(106, posicionDeLinea).getError();
-				
+
 				esSimbolo=false;
 				valor = 0;
 				lexema.delete(0, lexema.length());
@@ -219,7 +211,7 @@ class AFD {
 						c = leer();
 					} else {
 						new Error(106, posicionDeLinea).getError();
-						
+
 						valor = 0;
 						lexema.delete(0, lexema.length());
 						leido = false;
@@ -262,38 +254,38 @@ class AFD {
 					ultimaint=true;
 					return token;
 				}
-				
+
 			}
 			if(c==-1 && !eofLeido &&!ultimaint) {
 				eofLeido=true;
 				continue;
 			}else if(c==-1 ) {
-			
-					if(valor != 0) {
-						token = genToken(2,String.valueOf(valor),"entero");
-						valor = 0;
-						return token;
-					}
-					auxLexema = lexema.toString();
-					if(!esSimbolo) {
-						new Error(106, posicionDeLinea).getError();
-					}else if(auxLexema.length()>0 ) {
-						if (esPalabraReservada(auxLexema)) {
-							token = genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
-						} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
-							simbolo = new Simbolo(auxLexema);
-							posEnTablaSimbolo.InsertarTS(auxLexema, simbolo);
-							token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
-						} else {
-							token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
 
-							lexema.delete(0, lexema.length());
-						}
-					}
-					lexema.delete(0, lexema.length());
+				if(valor != 0) {
+					token = genToken(2,String.valueOf(valor),"entero");
+					valor = 0;
 					return token;
 				}
-			
+				auxLexema = lexema.toString();
+				if(!esSimbolo) {
+					new Error(106, posicionDeLinea).getError();
+				}else if(auxLexema.length()>0 ) {
+					if (esPalabraReservada(auxLexema)) {
+						token = genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
+					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
+						simbolo = new Simbolo(auxLexema);
+						posEnTablaSimbolo.InsertarTS(auxLexema, simbolo);
+						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
+					} else {
+						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
+
+						lexema.delete(0, lexema.length());
+					}
+				}
+				lexema.delete(0, lexema.length());
+				return token;
+			}
+
 		}
 	}
 
@@ -347,7 +339,7 @@ class AFD {
 		}
 	}
 
-	
+
 
 	// Método para ver si palabra es una palabra reservada
 	private boolean esPalabraReservada(String palabra) {
@@ -433,18 +425,13 @@ class AFD {
 			fwTokens.write(token + " //Palabra reservada: " + comentario + "\n");
 			break;
 		}
-		
-					
+
+
 		this.estado = 0; // Reseteamos el estado para la siguiente palabra
 		return token;
 	}
 
-	//LO USO DE MOMENTO PARA IMPRIMIR LA TABLA
-	public void ImprimirTabla() throws IOException {
-		posEnTablaSimbolo.imprimirTabla();
-	}
-
-	// Leemos de la linea linea el caracter de la posicion posCaracter
+	// Leemos de la linea el caracter de la posicion posCaracter
 	private int leer() throws IOException {
 		int c = br.read();
 		return c;
