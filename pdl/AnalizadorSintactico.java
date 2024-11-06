@@ -1,4 +1,4 @@
-package pdl;
+package pdl123.pdl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,10 +18,10 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\FicheroParse");
 //			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			try {
-				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\FicheroParse");
 //				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 		         bw=new BufferedWriter(fwParse);
 		         out = new PrintWriter(bw);
@@ -35,7 +35,7 @@ public class AnalizadorSintactico {
 //		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
 	public void empareja(int idToken) throws IOException {
-		if(sig_token.getCodigo()!=26) {
+		if(sig_token.getCodigo()!=29) {
 			if(sig_token.getCodigo()==idToken) {
 				sig_token=al.getToken();
 //				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
@@ -60,7 +60,7 @@ public class AnalizadorSintactico {
 			F();
 			P();
 		}
-		else if(sig_token.getCodigo() == 26) {
+		else if(sig_token.getCodigo() == 29) {
 			out.print(3 + " ");
 			//LAMBDA
 		}

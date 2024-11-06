@@ -1,5 +1,28 @@
 <9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,0> //es el identificador: hola
+<12,> //Palabra reservada: string
+<1,0> //es el identificador: s
 <19,> //tipo: ;
+<27,> //Palabra reservada: function
+<10,> //Palabra reservada: int
+<1,1> //es el identificador: FactorialRecursivo
+<16,> //tipo: (
+<10,> //Palabra reservada: int
+<1,2> //es el identificador: n
+<17,> //tipo: )
+<20,> //tipo: {
+<22,> //Palabra reservada: if
+<16,> //tipo: (
+<1,2> //es el identificador: n
+<5,> //tipo: ==
+<2,0> //es el numero: entero
+<17,> //tipo: )
+<28,> //Palabra reservada: return
+<2,1> //es el numero: entero
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,2> //es el identificador: n
+<4,> //tipo: +
+<2,1> //es el numero: entero
+<19,> //tipo: ;
+<21,> //tipo: }
 <26,> //Palabra reservada: eof

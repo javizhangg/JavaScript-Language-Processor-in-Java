@@ -1,4 +1,4 @@
-package pdl;
+package pdl123.pdl;
 
 public class Simbolo {
 	private String lexema;

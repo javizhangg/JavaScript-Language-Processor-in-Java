@@ -1,4 +1,4 @@
-package pdl;
+package pdl123.pdl;
 
 class Pair {
 	private Integer estado; // El estado puede ser null en caso de error
