@@ -63,13 +63,26 @@ class Error {
 			System.out.println(error);
 			break;
 		}
+		case 109 ->{
+			error = st.append("Error Lexico: Comentario no cerrado. Linea: ").append(linea).append("\n").toString();
+		}
 		case 200 -> {
-			error = st.append("Error Sintactico: Error en el sistema de producion. Linea: ").append(linea).append("\n").toString();
+			error = st.append("Error Sintactico: Error en el sistema de produccion. Linea: ").append(linea).append("\n").toString();
 			System.out.println(error);
 			break;		
 		}
 		case 201 -> {
 			error = st.append("Error Sintactico: Error al realizar emparejado. Linea: ").append(linea).append("\n").toString();
+			System.out.println(error);
+			break;
+		}
+		case 202 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion. Se esperaba los siguientes tokens: <22, > <9, > <25, > <14, > <15, > <28, > <27,26>").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 203 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion. Se esperaba los siguientes tokens: <6, > <17, > <18, > <19, >").append(linea).append("\n") .toString();
 			System.out.println(error);
 			break;
 		}

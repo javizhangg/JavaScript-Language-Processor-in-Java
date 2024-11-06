@@ -1,1 +1,1 @@
-var int cont;
+var int hola;

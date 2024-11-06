@@ -50,30 +50,6 @@ public class First {
 		first.put("K", new ArrayList<>(Arrays.asList(18)));
 		first.put("C", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28)));
 
-
-//		follow.put("E'", new ArrayList<>(Arrays.asList(17,18,19)));
-//		first.put("B", new ArrayList<>(Arrays.asList(22,9,25,14,15,28)));
-//		first.put("F", new ArrayList<>(Arrays.asList(27)));
-//		first.put("P", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28,27,λ)));
-//		first.put("E", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
-//		first.put("E'", new ArrayList<>(Arrays.asList(6,λ)));
-//		first.put("R", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
-//		first.put("R'", new ArrayList<>(Arrays.asList(5,λ)));
-//		first.put("U", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
-//		first.put("U'", new ArrayList<>(Arrays.asList(4,λ)));
-//		
-//		first.put("V", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
-//		first.put("V'", new ArrayList<>(Arrays.asList(16,λ)));
-//		first.put("S", new ArrayList<>(Arrays.asList(1,14,15,28)));
-//		first.put("S'", new ArrayList<>(Arrays.asList(1,14,15,28)));
-//		first.put("X", new ArrayList<>(Arrays.asList(1,16,ent,cad,λ)));
-//		first.put("L", new ArrayList<>(Arrays.asList(1,16,ent,cad)));
-//		first.put("Q", new ArrayList<>(Arrays.asList(18,λ)));
-//		first.put("T", new ArrayList<>(Arrays.asList(10,11,12)));
-//		first.put("H", new ArrayList<>(Arrays.asList(10,11,12)));
-//		first.put("A", new ArrayList<>(Arrays.asList(10,11,12,13)));
-//		first.put("K", new ArrayList<>(Arrays.asList(18,λ)));
-//		first.put("C", new ArrayList<>(Arrays.asList(22,9,25,1,14,15,28,λ)));
 	}
 
 }

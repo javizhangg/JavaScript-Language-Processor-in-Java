@@ -51,44 +51,44 @@ public class AnalizadorSintactico {
 
 	public void P() throws IOException {
 		if(first.first.get("B").contains(sig_token.getCodigo())) {
-			out.print( 1+" ");
+			out.print(1 + " ");
 			B();
 			P();
 		}
 		else if(first.first.get("F").contains(sig_token.getCodigo())) {
-			out.print( 2+" ");
+			out.print(2 + " ");
 			F();
 			P();
 		}
 		else if(sig_token.getCodigo() == 26) {
-			out.print( 3+" ");
+			out.print(3 + " ");
 			//LAMBDA
 		}
 		else {
-			new Error(200,al.getLinea()).getError();
+			new Error(202,al.getLinea()).getError();
 		}
 	}
 
 	public void E() throws IOException {
-		out.print( 4+" ");
+		out.print(4 + " ");
 		R();
 		E2();
 	}
 
 	public void E2() throws IOException {
 		if(first.first.get("E'").contains(sig_token.getCodigo())) {
-			out.print( 5+" ");
+			out.print(5 + " ");
 			empareja(sig_token.getCodigo());
 			R();
 			E2();
 		}
 		else if(first.follow.get("E'").contains(sig_token.getCodigo())) //FOLLOW E'
 		{
-			out.print( 6+" ");
+			out.print(6 + " ");
 			//LAMBDA
 		}
 		else {
-			new Error(200,al.getLinea()).getError();
+			new Error(203,al.getLinea()).getError();
 		}
 	}
 
