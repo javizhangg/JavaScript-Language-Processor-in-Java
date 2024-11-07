@@ -1,4 +1,4 @@
-package pdl123.pdl;
+package pdl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,10 +18,10 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\FicheroParse");
+			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
 //			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			try {
-				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\FicheroParse");
+				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 //				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 		         bw=new BufferedWriter(fwParse);
 		         out = new PrintWriter(bw);
@@ -35,7 +35,7 @@ public class AnalizadorSintactico {
 //		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
 	public void empareja(int idToken) throws IOException {
-		if(sig_token.getCodigo()!=29) {
+		if(sig_token.getCodigo()!=26) {
 			if(sig_token.getCodigo()==idToken) {
 				sig_token=al.getToken();
 //				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
@@ -43,6 +43,7 @@ public class AnalizadorSintactico {
 //				System.out.println("token siguiente " + sig_token.getCodigo());
 			}else {
 				new Error(201,al.getLinea()).getError();;
+				System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
 			}
 		}else {
 			System.out.print("ha acabado correctamente");
@@ -60,7 +61,7 @@ public class AnalizadorSintactico {
 			F();
 			P();
 		}
-		else if(sig_token.getCodigo() == 29) {
+		else if(sig_token.getCodigo() == 26) {
 			out.print(3 + " ");
 			//LAMBDA
 		}
@@ -122,7 +123,7 @@ public class AnalizadorSintactico {
 	}
 
 	public void U2() throws IOException {
-		if(first.first.get("U'").contains(sig_token.getCodigo())) {
+		if(first.first.get("U'").contains(sig_token.getCodigo())) { // tokens +
 			out.print( 11+" ");
 			empareja(sig_token.getCodigo());
 			V();
@@ -139,8 +140,7 @@ public class AnalizadorSintactico {
 	}
 
 	public void V() throws IOException {
-//		System.out.println("sig " + sig_token.getCodigo());
-		if(sig_token.getCodigo()== 1) {
+		if(sig_token.getCodigo()== 1) { //token id
 			out.print( 13+" ");
 			empareja(sig_token.getCodigo());
 			V2();
@@ -162,10 +162,10 @@ public class AnalizadorSintactico {
 	}
 
 	public void V2() throws IOException{
-		if(sig_token.getCodigo() ==  16) {
+		if(sig_token.getCodigo() ==  16) { //token (
 			out.print( 17+" ");
 			empareja(sig_token.getCodigo());
-			C();
+			L();
 			empareja(17); //token )
 		}
 		else if(first.follow.get("V'").contains(sig_token.getCodigo())) //FOLLOW V'
@@ -180,24 +180,25 @@ public class AnalizadorSintactico {
 
 	public void S() throws IOException {
 		if(sig_token.getCodigo() == 1) {
-			out.print( 19+" ");
+			out.print(19 + " ");
 			empareja(sig_token.getCodigo());
 			S2();
 		}
 		else if(sig_token.getCodigo() == 14) {
-			out.print( 20+" ");
+			out.print(20 + " ");
 			empareja(sig_token.getCodigo());
+//			System.out.println("TOKE N " + sig_token.getCodigo());
 			E();
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 15) {
-			out.print( 21+" ");
+			out.print(21 + " ");
 			empareja(sig_token.getCodigo());
 			empareja(1);
 			empareja(19);
 		}
-		else if(sig_token.getCodigo() == 28) {
-			out.print( 22+" ");
+		else if(sig_token.getCodigo() == 28) { //token return
+			out.print(22 + " ");
 			empareja(sig_token.getCodigo());
 			X();
 			empareja(19);
@@ -227,7 +228,7 @@ public class AnalizadorSintactico {
 	}
 
 	public void X() throws IOException {
-		if(first.first.get("X").contains(sig_token.getCodigo())) {
+		if(first.first.get("X").contains(sig_token.getCodigo())) { //tokens ( id ent cad
 			out.print( 26+" ");
 			E();
 		}
@@ -275,15 +276,15 @@ public class AnalizadorSintactico {
 	}
 
 	public void T() throws IOException {
-		if(sig_token.getCodigo() == 10) {
+		if(sig_token.getCodigo() == 10) { //token int 
 			out.print( 32+" ");
 			empareja(10);	
 		}
-		else if (sig_token.getCodigo() == 11) {
+		else if (sig_token.getCodigo() == 11) { //token boolean 
 			out.print( 33+" ");
 			empareja(11);
 		}
-		else if(sig_token.getCodigo() == 12) {
+		else if(sig_token.getCodigo() == 12) { //token string 
 			out.print( 34+" ");
 			empareja(12);
 		}
@@ -292,7 +293,7 @@ public class AnalizadorSintactico {
 	public void A() throws IOException {
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
 			out.print( 35+" ");
-			empareja(sig_token.getCodigo());
+//			empareja(sig_token.getCodigo());
 			T();
 			empareja(1);
 			K();
@@ -304,7 +305,7 @@ public class AnalizadorSintactico {
 	}
 
 	public void B() throws IOException {
-		if(sig_token.getCodigo() == 22) {
+		if(sig_token.getCodigo() == 22) { //token if
 			out.print( 37+" ");
 			empareja(22);
 			empareja(16);
@@ -312,18 +313,18 @@ public class AnalizadorSintactico {
 			empareja(17);
 			S();
 		}
-		else if(first.first.get("S").contains(sig_token.getCodigo())) {
+		else if(first.first.get("S").contains(sig_token.getCodigo())) { //tokens id output input return
 			out.print( 38+" ");
 			S();
 		}
-		else if(sig_token.getCodigo() == 9) {
+		else if(sig_token.getCodigo() == 9) { //token var
 			out.print( 39+" ");
 			empareja(sig_token.getCodigo());
 			T();
 			empareja(1);
 			empareja(19);
 		}
-		else if(sig_token.getCodigo() == 25) {
+		else if(sig_token.getCodigo() == 25) { //token do
 			out.print( 40+" ");
 			empareja(sig_token.getCodigo());
 			empareja(20);
@@ -338,9 +339,12 @@ public class AnalizadorSintactico {
 
 	public void C() throws IOException {
 		if(first.first.get("B").contains(sig_token.getCodigo())) {
-			out.print( 41+" ");
+			out.print(41 + " ");
 			B();
 			C();
+		}
+		else if(first.first.get("F").contains(sig_token.getCodigo())) {
+			out.print(42 + " ");
 		}
 		else if(first.follow.get("C").contains(sig_token.getCodigo())) //FOLLOW C
 		{
@@ -385,7 +389,7 @@ public class AnalizadorSintactico {
 			empareja(1);
 			K();
 		}
-		else if(first.follow.get("K").contains(sig_token.getCodigo())) //FOLLOW K
+		else if(first.follow.get("K").contains(sig_token.getCodigo())) //FOLLOW K token )
 		{
 			out.print( 47+" ");
 		}

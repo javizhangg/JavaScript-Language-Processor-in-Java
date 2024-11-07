@@ -1,4 +1,4 @@
-package pdl123.pdl;
+package pdl;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package pdl123.pdl;
+package pdl;
 
 class Token{
 	private final int codigo;

@@ -1,4 +1,4 @@
-package pdl123.pdl;
+package pdl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package pdl123.pdl;
+package pdl;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -34,7 +34,7 @@ class AFD {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
 
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl123\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
 		//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
