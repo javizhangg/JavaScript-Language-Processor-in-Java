@@ -34,8 +34,8 @@ class AFD {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
 
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-		//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		//this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
@@ -210,7 +210,10 @@ class AFD {
 					if (auxLexema.length() <= 64) {
 						token = genToken(3, auxLexema,auxLexema);
 						lexema.delete(0, lexema.length());
-						c = leer();
+						valor = 0;
+						lexema.delete(0, lexema.length());
+						leido = false;
+						estado = 0;
 					} else {
 						new Error(106, posicionDeLinea).getError();
 
@@ -251,7 +254,7 @@ class AFD {
 					leido = false;
 					return token;
 				case 'S':
-					token = genToken(26,"","eof");
+					token = genToken(29,"","eof");
 					eofLeido=false;
 					ultimaint=true;
 					return token;

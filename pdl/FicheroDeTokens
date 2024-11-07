@@ -1,132 +1,33 @@
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,0> //es el identificador: booleano
-<19,> //tipo: ;
 <27,> //Palabra reservada: function
-<11,> //Palabra reservada: boolean
-<1,1> //es el identificador: bisiesto
+<13,> //Palabra reservada: void
+<1,0> //es el identificador: demo
 <16,> //tipo: (
-<10,> //Palabra reservada: int
-<1,2> //es el identificador: a
+<13,> //Palabra reservada: void
 <17,> //tipo: )
 <20,> //tipo: {
-<28,> //Palabra reservada: return
-<16,> //tipo: (
-<1,2> //es el identificador: a
-<4,> //tipo: +
-<2,4> //es el numero: entero
-<5,> //tipo: ==
-<2,0> //es el numero: entero
-<6,> //tipo: &&
-<1,2> //es el identificador: a
-<4,> //tipo: +
-<2,100> //es el numero: entero
-<5,> //tipo: ==
-<2,0> //es el numero: entero
-<6,> //tipo: &&
-<1,2> //es el identificador: a
-<4,> //tipo: +
-<2,400> //es el numero: entero
-<5,> //tipo: ==
-<2,0> //es el numero: entero
-<17,> //tipo: )
-<19,> //tipo: ;
-<21,> //tipo: }
-<27,> //Palabra reservada: function
-<10,> //Palabra reservada: int
-<1,3> //es el identificador: dias
-<16,> //tipo: (
-<10,> //Palabra reservada: int
-<1,4> //es el identificador: m
-<18,> //tipo: ,
-<10,> //Palabra reservada: int
-<1,2> //es el identificador: a
-<17,> //tipo: )
-<20,> //tipo: {
-<9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,5> //es el identificador: dd
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<16,> //tipo: (
-<3,"di cuantos dias tiene el mes "> //es la cadena: "di cuantos dias tiene el mes "
-<17,> //tipo: )
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<1,4> //es el identificador: m
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<3," de "> //es la cadena: " de "
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<1,2> //es el identificador: a
-<19,> //tipo: ;
-<15,> //Palabra reservada: input
-<1,5> //es el identificador: dd
-<19,> //tipo: ;
 <22,> //Palabra reservada: if
 <16,> //tipo: (
-<1,1> //es el identificador: bisiesto
+<1,1> //es el identificador: esFechaCorrecta
 <16,> //tipo: (
-<1,2> //es el identificador: a
-<17,> //tipo: )
-<17,> //tipo: )
-<1,5> //es el identificador: dd
-<7,> //tipo: =
-<1,5> //es el identificador: dd
-<4,> //tipo: +
-<2,1> //es el numero: entero
-<19,> //tipo: ;
-<28,> //Palabra reservada: return
-<1,5> //es el identificador: dd
-<19,> //tipo: ;
-<21,> //tipo: }
-<27,> //Palabra reservada: function
-<11,> //Palabra reservada: boolean
-<1,6> //es el identificador: esFechaCorrecta
-<16,> //tipo: (
-<10,> //Palabra reservada: int
-<1,7> //es el identificador: d
+<2,25> //es el numero: entero
 <18,> //tipo: ,
-<10,> //Palabra reservada: int
-<1,4> //es el identificador: m
+<2,10> //es el numero: entero
 <18,> //tipo: ,
-<10,> //Palabra reservada: int
-<1,2> //es el identificador: a
+<2,2024> //es el numero: entero
 <17,> //tipo: )
-<20,> //tipo: {
-<28,> //Palabra reservada: return
-<1,4> //es el identificador: m
-<5,> //tipo: ==
-<2,1> //es el numero: entero
-<6,> //tipo: &&
-<1,4> //es el identificador: m
-<5,> //tipo: ==
-<2,12> //es el numero: entero
-<6,> //tipo: &&
-<1,7> //es el identificador: d
-<5,> //tipo: ==
-<2,1> //es el numero: entero
-<6,> //tipo: &&
-<1,7> //es el identificador: d
-<5,> //tipo: ==
-<1,3> //es el identificador: dias
-<16,> //tipo: (
-<1,4> //es el identificador: m
-<18,> //tipo: ,
-<1,2> //es el identificador: a
 <17,> //tipo: )
-<19,> //tipo: ;
-<21,> //tipo: }
 <14,> //Palabra reservada: output
-<2,4> //es el numero: entero
-<4,> //tipo: +
-<2,5> //es el numero: entero
-<4,> //tipo: +
-<2,77> //es el numero: entero
-<19,> //tipo: ;
-<27,> //Palabra reservada: function
-<13,> //Palabra reservada: void
-<1,8> //es el identificador: demo
 <16,> //tipo: (
-<13,> //Palabra reservada: void
+<3,"OK"> //es la cadena: "OK"
+<17,> //tipo: )
+<19,> //tipo: ;
+<21,> //tipo: }
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,2> //es el identificador: INT
+<19,> //tipo: ;
+<1,0> //es el identificador: demo
+<16,> //tipo: (
+<17,> //tipo: )
+<19,> //tipo: ;
+<29,> //Palabra reservada: eof

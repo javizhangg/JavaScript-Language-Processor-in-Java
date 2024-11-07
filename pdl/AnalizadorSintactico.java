@@ -18,11 +18,11 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-//			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 			try {
-				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 		         bw=new BufferedWriter(fwParse);
 		         out = new PrintWriter(bw);
 			} catch (FileNotFoundException e) {
@@ -35,7 +35,7 @@ public class AnalizadorSintactico {
 //		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
 	public void empareja(int idToken) throws IOException {
-		if(sig_token.getCodigo()!=26) {
+		
 			if(sig_token.getCodigo()==idToken) {
 				sig_token=al.getToken();
 //				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
@@ -45,9 +45,7 @@ public class AnalizadorSintactico {
 				new Error(201,al.getLinea()).getError();;
 				System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
 			}
-		}else {
-			System.out.print("ha acabado correctamente");
-		}
+		
 	}
 
 	public void P() throws IOException {
@@ -61,7 +59,7 @@ public class AnalizadorSintactico {
 			F();
 			P();
 		}
-		else if(sig_token.getCodigo() == 26) {
+		else if(sig_token.getCodigo() == 29) {
 			out.print(3 + " ");
 			//LAMBDA
 		}
@@ -331,6 +329,7 @@ public class AnalizadorSintactico {
 			C();
 			empareja(21);
 			empareja(26);
+			empareja(16);
 			E();
 			empareja(17);
 			empareja(19);
@@ -342,9 +341,6 @@ public class AnalizadorSintactico {
 			out.print(41 + " ");
 			B();
 			C();
-		}
-		else if(first.first.get("F").contains(sig_token.getCodigo())) {
-			out.print(42 + " ");
 		}
 		else if(first.follow.get("C").contains(sig_token.getCodigo())) //FOLLOW C
 		{
@@ -371,7 +367,7 @@ public class AnalizadorSintactico {
 	}
 
 	public void H() throws IOException {
-		if(first.first.get("H").contains(sig_token.getCodigo())) {
+		if(first.first.get("T").contains(sig_token.getCodigo())) {
 			out.print( 44+" ");
 			T();
 		}
@@ -402,10 +398,14 @@ public class AnalizadorSintactico {
 	public static void main(String[] args) throws IOException {
 		AnalizadorSintactico as = new AnalizadorSintactico();
 		as.P();
-
+		
 		as.out.flush();
+		as.out.close(); 
+		as.fwParse.close();
 		as.al.fwTokens.close();
 		as.al.fwTS.close();
+		
+		
 	}
 
 }
