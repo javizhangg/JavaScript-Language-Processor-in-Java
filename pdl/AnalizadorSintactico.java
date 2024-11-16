@@ -18,11 +18,11 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-//			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 			try {
-				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 		         bw=new BufferedWriter(fwParse);
 		         out = new PrintWriter(bw);
 			} catch (FileNotFoundException e) {
@@ -231,22 +231,26 @@ public class AnalizadorSintactico {
 			empareja(17);
 			empareja(19);
 		}
-		else
+		else if(sig_token.getCodigo()==18){
+			out.print( 26+" ");
+			empareja(18);
+			empareja(1);
+			C();
+		}else
 		{
-			System.out.println(sig_token.getCodigo());
-			new Error(209,al.getLinea()).getError();
+			out.print( 27+" ");
 		}
 	}
 
 	public void X() throws IOException {
 		if(first.first.get("X").contains(sig_token.getCodigo())) { //tokens ( id ent cad
-			out.print( 26+" ");
+			out.print( 28+" ");
 			E();
 		}
 		else if(first.follow.get("X").contains(sig_token.getCodigo())) //FOLLOW X
 		{
 			//LAMBDA
-			out.print( 27+" ");
+			out.print( 29+" ");
 		}
 		else {
 			new Error(210,al.getLinea()).getError();;
@@ -255,13 +259,13 @@ public class AnalizadorSintactico {
 
 	public void L() throws IOException {
 		if(first.first.get("E").contains(sig_token.getCodigo())) {
-			out.print( 28+" ");
+			out.print( 30+" ");
 			E();
 			Q();
 		}
 		else if(first.follow.get("L").contains(sig_token.getCodigo())) //FOLLOW L
 		{
-			out.print( 29+" ");
+			out.print( 31+" ");
 		}
 		else {
 			new Error(211,al.getLinea()).getError();;
@@ -271,14 +275,14 @@ public class AnalizadorSintactico {
 
 	public void Q() throws IOException {
 		if(sig_token.getCodigo() == 18) {
-			out.print( 30+" ");
+			out.print( 32+" ");
 			empareja(sig_token.getCodigo());
 			E();
 			Q();
 		}
 		else if(first.follow.get("Q").contains(sig_token.getCodigo())) //FOLLOW Q
 		{
-			out.print( 31+" ");
+			out.print( 33+" ");
 			//LAMBDA
 		}
 		else {
@@ -288,15 +292,15 @@ public class AnalizadorSintactico {
 
 	public void T() throws IOException {
 		if(sig_token.getCodigo() == 10) { //token int 
-			out.print( 32+" ");
+			out.print( 34+" ");
 			empareja(10);	
 		}
 		else if (sig_token.getCodigo() == 11) { //token boolean 
-			out.print( 33+" ");
+			out.print( 35+" ");
 			empareja(11);
 		}
 		else if(sig_token.getCodigo() == 12) { //token string 
-			out.print( 34+" ");
+			out.print( 36+" ");
 			empareja(12);
 		}
 		else 
@@ -307,14 +311,14 @@ public class AnalizadorSintactico {
 
 	public void A() throws IOException {
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
-			out.print( 35+" ");
+			out.print( 37+" ");
 //			empareja(sig_token.getCodigo());
 			T();
 			empareja(1);
 			K();
 		}
 		else if(sig_token.getCodigo() == 13) {
-			out.print( 36+" ");
+			out.print( 38+" ");
 			empareja(sig_token.getCodigo());
 		}
 		else {
@@ -324,7 +328,7 @@ public class AnalizadorSintactico {
 
 	public void B() throws IOException {
 		if(sig_token.getCodigo() == 22) { //token if
-			out.print( 37+" ");
+			out.print( 39+" ");
 			empareja(22);
 			empareja(16);
 			E();
@@ -332,18 +336,18 @@ public class AnalizadorSintactico {
 			S();
 		}
 		else if(first.first.get("S").contains(sig_token.getCodigo())) { //tokens id output input return
-			out.print( 38+" ");
+			out.print( 40+" ");
 			S();
 		}
 		else if(sig_token.getCodigo() == 9) { //token var
-			out.print( 39+" ");
+			out.print( 41+" ");
 			empareja(sig_token.getCodigo());
 			T();
 			empareja(1);
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 25) { //token do
-			out.print( 40+" ");
+			out.print( 42+" ");
 			empareja(sig_token.getCodigo());
 			empareja(20);
 			C();
@@ -361,13 +365,13 @@ public class AnalizadorSintactico {
 
 	public void C() throws IOException {
 		if(first.first.get("B").contains(sig_token.getCodigo())) {
-			out.print(41 + " ");
+			out.print(43+ " ");
 			B();
 			C();
 		}
 		else if(first.follow.get("C").contains(sig_token.getCodigo())) //FOLLOW C
 		{
-			out.print( 42+" ");
+			out.print(44+" ");
 			//LAMBDA
 		}
 		else {
@@ -376,7 +380,7 @@ public class AnalizadorSintactico {
 	}
 
 	public void F() throws IOException {
-		out.print( 43+" ");
+		   out.print( 45+" ");
 		empareja(sig_token.getCodigo());
 		H();
 		empareja(1);
@@ -391,11 +395,11 @@ public class AnalizadorSintactico {
 
 	public void H() throws IOException {
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
-			out.print( 44+" ");
+			out.print(46+" ");
 			T();
 		}
 		else if(sig_token.getCodigo() == 13) {
-			out.print( 45+" ");
+			out.print(47+" ");
 			empareja(13);
 		}
 		else {
@@ -405,7 +409,7 @@ public class AnalizadorSintactico {
 
 	public void K() throws IOException {
 		if(sig_token.getCodigo() == 18) {
-			out.print( 46+" ");
+			out.print(48+" ");
 			empareja(sig_token.getCodigo());
 			T();
 			empareja(1);
@@ -413,7 +417,7 @@ public class AnalizadorSintactico {
 		}
 		else if(first.follow.get("K").contains(sig_token.getCodigo())) //FOLLOW K token )
 		{
-			out.print( 47+" ");
+			out.print(49+" ");
 		}
 		else {
 			new Error(218,al.getLinea()).getError();
@@ -423,7 +427,9 @@ public class AnalizadorSintactico {
 
 	public static void main(String[] args) throws IOException {
 		AnalizadorSintactico as = new AnalizadorSintactico();
+		
 		as.P();
+		as.al.afdtoken.posEnTablaSimbolo.imprimirTabla();
 		
 		as.out.flush();
 		as.out.close(); 

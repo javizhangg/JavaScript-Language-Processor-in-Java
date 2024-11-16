@@ -20,7 +20,7 @@ class AFD {
 	// Variable que nos dice la linea actual
 	public int posicionDeLinea;
 
-	private TS posEnTablaSimbolo;
+	public TS posEnTablaSimbolo;
 	// Esta variable nos sirve para no perder el caracter que hemos leido, en el
 			// caso de generar token
 	public boolean leido = false;
@@ -34,8 +34,8 @@ class AFD {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
 
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
@@ -148,7 +148,7 @@ class AFD {
 					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema,simbolo);
-						posEnTablaSimbolo.imprimirTabla();
+						//posEnTablaSimbolo.imprimirTabla();
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					}else {
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
@@ -164,7 +164,7 @@ class AFD {
 					if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema,simbolo);
-						posEnTablaSimbolo.imprimirTabla();
+						//posEnTablaSimbolo.imprimirTabla();
 					}
 					token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)),auxLexema);
 					lexema.delete(0, lexema.length());
@@ -280,7 +280,7 @@ class AFD {
 					} else if (!posEnTablaSimbolo.Contiene(auxLexema)) {
 						simbolo = new Simbolo(auxLexema);
 						posEnTablaSimbolo.InsertarTS(auxLexema, simbolo);
-						posEnTablaSimbolo.imprimirTabla();
+					//	posEnTablaSimbolo.imprimirTabla();
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);
 					} else {
 						token = genToken(1, String.valueOf(posEnTablaSimbolo.get(auxLexema)), auxLexema);

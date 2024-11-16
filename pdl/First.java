@@ -25,6 +25,7 @@ public class First {
 		follow.put("Q", new ArrayList<>(Arrays.asList(17)));
 		follow.put("C", new ArrayList<>(Arrays.asList(17,21)));
 		follow.put("K", new ArrayList<>(Arrays.asList(17)));
+		follow.put("S2", new ArrayList<>(Arrays.asList(17)));
 		
 		
 		first.put("B", new ArrayList<>(Arrays.asList(25,1,22,14,15,28,9)));

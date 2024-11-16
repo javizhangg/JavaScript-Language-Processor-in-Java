@@ -1,11 +1,13 @@
 CONTENIDOS DE LA TABLA GLOBAL#1 :
+* LEXEMA : 'texto'
+  Atributos :
+  --------- ---------- 
 * LEXEMA : 'put'
   Atributos :
   --------- ---------- 
-CONTENIDOS DE LA TABLA GLOBAL#1 :
-* LEXEMA : 'put'
+* LEXEMA : 'm_s_g'
   Atributos :
   --------- ---------- 
-* LEXEMA : 'textoAux'
+* LEXEMA : 'pideTexto'
   Atributos :
   --------- ---------- 
