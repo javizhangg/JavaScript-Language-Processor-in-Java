@@ -77,16 +77,92 @@ class Error {
 			break;
 		}
 		case 202 -> {
-			error = st.append("Error Sintactico: Error en el sistema de produccion. Se esperaba los siguientes tokens: <22, > <9, > <25, > <14, > <15, > <28, > <27, > <26, > <29, >. En la linea: ").append(linea).append("\n") .toString();
+			error = st.append("Error Sintactico: Error en el sistema de produccion (P). Se esperaba los siguientes tokens: <if, > <var, > <do, > <output, > <input, > <return, > <function, > <while, > <eof, >. En la linea: ").append(linea).append("\n") .toString();
 			System.out.println(error);
 			break;
 		}
 		case 203 -> {
-			error = st.append("Error Sintactico: Error en el sistema de produccion. Se esperaba los siguientes tokens: <6, > <17, > <18, > <19, >").append(linea).append("\n") .toString();
+			error = st.append("Error Sintactico: Error en el sistema de produccion (E'). Se esperaba los siguientes tokens: <&&, > <), > <,, > <;, >. En la linea: ").append(linea).append("\n") .toString();
 			System.out.println(error);
 			break;
 		}
+		case 204 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (R'). Se esperaba los siguientes tokens: <==, > <&&, > <), > <,, > <;, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
 		}
+		case 205 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (U'). Se esperaba los siguientes tokens: <+, > <==, > <&&, > <), > <,, > <;, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 206 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (V). Se esperaba los siguientes tokens: <identificador, > <numero, > <cadena, > <(, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 207 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (V'). Se esperaba los siguientes tokens: <+, > <==, > <&&, > <(, > <), > <,, > <;, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 208 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (S). Se esperaba los siguientes tokens: <identificador, > <output, > <input, > <return, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 209 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (S'). Se esperaba los siguientes tokens: <=, > <|=, > <(, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 210 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (X). Se esperaba los siguientes tokens: <identificador, > <numero, > <cadena, > <(, > <;, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 211 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (L). Se esperaba los siguientes tokens: <identificador, > <numero, > <cadena, > <(, > <), >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 212 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (Q). Se esperaba los siguientes tokens: <), > <,, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 213 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (T). Se esperaba los siguientes tokens: <int, > <boolean, > <string, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 214 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (A). Se esperaba los siguientes tokens: <int, > <boolean, > <string, > <void, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 215 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (B). Se esperaba los siguientes tokens: <identificador, > <var, > <output, > <input, > <if, > <do, > <return, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 216 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (C). Se esperaba los siguientes tokens: <identificador, > <var, > <output, > <input, > <), > <} , > <if, > <do, > <return, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 217 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (H). Se esperaba los siguientes tokens: <int, > <boolean, > <string, > <void, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		case 218 -> {
+			error = st.append("Error Sintactico: Error en el sistema de produccion (K). Se esperaba los siguientes tokens: <), > <,, >. En la linea: ").append(linea).append("\n") .toString();
+			System.out.println(error);
+			break;
+		}
+		
 	}
 
+}
 }
