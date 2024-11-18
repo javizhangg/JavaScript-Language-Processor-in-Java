@@ -83,12 +83,13 @@ class AFD {
 			accion = accion(estado, identificar(c));
 			//			System.out.print(" accion: " + accion);
 			if (accion == null) {
-				new Error(106, posicionDeLinea).getError();
+				new Error(106, posicionDeLinea,String.valueOf(c)).getError();
 				esSimbolo=true;
 				valor = 0;
 				lexema.delete(0, lexema.length());
 				leido = false;
 				estado = 0;
+				
 				continue;
 			}
 			if (accion instanceof Integer) {

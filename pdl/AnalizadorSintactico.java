@@ -1,10 +1,8 @@
 package pdl;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,34 +16,34 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-//			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			try {
-				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-		         bw=new BufferedWriter(fwParse);
-		         out = new PrintWriter(bw);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+		//			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+		try {
+			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			//				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			bw=new BufferedWriter(fwParse);
+			out = new PrintWriter(bw);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		this.al=new AnalizadorLexico();
 		out.print( "Descendente ");
 		fwParse.flush();
 		sig_token = al.getToken();
-//		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
+		//		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
 	public void empareja(int idToken) throws IOException {
-		
-			if(sig_token.getCodigo()==idToken) {
-				sig_token=al.getToken();
-//				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 
-//				System.out.println("token siguiente " + sig_token.getCodigo());
-			}else {
-				new Error(201,al.getLinea()).getError();;
-//				System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
-			}
-		
+		if(sig_token.getCodigo()==idToken) {
+			sig_token=al.getToken();
+			//				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
+
+			//				System.out.println("token siguiente " + sig_token.getCodigo());
+		}else {
+			new Error(201,al.getLinea()," Token leído : " + String.valueOf(sig_token.getCodigo() + ", se esperaba token: " + String.valueOf(idToken))).getError();;
+//							System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
+		}
+
 	}
 
 	public void P() throws IOException {
@@ -188,25 +186,24 @@ public class AnalizadorSintactico {
 	public void S() throws IOException {
 		if(sig_token.getCodigo() == 1) {
 			out.print(20 + " ");
-			empareja(sig_token.getCodigo());
+			empareja(1);
 			S2();
 		}
 		else if(sig_token.getCodigo() == 14) {
 			out.print(21 + " ");
-			empareja(sig_token.getCodigo());
-//			System.out.println("TOKE N " + sig_token.getCodigo());
+			empareja(14);
 			E();
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 15) {
 			out.print(22 + " ");
-			empareja(sig_token.getCodigo());
+			empareja(15);
 			empareja(1);
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 28) { //token return
 			out.print(23 + " ");
-			empareja(sig_token.getCodigo());
+			empareja(28);
 			X();
 			empareja(19);
 		}
@@ -217,16 +214,16 @@ public class AnalizadorSintactico {
 	}
 
 	public void S2() throws IOException {
-		
+
 		if(sig_token.getCodigo() == 7) {
 			out.print( 24+" ");
-			empareja(sig_token.getCodigo());
+			empareja(7);
 			E();
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 8) {
 			out.print( 25+" ");
-			empareja(sig_token.getCodigo());
+			empareja(8);
 			E();
 			empareja(19);	
 		}
@@ -269,7 +266,7 @@ public class AnalizadorSintactico {
 		}
 		else {
 			new Error(211,al.getLinea()).getError();;
-			
+
 		}
 	}
 
@@ -312,7 +309,7 @@ public class AnalizadorSintactico {
 	public void A() throws IOException {
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
 			out.print( 37+" ");
-//			empareja(sig_token.getCodigo());
+			//			empareja(sig_token.getCodigo());
 			T();
 			empareja(1);
 			K();
@@ -341,14 +338,14 @@ public class AnalizadorSintactico {
 		}
 		else if(sig_token.getCodigo() == 9) { //token var
 			out.print( 41+" ");
-			empareja(sig_token.getCodigo());
+			empareja(9);
 			T();
 			empareja(1);
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 25) { //token do
 			out.print( 42+" ");
-			empareja(sig_token.getCodigo());
+			empareja(25);
 			empareja(20);
 			C();
 			empareja(21);
@@ -375,12 +372,16 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(216,al.getLinea()).getError();
+			if(sig_token.getCodigo()==27) {
+				new Error(219,al.getLinea()).getError();
+			}
+			else 
+				new Error(216,al.getLinea()).getError();
 		}
 	}
 
 	public void F() throws IOException {
-		   out.print( 45+" ");
+		out.print( 45+" ");
 		empareja(sig_token.getCodigo());
 		H();
 		empareja(1);
@@ -427,17 +428,17 @@ public class AnalizadorSintactico {
 
 	public static void main(String[] args) throws IOException {
 		AnalizadorSintactico as = new AnalizadorSintactico();
-		
+
 		as.P();
 		as.al.afdtoken.posEnTablaSimbolo.imprimirTabla();
-		
+
 		as.out.flush();
 		as.out.close(); 
 		as.fwParse.close();
 		as.al.fwTokens.close();
 		as.al.fwTS.close();
-		
-		
+
+
 	}
 
 }

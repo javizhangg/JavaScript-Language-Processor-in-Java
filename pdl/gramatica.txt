@@ -28,8 +28,8 @@ S -> id S2
 S -> output E ; 
 S -> input id ;
 S -> return X ;
-S2 -> |= E ;
 S2 -> = E ;
+S2 -> |= E ;
 S2 -> ( L ) ; 
 S2 -> lambda
 X -> E
