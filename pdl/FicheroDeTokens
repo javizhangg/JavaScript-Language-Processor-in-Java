@@ -4,38 +4,77 @@
 <19,> //tipo: ;
 <27,> //Palabra reservada: function
 <13,> //Palabra reservada: void
-<1,1> //es el identificador: put
-<16,> //tipo: (
-<12,> //Palabra reservada: string
-<1,2> //es el identificador: m_s_g
-<17,> //tipo: )
-<20,> //tipo: {
-<14,> //Palabra reservada: output
-<3,"Mensaje introducido:"> //es la cadena: "Mensaje introducido:"
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<1,2> //es el identificador: m_s_g
-<19,> //tipo: ;
-<21,> //tipo: }
-<27,> //Palabra reservada: function
-<13,> //Palabra reservada: void
-<1,3> //es el identificador: pideTexto
+<1,1> //es el identificador: pideTexto
 <16,> //tipo: (
 <13,> //Palabra reservada: void
 <17,> //tipo: )
 <20,> //tipo: {
 <14,> //Palabra reservada: output
-<3,"Introduce un texto corto"> //es la cadena: "Introduce un texto corto"
+<3,"Introduce una palabra"> //es la cadena: "Introduce una palabra"
 <19,> //tipo: ;
 <15,> //Palabra reservada: input
 <1,0> //es el identificador: texto
 <19,> //tipo: ;
 <21,> //tipo: }
-<1,3> //es el identificador: pideTexto
+<27,> //Palabra reservada: function
+<13,> //Palabra reservada: void
+<1,2> //es el identificador: put
+<16,> //tipo: (
+<12,> //Palabra reservada: string
+<1,3> //es el identificador: msg
+<17,> //tipo: )
+<20,> //tipo: {
+<14,> //Palabra reservada: output
+<1,3> //es el identificador: msg
+<19,> //tipo: ;
+<21,> //tipo: }
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,4> //es el identificador: aa_aa
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,5> //es el identificador: iiii
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<12,> //Palabra reservada: string
+<1,6> //es el identificador: s64
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,7> //es el identificador: bo
+<19,> //tipo: ;
+<27,> //Palabra reservada: function
+<10,> //Palabra reservada: int
+<1,8> //es el identificador: ffff
+<16,> //tipo: (
+<13,> //Palabra reservada: void
+<17,> //tipo: )
+<20,> //tipo: {
+<1,4> //es el identificador: aa_aa
+<7,> //tipo: =
+<2,11> //es el numero: entero
+<19,> //tipo: ;
+<1,4> //es el identificador: aa_aa
+<7,> //tipo: =
+<1,5> //es el identificador: iiii
+<4,> //tipo: +
+<2,33> //es el numero: entero
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,4> //es el identificador: aa_aa
+<19,> //tipo: ;
+<21,> //tipo: }
+<14,> //Palabra reservada: output
+<19,> //tipo: ;
+<14,> //Palabra reservada: output
+<1,6> //es el identificador: s64
+<19,> //tipo: ;
+<1,1> //es el identificador: pideTexto
 <16,> //tipo: (
 <17,> //tipo: )
 <19,> //tipo: ;
-<1,1> //es el identificador: put
+<1,2> //es el identificador: put
 <16,> //tipo: (
 <1,0> //es el identificador: texto
 <17,> //tipo: )

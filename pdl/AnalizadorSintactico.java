@@ -18,11 +18,11 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	public AnalizadorSintactico() throws IOException{
-//			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+//			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 			try {
-//				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+				fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
 		         bw=new BufferedWriter(fwParse);
 		         out = new PrintWriter(bw);
 			} catch (FileNotFoundException e) {
@@ -40,10 +40,10 @@ public class AnalizadorSintactico {
 				sig_token=al.getToken();
 //				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 
-				System.out.println("token siguiente " + sig_token.getCodigo());
+//				System.out.println("token siguiente " + sig_token.getCodigo());
 			}else {
 				new Error(201,al.getLinea()).getError();;
-				System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
+//				System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
 			}
 		
 	}
@@ -157,6 +157,12 @@ public class AnalizadorSintactico {
 			out.print( 16+" ");
 			empareja(sig_token.getCodigo());
 		}
+		else if(sig_token.getCodigo()==18){
+			out.print( 17+" ");
+			empareja(18);
+			empareja(1);
+			V2();
+		}
 		else {
 			new Error(206,al.getLinea()).getError();
 		}
@@ -164,14 +170,14 @@ public class AnalizadorSintactico {
 
 	public void V2() throws IOException{
 		if(sig_token.getCodigo() ==  16) { //token (
-			out.print( 17+" ");
-			empareja(sig_token.getCodigo());
+			out.print( 18+" ");
+			empareja(16);
 			L();
 			empareja(17); //token )
 		}
 		else if(first.follow.get("V'").contains(sig_token.getCodigo())) //FOLLOW V'
 		{
-			out.print( 18+" ");
+			out.print( 19+" ");
 			//LAMBDA
 		}
 		else {
@@ -181,25 +187,25 @@ public class AnalizadorSintactico {
 
 	public void S() throws IOException {
 		if(sig_token.getCodigo() == 1) {
-			out.print(19 + " ");
+			out.print(20 + " ");
 			empareja(sig_token.getCodigo());
 			S2();
 		}
 		else if(sig_token.getCodigo() == 14) {
-			out.print(20 + " ");
+			out.print(21 + " ");
 			empareja(sig_token.getCodigo());
 //			System.out.println("TOKE N " + sig_token.getCodigo());
 			E();
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 15) {
-			out.print(21 + " ");
+			out.print(22 + " ");
 			empareja(sig_token.getCodigo());
 			empareja(1);
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 28) { //token return
-			out.print(22 + " ");
+			out.print(23 + " ");
 			empareja(sig_token.getCodigo());
 			X();
 			empareja(19);
@@ -213,29 +219,23 @@ public class AnalizadorSintactico {
 	public void S2() throws IOException {
 		
 		if(sig_token.getCodigo() == 7) {
-			out.print( 23+" ");
+			out.print( 24+" ");
 			empareja(sig_token.getCodigo());
 			E();
 			empareja(19);
 		}
 		else if(sig_token.getCodigo() == 8) {
-			out.print( 24+" ");
+			out.print( 25+" ");
 			empareja(sig_token.getCodigo());
 			E();
 			empareja(19);	
 		}
 		else if(sig_token.getCodigo() == 16) {
-			out.print( 25+" ");
-			empareja(sig_token.getCodigo());
-			C();
-			empareja(17);
-			empareja(19);
-		}
-		else if(sig_token.getCodigo()==18){
 			out.print( 26+" ");
-			empareja(18);
-			empareja(1);
-			C();
+			empareja(16);
+			L();
+			empareja(17);
+			empareja(19);	
 		}else
 		{
 			out.print( 27+" ");

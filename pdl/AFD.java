@@ -34,8 +34,8 @@ class AFD {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
 
-//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		// Inicializar la matriz de transiciones
@@ -83,8 +83,7 @@ class AFD {
 			accion = accion(estado, identificar(c));
 			//			System.out.print(" accion: " + accion);
 			if (accion == null) {
-				new Error(106, posicionDeLinea).getError();;
-
+				new Error(106, posicionDeLinea).getError();
 				esSimbolo=true;
 				valor = 0;
 				lexema.delete(0, lexema.length());
