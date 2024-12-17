@@ -8,33 +8,35 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TS {
-	private Map<String,Integer> posEnTablaSimbolo;
+//	private Map<String,Integer> posEnTablaSimbolo;
 	public Map<String,Simbolo> tablaSimbolo;
-	int contsimb;
+	int contsimb; 
 	int numeroTabla;
 	FileWriter fw;
 	StringBuilder st;
-	public TS(int numeroTabla,FileWriter fw) {
+	public TS(int ambito,FileWriter fw) {
 		this.numeroTabla = numeroTabla;
 		this.fw = fw;
-		posEnTablaSimbolo=new HashMap<>();
+//		posEnTablaSimbolo=new HashMap<>();
 		tablaSimbolo = new LinkedHashMap<>();
 		st = new StringBuilder();
 		contsimb=0;
 	}
 
-	public boolean Contiene(String lexema) {
-		return posEnTablaSimbolo.containsKey(lexema);
-	}
-
-	public int get(String lexema) {
-		return posEnTablaSimbolo.get(lexema);
+	public Simbolo getSimbolo(String lexema) {
+//		return posEnTablaSimbolo.get(lexema);
+		return tablaSimbolo.get(lexema);
 	}
 
 	public void InsertarTS(String lexema,Simbolo simbolo) throws IOException {
-		posEnTablaSimbolo.put(lexema, contsimb);
+//		posEnTablaSimbolo.put(lexema, contsimb);
 		tablaSimbolo.put(lexema, simbolo);
-		contsimb++;
+//		contsimb++;
+	}
+	
+	public void AddTipoTS(String lexema,Tipo tipo) {
+		Simbolo simbolo = tablaSimbolo.get(lexema);
+		simbolo.setTipo(tipo);
 	}
 	
 	public void imprimirTabla() throws IOException {

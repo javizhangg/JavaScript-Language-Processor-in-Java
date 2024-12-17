@@ -1,8 +1,1 @@
-function void demo  (void)
-{
-
-if (esFechaCorrecta(25, 10, 2024)) output ("OK");
-
-}
-var int INT ;
-demo();
+var $;
