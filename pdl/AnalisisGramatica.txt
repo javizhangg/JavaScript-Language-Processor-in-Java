@@ -1,0 +1,182 @@
+
+
+Análisis LL1 de gramatica.txt
+
+Analizando símbolo A
+Analizando producción A -> T id K
+Analizando símbolo T
+Analizando producción T -> int
+FIRST de T -> int  =  { int }
+Analizando producción T -> boolean
+FIRST de T -> boolean  =  { boolean }
+Analizando producción T -> string
+FIRST de T -> string  =  { string }
+FIRST de T  =  { boolean int string }
+FIRST de A -> T id K  =  { boolean int string }
+Analizando producción A -> void
+FIRST de A -> void  =  { void }
+FIRST de A  =  { boolean int string void }
+Analizando símbolo B
+Analizando producción B -> if ( E ) S
+FIRST de B -> if ( E ) S  =  { if }
+Analizando producción B -> S
+Analizando símbolo S
+Analizando producción S -> id S2
+FIRST de S -> id S2  =  { id }
+Analizando producción S -> output E ;
+FIRST de S -> output E ;  =  { output }
+Analizando producción S -> input id ;
+FIRST de S -> input id ;  =  { input }
+Analizando producción S -> return X ;
+FIRST de S -> return X ;  =  { return }
+FIRST de S  =  { id input output return }
+FIRST de B -> S  =  { id input output return }
+Analizando producción B -> var T id ;
+FIRST de B -> var T id ;  =  { var }
+Analizando producción B -> do { C } while ( E ) ;
+FIRST de B -> do { C } while ( E ) ;  =  { do }
+FIRST de B  =  { do id if input output return var }
+Analizando símbolo C
+Analizando producción C -> B C
+FIRST de C -> B C  =  { do id if input output return var }
+Analizando producción C -> lambda
+FIRST de C -> lambda  =  { lambda }
+FIRST de C  =  { do id if input output return var lambda }
+Calculando FOLLOW de C
+FOLLOW de C  =  { } }
+Analizando símbolo E
+Analizando producción E -> R E2
+Analizando símbolo R
+Analizando producción R -> U R2
+Analizando símbolo U
+Analizando producción U -> V U2
+Analizando símbolo V
+Analizando producción V -> id V2
+FIRST de V -> id V2  =  { id }
+Analizando producción V -> ( E )
+FIRST de V -> ( E )  =  { ( }
+Analizando producción V -> ent
+FIRST de V -> ent  =  { ent }
+Analizando producción V -> cad
+FIRST de V -> cad  =  { cad }
+Analizando producción V -> , id V2
+FIRST de V -> , id V2  =  { , }
+FIRST de V  =  { ( , cad ent id }
+FIRST de U -> V U2  =  { ( , cad ent id }
+FIRST de U  =  { ( , cad ent id }
+FIRST de R -> U R2  =  { ( , cad ent id }
+FIRST de R  =  { ( , cad ent id }
+FIRST de E -> R E2  =  { ( , cad ent id }
+FIRST de E  =  { ( , cad ent id }
+Analizando símbolo E2
+Analizando producción E2 -> && R E2
+FIRST de E2 -> && R E2  =  { && }
+Analizando producción E2 -> lambda
+FIRST de E2 -> lambda  =  { lambda }
+FIRST de E2  =  { && lambda }
+Calculando FOLLOW de E2
+Calculando FOLLOW de E
+Calculando FOLLOW de X
+FOLLOW de X  =  { ; }
+Analizando símbolo Q
+Analizando producción Q -> , E Q
+FIRST de Q -> , E Q  =  { , }
+Analizando producción Q -> lambda
+FIRST de Q -> lambda  =  { lambda }
+FIRST de Q  =  { , lambda }
+Calculando FOLLOW de Q
+Calculando FOLLOW de L
+FOLLOW de L  =  { ) }
+FOLLOW de Q  =  { ) }
+FOLLOW de E  =  { ) , ; }
+FOLLOW de E2  =  { ) , ; }
+Analizando símbolo F
+Analizando producción F -> function H id ( A ) { C }
+FIRST de F -> function H id ( A ) { C }  =  { function }
+FIRST de F  =  { function }
+Analizando símbolo H
+Analizando producción H -> T
+FIRST de H -> T  =  { boolean int string }
+Analizando producción H -> void
+FIRST de H -> void  =  { void }
+FIRST de H  =  { boolean int string void }
+Analizando símbolo K
+Analizando producción K -> , T id K
+FIRST de K -> , T id K  =  { , }
+Analizando producción K -> lambda
+FIRST de K -> lambda  =  { lambda }
+FIRST de K  =  { , lambda }
+Calculando FOLLOW de K
+Calculando FOLLOW de A
+FOLLOW de A  =  { ) }
+FOLLOW de K  =  { ) }
+Analizando símbolo L
+Analizando producción L -> E Q
+FIRST de L -> E Q  =  { ( , cad ent id }
+Analizando producción L -> lambda
+FIRST de L -> lambda  =  { lambda }
+FIRST de L  =  { ( , cad ent id lambda }
+Analizando símbolo P
+Analizando producción P -> B P
+FIRST de P -> B P  =  { do id if input output return var }
+Analizando producción P -> F P
+FIRST de P -> F P  =  { function }
+Analizando producción P -> lambda
+FIRST de P -> lambda  =  { lambda }
+FIRST de P  =  { do function id if input output return var lambda }
+Calculando FOLLOW de P
+FOLLOW de P  =  {  $ (final de cadena) }
+Analizando símbolo R2
+Analizando producción R2 -> == U R2
+FIRST de R2 -> == U R2  =  { == }
+Analizando producción R2 -> lambda
+FIRST de R2 -> lambda  =  { lambda }
+FIRST de R2  =  { == lambda }
+Calculando FOLLOW de R2
+Calculando FOLLOW de R
+FOLLOW de R  =  { && ) , ; }
+FOLLOW de R2  =  { && ) , ; }
+Analizando símbolo S2
+Analizando producción S2 -> = E ;
+FIRST de S2 -> = E ;  =  { = }
+Analizando producción S2 -> |= E ;
+FIRST de S2 -> |= E ;  =  { |= }
+Analizando producción S2 -> ( L ) ;
+FIRST de S2 -> ( L ) ;  =  { ( }
+Analizando producción S2 -> lambda
+FIRST de S2 -> lambda  =  { lambda }
+FIRST de S2  =  { ( = |= lambda }
+Calculando FOLLOW de S2
+Calculando FOLLOW de S
+Calculando FOLLOW de B
+FOLLOW de B  =  { do function id if input output return var }  $ (final de cadena) }
+FOLLOW de S  =  { do function id if input output return var }  $ (final de cadena) }
+FOLLOW de S2  =  { do function id if input output return var }  $ (final de cadena) }
+Analizando símbolo U2
+Analizando producción U2 -> + V U2
+FIRST de U2 -> + V U2  =  { + }
+Analizando producción U2 -> lambda
+FIRST de U2 -> lambda  =  { lambda }
+FIRST de U2  =  { + lambda }
+Calculando FOLLOW de U2
+Calculando FOLLOW de U
+FOLLOW de U  =  { && ) , ; == }
+FOLLOW de U2  =  { && ) , ; == }
+Analizando símbolo V2
+Analizando producción V2 -> ( L )
+FIRST de V2 -> ( L )  =  { ( }
+Analizando producción V2 -> lambda
+FIRST de V2 -> lambda  =  { lambda }
+FIRST de V2  =  { ( lambda }
+Calculando FOLLOW de V2
+Calculando FOLLOW de V
+FOLLOW de V  =  { && ) + , ; == }
+FOLLOW de V2  =  { && ) + , ; == }
+Analizando símbolo X
+Analizando producción X -> E
+FIRST de X -> E  =  { ( , cad ent id }
+Analizando producción X -> lambda
+FIRST de X -> lambda  =  { lambda }
+FIRST de X  =  { ( , cad ent id lambda }
+
+Análisis concluido satisfactoriamente

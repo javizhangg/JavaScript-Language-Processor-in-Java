@@ -21,7 +21,6 @@ public class AnalizadorLexico{
 
 	//Constructor del Analizador Lexico con la ruta del fichero fuente
 	public AnalizadorLexico() throws IOException {
-	
 		archivoEntrada = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
 		archivoSalidaTokens = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
 		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
@@ -42,27 +41,21 @@ public class AnalizadorLexico{
 		this.afdtoken=new AFD(br,fwTokens,fwTS);
 	}
 	public Token getToken() throws IOException {
-
 		this.token = afdtoken.getToken();
 		return this.token;
-		
 	}
 	public int getLinea() {
 		return afdtoken.posicionDeLinea;
 	}
 
+	//MAIN para probar el analizador Lexico
 	public static void main (String[] args) throws IOException {
 		AnalizadorLexico al = new AnalizadorLexico();
 	
-		
+		while(al.afdtoken.c != -1) {
 		al.getToken();
-		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
-		al.getToken();
-		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
-//		al.getToken();
-		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
-		al.getToken();
-		al.getToken();
+		System.out.println("Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + " ult: " + al.afdtoken.ultimaint);
+		}
 		fwTokens.close();
 		fwTS.close();
 

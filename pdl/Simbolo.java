@@ -11,26 +11,13 @@ public class Simbolo {
     private int numParametros;
     
 
-    // Constructor variables que no sean funciones
-    public Simbolo(String lexema,Tipo tipo, int ambito,int posEnTablaDeSimbolos, int direccionMemoria) {
+    //Constructor que va a llamar el AFD para insertar solamente los lexemas
+    public Simbolo(String lexema) {
     	this.lexema = lexema;
-        this.tipo = tipo;
-        this.ambito = ambito;
-        this.posEnTablaDeSimbolos = posEnTablaDeSimbolos;
-        this.direccionMemoria = direccionMemoria;
     }
     
- // Constructor funciones
-    public Simbolo(String lexema,Tipo tipo, int ambito,int posEnTablaDeSimbolos, int direccionMemoria,int numParametros, Tipo tipoParametro, String etiqueta) {
-    	this.lexema = lexema;
-        this.tipo = tipo;
-        this.ambito = ambito;
-        this.posEnTablaDeSimbolos = posEnTablaDeSimbolos;
-    }
-
-   
     // Getters y setters
-    public String getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
@@ -38,11 +25,11 @@ public class Simbolo {
         this.tipo = tipo;
     }
 
-    public String getAmbito() {
+    public int getAmbito() {
         return ambito;
     }
 
-    public void setAmbito(String ambito) {
+    public void setAmbito(int ambito) {
         this.ambito = ambito;
     }
 

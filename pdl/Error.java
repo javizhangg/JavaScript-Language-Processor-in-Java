@@ -24,66 +24,66 @@ class Error {
 	public void getError() {
 		switch (codError) {
 		case 100 -> {
-			error = st.append("- Error Lexico: No se puede empezar leyendo un *. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: No se puede empezar leyendo un *. En la linea: ").append(linea).toString();
 			System.out.println(error);
 		}
 		case 101 -> {
-			error = st.append("- Error Lexico: No se puede empezar leyendo un  _. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: No se puede empezar leyendo un  _. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 102 -> {
-			error = st.append("- Error Lexico: En este estado no se puede leer otro caracter distinto a &. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: En este estado no se puede leer otro caracter distinto a &. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 103 -> {
-			error = st.append("- Error Lexico: En este estado no se puede leer otro caracter distinto a =. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: En este estado no se puede leer otro caracter distinto a =. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 104 -> {
-			error = st.append("- Error Lexico: En este estado no se puede leer otro caracter distinto a *. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: En este estado no se puede leer otro caracter distinto a *. En la linea: ").append(linea).toString();
 
 			System.out.println(error);
 			break;
 		}
 		case 105 -> {
-			error = st.append("- Error Lexico: Cadena no cerrada. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: Cadena no cerrada. En la linea: ").append(linea).toString();
 
 			System.out.println(error);
 			break;
 		}
 		case 106 -> {
-			error = st.append("- Error Lexico: Se ha leido un caracter erroneo: ").append(mensaje).append(". Linea:").append(linea).toString();
+			error = st.append("- Error Lexico: Se ha leido un caracter erroneo: ").append(mensaje).append(". En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 107 -> {
-			error = st.append("- Error Lexico: Supera el maximo entero valido. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: Supera el maximo entero valido. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 108 -> {
-			error = st.append("- Error Lexico: Supera el maximo de 64 caracteres. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: Supera el maximo de 64 caracteres. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 109 ->{
-			error = st.append("- Error Lexico: Comentario no cerrado. Linea: ").append(linea).toString();
+			error = st.append("- Error Lexico: Comentario no cerrado. En la linea: ").append(linea).toString();
 		}
 		case 200 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion. Linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;		
 		}
 		case 201 -> {
-			error = st.append("- Error Sintactico: Error al realizar emparejado.").append(mensaje).append( ". Linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error al realizar emparejado. Probablemente es debido a errores anteriores.").append(" En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 202 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (P). Se esperaba los siguientes tokens: <if, > <var, > <do, > <output, > <input, > <return, > <function, > <while, > <eof, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (P). Se esperaba empezar una secuencia o leer fín de fichero. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -113,7 +113,7 @@ class Error {
 			break;
 		}
 		case 208 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (S). Se esperaba los siguientes tokens: <identificador, > <output, > <input, > <return, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (S). Falta una sentencia simple o falta el return. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -153,7 +153,7 @@ class Error {
 			break;
 		}
 		case 216 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (C). Se esperaba los siguientes tokens: <identificador, > <var, > <output, > <input, > <), > <} , > <if, > <do, > <return, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (C). Error que ocurre cuando también ha fallado la producción (S). En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}

@@ -1,36 +1,25 @@
 package pdl;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TS {
-//	private Map<String,Integer> posEnTablaSimbolo;
 	public Map<String,Simbolo> tablaSimbolo;
-	int contsimb; 
-	int numeroTabla;
-	FileWriter fw;
-	StringBuilder st;
-	public TS(int ambito,FileWriter fw) {
-		this.numeroTabla = numeroTabla;
-		this.fw = fw;
-//		posEnTablaSimbolo=new HashMap<>();
+	
+	public TS() {
 		tablaSimbolo = new LinkedHashMap<>();
-		st = new StringBuilder();
-		contsimb=0;
 	}
-
+	
+	//Función auxiliar, que devuelve el simbolo dado el lexema correspondiente al simbolo buscado.
 	public Simbolo getSimbolo(String lexema) {
-//		return posEnTablaSimbolo.get(lexema);
 		return tablaSimbolo.get(lexema);
 	}
 
-	public void InsertarTS(String lexema,Simbolo simbolo) throws IOException {
+	//Función auxiliar, que inserta en la TS el simbolo
+	public void InsertarTS(String lexema) throws IOException {
 //		posEnTablaSimbolo.put(lexema, contsimb);
-		tablaSimbolo.put(lexema, simbolo);
+		tablaSimbolo.put(lexema, new Simbolo(lexema));
 //		contsimb++;
 	}
 	
@@ -39,24 +28,7 @@ public class TS {
 		simbolo.setTipo(tipo);
 	}
 	
-	public void imprimirTabla() throws IOException {
-		if(numeroTabla == 1)
-		fw.write("CONTENIDOS DE LA TABLA GLOBAL#" + numeroTabla + " :" + "\n");
-		else
-			fw.write("CONTENIDOS DE LA TABLA#" + numeroTabla + " :" + "\n");
-		
-		for (String nombre : tablaSimbolo.keySet()) {
-			Simbolo simbolo = tablaSimbolo.get(nombre);
-
-			// Imprimir línea del lexema
-			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
-
-			// Imprimir línea de atributos
-			fw.write("  Atributos :" + "\n");
-
-			fw.write("  --------- ---------- " + "\n");
-		}
-	}
+	
 
 }
 
