@@ -308,11 +308,8 @@ public class AnalizadorSintactico {
 		{
 			new Error(213,al.getLinea()).getError();
 		}
-<<<<<<< HEAD
 		
 		return tipo;
-=======
->>>>>>> 325b0fc2dacb4536339ab1d24cf9fd722d88e52d
 	}
 
 	public void A() throws IOException {
