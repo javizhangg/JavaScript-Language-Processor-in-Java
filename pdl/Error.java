@@ -88,27 +88,27 @@ class Error {
 			break;
 		}
 		case 203 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (E'). Se esperaba los siguientes tokens: <&&, > <), > <,, > <;, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (E'). Error en la expresion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 204 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (R'). Se esperaba los siguientes tokens: <==, > <&&, > <), > <,, > <;, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (R'). Error en la expresion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 205 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (U'). Se esperaba los siguientes tokens: <+, > <==, > <&&, > <), > <,, > <;, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (U'). Error en la expresion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 206 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (V). Se esperaba los siguientes tokens: <identificador, > <numero, > <cadena, > <(, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (V). Error en la expresion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 207 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (V'). Se esperaba los siguientes tokens: <+, > <==, > <&&, > <(, > <), > <,, > <;, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (V'). Error en la expresion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -118,22 +118,22 @@ class Error {
 			break;
 		}
 		case 209 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (S'). Se esperaba los siguientes tokens: <=, > <|=, > <(, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (S'). Se esperaba los siguientes simbolos: =, |=, (. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 210 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (X). Se esperaba los siguientes tokens: <identificador, > <numero, > <cadena, > <(, > <;, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (X). Error en la expresion del return. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 211 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (L). Se esperaba los siguientes tokens: <identificador, > <numero, > <cadena, > <(, > <), >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (L). Error en la expresion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 212 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (Q). Se esperaba los siguientes tokens: <), > <,, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (Q). Falta cerrar el parentesis. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -153,7 +153,7 @@ class Error {
 			break;
 		}
 		case 216 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (C). Error que ocurre cuando también ha fallado la producción (S). En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (C). Falta una sentencia simple o falta el return.. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -163,7 +163,7 @@ class Error {
 			break;
 		}
 		case 218 -> {
-			error = st.append("- Error Sintactico: Error en el sistema de produccion (K). Se esperaba los siguientes tokens: <), > <,, >. En la linea: ").append(linea).toString();
+			error = st.append("- Error Sintactico: Error en el sistema de produccion (K). Error al definir los parametros de la funcion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
