@@ -1,6 +1,8 @@
-function hola (void) {
+function void hola (void) {
 
-if (hola);
+		if (hola) return hola;
 
-var integer ;
+		var boolean integer ;
+
+		return hola;
 }

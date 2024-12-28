@@ -6,10 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TablasDeSimbolos {
-	public Map<Integer,TS> gestorTS;
+	public static  Map<Integer,TS> gestorTS;
 	int numeroTabla;
 	FileWriter fw; 
-	boolean esGlobal;
+	static boolean esGlobal;
+	
+	public static TS tablaSimboloL = new TS();
+	public static TS tablaSimboloG = new TS();
 	public TablasDeSimbolos(FileWriter fw){
 		gestorTS = new HashMap<>();
 		this.fw = fw;
@@ -17,44 +20,59 @@ public class TablasDeSimbolos {
 	}
 
 	//Función para añadir tablas locales 
-	public void añadirTablaLocalTS(TS tablaSimbolo) {
-		gestorTS.put(1, tablaSimbolo);
+	public void añadirTablaLocalTS() {
+		
+		gestorTS.put(1, tablaSimboloL);
 		numeroTabla++;
 		esGlobal = false;
+		
+	}
+	public boolean hayTabla() {
+		if(gestorTS.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 	
 	//Función para la tabla global
-	public void añadirTablaGlobalTS(TS tablaSimbolo) {
-		gestorTS.put(0, tablaSimbolo);
+	public void añadirTablaGlobalTS() {
+		gestorTS.put(0, tablaSimboloG);
 		esGlobal = true;
+	
 	}
 	
 	//Función que devuelve la tabla TS del ambito especificado: 0 -> Global, 1 -> Local
 	//Y lo elimina del gestor de TS
 	public void getTablaTS(int ambito) throws IOException {
 		imprimirTabla(gestorTS.get(ambito));
+		System.out.print("se imprime" + ambito);
 		gestorTS.remove(ambito);
 		esGlobal = true;
 	}
 	
 
 	public void imprimirTabla(TS tablaSimbolo) throws IOException {
-		if(esGlobal)
+		if(esGlobal) {
 		fw.write("CONTENIDOS DE LA TABLA GLOBAL#" + numeroTabla + " :" + "\n");
-		else
+		}
+		else {
 			fw.write("CONTENIDOS DE LA TABLA#" + numeroTabla + " :" + "\n");
+		}
 		
 		for (String nombre : tablaSimbolo.tablaSimbolo.keySet()) {
 			Simbolo simbolo = tablaSimbolo.getSimbolo(nombre);
+			System.out.print(simbolo.getLexema());
 
 			// Imprimir línea del lexema
 			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
 
 			// Imprimir línea de atributos
-			fw.write("  Atributos :" + "\n");
+			fw.write("  Atributos :"+ simbolo.getTipo() + "\n");
 
 			fw.write("  --------- ---------- " + "\n");
 		}
+		fw.flush(); // Asegura que los datos se escriban en el archivo
 	}
 	
 }

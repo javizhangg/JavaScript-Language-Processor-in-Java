@@ -6,21 +6,34 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 public class AnalizadorSintactico {
 	private File archivoSalidaParse;
+	private File archivoSalidaTS;
 	public static FileWriter fwParse;
+	public static FileWriter fwTS;
 	BufferedWriter bw;
 	Token sig_token; 
 	AnalizadorLexico al;
 	PrintWriter out;
 	First first = new First();
+	
+	
+	
+	//Tablas de Simbolos en nuestro analizador Sintactico
+	public AnalizadorSemantico As;
+	public TablasDeSimbolos gestorTablas;
+	
 	public AnalizadorSintactico() throws IOException{
-		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-		//			archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+		//archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+		  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+		  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+		  
 		try {
-			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			//				fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			//fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -30,20 +43,46 @@ public class AnalizadorSintactico {
 		out.print( "Descendente ");
 		fwParse.flush();
 		sig_token = al.getToken();
+		
+		this.gestorTablas = new TablasDeSimbolos(fwTS);
+		this.As = new AnalizadorSemantico(gestorTablas);
+		
+		
+		
 		//		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
 	public void empareja(int idToken) throws IOException {
-		if(sig_token.getCodigo()==idToken) 
+		if(sig_token.getCodigo()==idToken) {
+			
+		
 			sig_token=al.getToken();
 			//				System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 
-			//				System.out.println("token siguiente " + sig_token.getCodigo());
+			System.out.println("token siguiente " + sig_token.getCodigo());
+		}
 		else 
 			new Error(201,al.getLinea()).getError();;
 //							System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
 	}
+	public void AddTipoTS(String id, Tipo tipo) {
+		if (gestorTablas.gestorTS.containsKey(1)) {
+	        if (gestorTablas.gestorTS.get(1).estaSimbolo(id)) {
+	            gestorTablas.gestorTS.get(1).getSimbolo(id).setTipo(tipo);
+	        } else {
+	            System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla local.");
+	        }
+	    } else if (gestorTablas.gestorTS.get(0).estaSimbolo(id)) {
+	        gestorTablas.gestorTS.get(0).getSimbolo(id).setTipo(tipo);
+	    } else {
+	        System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla global.");
+	    }
+	}
 
 	public void P() throws IOException {
+		if(!gestorTablas.hayTabla()) {
+			gestorTablas.añadirTablaGlobalTS();
+		}
+		gestorTablas.añadirTablaGlobalTS();
 		if(first.first.get("B").contains(sig_token.getCodigo())) {
 			out.print(1 + " ");
 			B();
@@ -54,11 +93,17 @@ public class AnalizadorSintactico {
 			F();
 			P();
 		}
-		else if(sig_token.getCodigo() == 29) 
+		else if(sig_token.getCodigo() == 29)  {
+			
 			out.print(3 + " ");
+			gestorTablas.getTablaTS(0);
 			//LAMBDA
-		else 
+		}
+		else {
 			new Error(202,al.getLinea()).getError();
+		}
+			
+			
 	}
 
 	public void E() throws IOException {
@@ -255,7 +300,7 @@ public class AnalizadorSintactico {
 			new Error(212,al.getLinea()).getError();
 	}
 
-	public Tipo T() throws IOException {
+	public Tipo T() throws IOException {  // ;tipo
 		Tipo tipo = new Tipo();
 		if(sig_token.getCodigo() == 10) { //token int 
 			out.print( 34+" ");
@@ -272,29 +317,36 @@ public class AnalizadorSintactico {
 			empareja(12);
 			tipo.putTipo("string");
 		}
-		else 
+		else {
 			new Error(213,al.getLinea()).getError();
+		}
 		
 		return tipo;
 	}
 
-	public void A() throws IOException {
+	public Tipo A() throws IOException { // ; tipo
+		Tipo tipo = new Tipo(); 
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
 			out.print( 37+" ");
 			//			empareja(sig_token.getCodigo());
-			T();
+			tipo=T();
+			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1);
 			K();
 		}
 		else if(sig_token.getCodigo() == 13) {
 			out.print( 38+" ");
 			empareja(sig_token.getCodigo());
+			tipo.putTipo("void");
 		}
 		else 
 			new Error(214,al.getLinea()).getError();
+		
+		return tipo;
 	}
 
 	public void B() throws IOException {
+		Tipo tipo = new Tipo(); 
 		if(sig_token.getCodigo() == 22) { //token if
 			out.print( 39+" ");
 			empareja(22);
@@ -310,7 +362,8 @@ public class AnalizadorSintactico {
 		else if(sig_token.getCodigo() == 9) { //token var
 			out.print( 41+" ");
 			empareja(9);
-			T();
+			tipo=T();
+			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1);
 			empareja(19);
 		}
@@ -348,9 +401,12 @@ public class AnalizadorSintactico {
 	}
 
 	public void F() throws IOException {
+		
+		
 		out.print( 45+" ");
 		empareja(sig_token.getCodigo());
 		H();
+		gestorTablas.añadirTablaLocalTS();
 		empareja(1);
 		empareja(16);
 		A();
@@ -358,27 +414,36 @@ public class AnalizadorSintactico {
 		empareja(20);
 		C();
 		empareja(21);
+		out.print(5555+" ");
+		gestorTablas.getTablaTS(1);
+		
 
 	}
 
-	public void H() throws IOException {
+	public Tipo H() throws IOException { //; tipo
+		Tipo tipo =new Tipo ();
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
 			out.print(46+" ");
-			T();
+			tipo=T();
 		}
 		else if(sig_token.getCodigo() == 13) {
 			out.print(47+" ");
 			empareja(13);
+			tipo.putTipo("void");
 		}
 		else 
 			new Error(217,al.getLinea()).getError();
+		
+		return tipo;
 	}
 
 	public void K() throws IOException {
+		Tipo tipo = new Tipo ();
 		if(sig_token.getCodigo() == 18) {
 			out.print(48+" ");
 			empareja(sig_token.getCodigo());
-			T();
+			tipo = T();
+			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1);
 			K();
 		}
@@ -395,6 +460,7 @@ public class AnalizadorSintactico {
 		as.out.flush();
 		as.out.close(); 
 		as.fwParse.close();
+		as.fwTS.close();
 		as.al.fwTokens.close();
 		as.al.fwTS.close();
 	}

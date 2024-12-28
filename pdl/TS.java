@@ -8,9 +8,12 @@ public class TS {
 	public Map<String,Simbolo> tablaSimbolo;
 	
 	public TS() {
-		tablaSimbolo = new LinkedHashMap<>();
+		this.tablaSimbolo = new LinkedHashMap<>();
 	}
 	
+	public boolean estaSimbolo(String lexema) {
+		return tablaSimbolo.containsKey(lexema);
+	}
 	//Función auxiliar, que devuelve el simbolo dado el lexema correspondiente al simbolo buscado.
 	public Simbolo getSimbolo(String lexema) {
 		return tablaSimbolo.get(lexema);

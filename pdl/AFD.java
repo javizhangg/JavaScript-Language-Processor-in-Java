@@ -40,8 +40,8 @@ class AFD {
 		this.posicionDeLinea = 1;
 		
 		// Inicializar la matriz de transiciones
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-		//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		//this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 		
@@ -64,8 +64,8 @@ class AFD {
 		this.gestorTablas = new TablasDeSimbolos(fwTS);
 		this.As = new AnalizadorSemantico(gestorTablas);
 		this.posEnTablaSimbolo = new TS();
-		this.tablaGlobal = new TS();
-		gestorTablas.añadirTablaGlobalTS(tablaGlobal);
+		
+		
 
 		this.br = br;
 	}
@@ -73,10 +73,13 @@ class AFD {
 	//Busca ese lexema en la tabla de símbolos activa; si no lo encuentra 
 	// y la tabla activa no es la global, sigue buscando
 	public boolean BuscaTS(String lexema) {
-		if(gestorTablas.gestorTS.containsKey(1)) 
+		if(gestorTablas.gestorTS.containsKey(1)) { 
 			return gestorTablas.gestorTS.get(1).tablaSimbolo.containsKey(lexema);
+		}
 		else
+		{
 			return gestorTablas.gestorTS.get(0).tablaSimbolo.containsKey(lexema);
+		}
 	}
 
 	// Método principal que me devuelve el token generado
@@ -153,9 +156,9 @@ class AFD {
 					} else if (!BuscaTS(auxLexema)) {
 						posEnTablaSimbolo = As.getTablaActual();
 						posEnTablaSimbolo.InsertarTS(auxLexema);
-						token = genToken(1, String.valueOf(posEnTablaSimbolo.getSimbolo(auxLexema)),auxLexema);
+						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}else 
-						token = genToken(1, String.valueOf(posEnTablaSimbolo.getSimbolo(auxLexema)),auxLexema);
+						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					lexema.delete(0, lexema.length());
 					leido = true;
 					return token;
@@ -165,7 +168,7 @@ class AFD {
 						posEnTablaSimbolo = As.getTablaActual();
 						posEnTablaSimbolo.InsertarTS(auxLexema);
 					}
-					token = genToken(1, String.valueOf(posEnTablaSimbolo.getSimbolo(auxLexema)),auxLexema);
+					token = genToken(1,posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					lexema.delete(0, lexema.length());
 					leido = true;
 					return token;
@@ -247,7 +250,7 @@ class AFD {
 				case 'S':
 					token = genToken(29,"","eof");
 					ultimaint=true;
-					gestorTablas.getTablaTS(0);
+					
 					return token;
 				}
 			}
@@ -267,9 +270,9 @@ class AFD {
 						token = genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
 					} else if (!BuscaTS(auxLexema)) {
 						posEnTablaSimbolo.InsertarTS(auxLexema);
-						token = genToken(1, String.valueOf(posEnTablaSimbolo.getSimbolo(auxLexema)), auxLexema);
+						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(), auxLexema);
 					} else 
-						token = genToken(1, String.valueOf(posEnTablaSimbolo.getSimbolo(auxLexema)), auxLexema);
+						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(), auxLexema);
 				}
 				lexema.delete(0, lexema.length());
 				return token;

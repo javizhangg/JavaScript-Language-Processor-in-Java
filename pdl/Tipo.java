@@ -2,8 +2,9 @@ package pdl;
 
 public class Tipo {
 
-	String tipo;
+	private String tipo;
 	Tipo(){
+		tipo="null";
 	}
 	
 	public void putTipo(String tipo) {

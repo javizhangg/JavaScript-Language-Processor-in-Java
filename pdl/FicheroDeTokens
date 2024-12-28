@@ -1,11 +1,23 @@
 <27,> //Palabra reservada: function
-<1,> //es el identificador: hola
+<13,> //Palabra reservada: void
+<1,hola> //es el identificador: hola
 <16,> //tipo: (
 <13,> //Palabra reservada: void
 <17,> //tipo: )
 <20,> //tipo: {
 <22,> //Palabra reservada: if
 <16,> //tipo: (
-<1,> //es el identificador: hola
+<1,hola> //es el identificador: hola
 <17,> //tipo: )
+<28,> //Palabra reservada: return
+<1,hola> //es el identificador: hola
 <19,> //tipo: ;
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,integer> //es el identificador: integer
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,hola> //es el identificador: hola
+<19,> //tipo: ;
+<21,> //tipo: }
+<29,> //Palabra reservada: eof

@@ -1,9 +1,7 @@
-Terminales = { && == = + id ent cad output input return |= ; int boolean string void if do while function var , { } ( ) }
-
-NoTerminales = { P E E2 R R2 U U2 V V2 S S2 X L Q T A B C F H K  }
-
+Terminales = { && == = + id ent cad output input return |= ; int Boolean string void if do
+while function var , { } ( ) }
+NoTerminales = { P E E2 R R2 U U2 V V2 S S2 X L Q T A B C F H K }
 Axioma = P
-
 Producciones = {
 P -> B P
 P -> F P
@@ -22,15 +20,15 @@ V -> ( E )
 V -> ent
 V -> cad
 V -> , id V2
-V2 -> ( L ) 
+V2 -> ( L )
 V2 -> lambda
 S -> id S2
-S -> output E ; 
+S -> output E ;
 S -> input id ;
 S -> return X ;
 S2 -> = E ;
 S2 -> |= E ;
-S2 -> ( L ) ; 
+S2 -> ( L ) ;
 S2 -> lambda
 X -> E
 X -> lambda
@@ -53,6 +51,5 @@ F -> function H id ( A ) { C }
 H -> T
 H -> void
 K -> , T id K
-K -> lambda 
-
+K -> lambda
 }

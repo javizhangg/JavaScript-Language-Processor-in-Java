@@ -16,6 +16,9 @@ public class Simbolo {
     	this.lexema = lexema;
     }
     
+    public String getLexema() {
+    	return lexema;
+    }
     // Getters y setters
     public Tipo getTipo() {
         return tipo;
