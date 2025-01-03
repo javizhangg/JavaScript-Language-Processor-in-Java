@@ -45,10 +45,16 @@ public class TablasDeSimbolos {
 	//Función que devuelve la tabla TS del ambito especificado: 0 -> Global, 1 -> Local
 	//Y lo elimina del gestor de TS
 	public void getTablaTS(int ambito) throws IOException {
-		imprimirTabla(gestorTS.get(ambito));
+		if(ambito ==0) {
+		imprimirTabla(gestorTS.get(0));
 		System.out.print("se imprime" + ambito);
 		gestorTS.remove(ambito);
 		esGlobal = true;
+		}else {
+			System.out.print("se imprime" + ambito);
+			gestorTS.remove(ambito);
+			esGlobal = true;
+		}
 	}
 	
 
@@ -66,13 +72,13 @@ public class TablasDeSimbolos {
 
 			// Imprimir línea del lexema
 			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
-
+			
 			// Imprimir línea de atributos
-			fw.write("  Atributos :"+ simbolo.getTipo() + "\n");
+			fw.write("  Atributos :"+ simbolo.getTipo().getTipo() + simbolo.getDireccionMemoria()+ "\n");
 
 			fw.write("  --------- ---------- " + "\n");
 		}
-		fw.flush(); // Asegura que los datos se escriban en el archivo
+		
 	}
 	
 }

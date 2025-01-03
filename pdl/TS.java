@@ -6,8 +6,11 @@ import java.util.Map;
 
 public class TS {
 	public Map<String,Simbolo> tablaSimbolo;
-	
+	public static int Desplazamiento;
+	public static int numParametros;
 	public TS() {
+		numParametros=0;
+		Desplazamiento=0;
 		this.tablaSimbolo = new LinkedHashMap<>();
 	}
 	

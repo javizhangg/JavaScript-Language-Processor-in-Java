@@ -5,6 +5,7 @@ public class Simbolo {
 	private String etiqueta;
     private Tipo tipo; 
     private Tipo tipoParametro;
+    private Tipo tipoDev;
     private int ambito;  //global, local
     private int direccionMemoria;  //desplazamiento
     private int posEnTablaDeSimbolos;
@@ -15,11 +16,13 @@ public class Simbolo {
     public Simbolo(String lexema) {
     	this.lexema = lexema;
     }
-    
+    /*--------------------------Variable normal--------------------------------------------*/
+    //Nos devuelve el lexema 
     public String getLexema() {
     	return lexema;
     }
-    // Getters y setters
+    
+    //Sirve para Tipo
     public Tipo getTipo() {
         return tipo;
     }
@@ -27,7 +30,43 @@ public class Simbolo {
    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
+   
+   //Sirve para direcion de memoria 
+   public int getDireccionMemoria() {
+       return direccionMemoria;
+   }
+   public void setDireccionMemoria(int posmem) {
+	   posEnTablaDeSimbolos=posmem;
+   }
 
+   /*--------------------------Funciones--------------------------------------------*/
+    //Sirve para tipoParamtetro en funciones
+    public void setTipoParametro(Tipo tipo){
+    	tipoParametro =tipo;
+    }
+    public Tipo getTipoParametro(){
+    	return tipoParametro;
+    }
+    
+    //Sirve para tipoDev en funciones
+    public void setTipoDev(Tipo tipo){
+    	tipoDev =tipo;
+    }
+    public Tipo GetTipoDev(){
+    	return tipoDev;
+    }
+    
+    
+    //Sirve para numero de parametros 
+    public void setNumPar(int numpar) {
+    	posEnTablaDeSimbolos=numpar;
+    }
+   
+    public int getNumPar() {
+    	return posEnTablaDeSimbolos;
+    }
+    
+    
     public int getAmbito() {
         return ambito;
     }
@@ -36,9 +75,7 @@ public class Simbolo {
         this.ambito = ambito;
     }
 
-    public int getDireccionMemoria() {
-        return direccionMemoria;
-    }
+    
 
 
     @Override

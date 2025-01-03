@@ -172,6 +172,11 @@ class Error {
 			System.out.println(error);
 			break;
 		}
+		case 300 -> {
+			error = st.append("- Error Semantico: Error ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
 		}
 
 	}

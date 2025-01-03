@@ -1,8 +1,21 @@
-function void hola (void) {
+function void holaconh (void) {
 
 		if (hola) return hola;
 
 		var boolean integer ;
 
 		return hola;
+}
+
+var boolean hola;
+
+var string adios;
+
+function void holasinh (string adios) {
+
+		if (hola) return adiosconh;
+
+		var boolean suma ;
+
+		return suma;
 }

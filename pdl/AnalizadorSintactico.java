@@ -64,18 +64,46 @@ public class AnalizadorSintactico {
 			new Error(201,al.getLinea()).getError();;
 //							System.out.println("Token error :" + sig_token.getCodigo() + " se esperaba: " + idToken + ". Linea: " + al.afdtoken.posicionDeLinea);
 	}
+	
+	
+	
 	public void AddTipoTS(String id, Tipo tipo) {
 		if (gestorTablas.gestorTS.containsKey(1)) {
 	        if (gestorTablas.gestorTS.get(1).estaSimbolo(id)) {
 	            gestorTablas.gestorTS.get(1).getSimbolo(id).setTipo(tipo);
+	            
+	            if(tipo.getTipo()=="string") {
+	            	gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(gestorTablas.gestorTS.get(1).Desplazamiento);
+	            	gestorTablas.gestorTS.get(1).Desplazamiento += id.length();
+	            }else if(tipo.getTipo()=="int") {
+	            	gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(gestorTablas.gestorTS.get(1).Desplazamiento);
+	            	gestorTablas.gestorTS.get(1).Desplazamiento += 2;
+	            }else if(tipo.getTipo()=="boolean") {
+	            	gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(gestorTablas.gestorTS.get(1).Desplazamiento);
+	            	gestorTablas.gestorTS.get(1).Desplazamiento += 1;
+	            }
+	            gestorTablas.gestorTS.get(1).numParametros +=1;
+	           
 	        } else {
 	            System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla local.");
 	        }
 	    } else if (gestorTablas.gestorTS.get(0).estaSimbolo(id)) {
 	        gestorTablas.gestorTS.get(0).getSimbolo(id).setTipo(tipo);
+	        if(tipo.getTipo()=="string") {
+            	gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(gestorTablas.gestorTS.get(0).Desplazamiento);
+            	gestorTablas.gestorTS.get(0).Desplazamiento += id.length();
+            }else if(tipo.getTipo()=="int") {
+            	gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(gestorTablas.gestorTS.get(0).Desplazamiento);
+            	gestorTablas.gestorTS.get(0).Desplazamiento += 2;
+            }else if(tipo.getTipo()=="boolean") {
+            	gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(gestorTablas.gestorTS.get(0).Desplazamiento);
+            	gestorTablas.gestorTS.get(0).Desplazamiento += 1;
+            }
+	        gestorTablas.gestorTS.get(0).numParametros+=1;
 	    } else {
 	        System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla global.");
 	    }
+		
 	}
 
 	public void P() throws IOException {
@@ -401,21 +429,30 @@ public class AnalizadorSintactico {
 	}
 
 	public void F() throws IOException {
-		
-		
+		Tipo tipo =new Tipo();
+		String lexemafuncion;
 		out.print( 45+" ");
 		empareja(sig_token.getCodigo());
-		H();
-		gestorTablas.añadirTablaLocalTS();
+		tipo = H();
+		
+		AddTipoTS(sig_token.getAtributo(),tipo);
+		lexemafuncion=sig_token.getAtributo();
 		empareja(1);
+		gestorTablas.añadirTablaLocalTS();
 		empareja(16);
+		
 		A();
+		gestorTablas.gestorTS.get(0).getSimbolo(lexemafuncion).setNumPar(gestorTablas.gestorTS.get(1).numParametros);
+		
+		
 		empareja(17);
 		empareja(20);
 		C();
 		empareja(21);
 		out.print(5555+" ");
 		gestorTablas.getTablaTS(1);
+		
+		
 		
 
 	}
