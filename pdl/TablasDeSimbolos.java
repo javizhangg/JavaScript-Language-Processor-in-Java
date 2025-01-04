@@ -27,6 +27,32 @@ public class TablasDeSimbolos {
 		esGlobal = false;
 		
 	}
+	//lo implementamos para obtener el simbolo de la funcion 
+	public Simbolo getFuncion() {
+		Simbolo simbolo;
+		String ultimoSimbolo =tablaSimboloG.getLastSimbolo();
+		
+		simbolo = tablaSimboloG.getSimbolo(ultimoSimbolo);
+		
+		return simbolo;
+	}
+	//Funcion para obtener el simbolo, dandoigual si es del global o del local
+	public Simbolo getSimboloGL(String lexSimbolo) {
+		Simbolo simbolo;
+		if(gestorTS.containsKey(1)) {
+			if(gestorTS.get(1).tablaSimbolo.containsKey(lexSimbolo)) {
+			simbolo=gestorTS.get(1).getSimbolo(lexSimbolo);
+			}else {
+				simbolo=gestorTS.get(0).getSimbolo(lexSimbolo);
+			}
+		}else {
+			simbolo=gestorTS.get(0).getSimbolo(lexSimbolo);
+		}
+		return simbolo;
+	}
+	
+	
+		//Sirve para comprobar la existencia de tablas
 	public boolean hayTabla() {
 		if(gestorTS.isEmpty()) {
 			return false;
@@ -72,9 +98,25 @@ public class TablasDeSimbolos {
 
 			// Imprimir línea del lexema
 			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
+			StringBuilder atributos = new StringBuilder("  Atributos :" + "\n");
+			if (simbolo.getTipo() != null && simbolo.getDireccionMemoria() >= 0) {
+	            atributos.append("      Tipo=").append(simbolo.getTipo().getTipo()).append("\n");
+	            atributos.append("      DireccionMemoria=").append(simbolo.getDireccionMemoria()).append("\n");
+	        }
 			
+			if (simbolo.getNumPar() >= 0 && simbolo.GetTipoDev()!=null ) {
+	            atributos.append("      NumParametros=").append(simbolo.getNumPar()).append("\n");
+	            atributos.append("      TipoDev=").append(simbolo.GetTipoDev().getTipo()).append("\n");
+	            atributos.append("      TipoParametro=");
+	            for(Tipo tipo : simbolo.tipoParametro.values() ) {
+	            	atributos.append(tipo.getTipo()).append(" , ");
+	            }
+	            atributos.append("\n");
+	            
+	        }
+
 			// Imprimir línea de atributos
-			fw.write("  Atributos :"+ simbolo.getTipo().getTipo() + simbolo.getDireccionMemoria()+ "\n");
+			fw.write(atributos.toString() + "\n");
 
 			fw.write("  --------- ---------- " + "\n");
 		}

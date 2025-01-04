@@ -1,17 +1,6 @@
-function void holaconh (void) {
 
-		if (hola) return hola;
 
-		var boolean integer ;
-
-		return hola;
-}
-
-var boolean hola;
-
-var string adios;
-
-function void holasinh (string adios) {
+function void holasinh ( int adios , string hola23) {
 
 		if (hola) return adiosconh;
 

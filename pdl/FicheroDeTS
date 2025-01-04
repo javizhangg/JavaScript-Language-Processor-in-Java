@@ -1,4 +1,10 @@
 CONTENIDOS DE LA TABLA GLOBAL#2 :
-* LEXEMA : 'holaconh'
-  Atributos :void0
+* LEXEMA : 'holasinh'
+  Atributos :
+      Tipo=string
+      DireccionMemoria=0
+      NumParametros=2
+      TipoDev=void
+      TipoParametro=
+
   --------- ---------- 

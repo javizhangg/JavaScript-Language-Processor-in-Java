@@ -6,12 +6,17 @@ import java.util.Map;
 
 public class TS {
 	public Map<String,Simbolo> tablaSimbolo;
-	public static int Desplazamiento;
-	public static int numParametros;
+	
+	private String lastsimbolo;
 	public TS() {
-		numParametros=0;
-		Desplazamiento=0;
+		
+		
 		this.tablaSimbolo = new LinkedHashMap<>();
+	}
+	
+	//Devuelve el ultimo simbolo que en caso de entrar en una funcion sera el simbolo de la funcion 
+	public String getLastSimbolo() {
+		return lastsimbolo;
 	}
 	
 	public boolean estaSimbolo(String lexema) {
@@ -24,6 +29,7 @@ public class TS {
 
 	//Función auxiliar, que inserta en la TS el simbolo
 	public void InsertarTS(String lexema) throws IOException {
+		lastsimbolo=lexema;
 //		posEnTablaSimbolo.put(lexema, contsimb);
 		tablaSimbolo.put(lexema, new Simbolo(lexema));
 //		contsimb++;
@@ -33,6 +39,8 @@ public class TS {
 		Simbolo simbolo = tablaSimbolo.get(lexema);
 		simbolo.setTipo(tipo);
 	}
+
+	
 	
 	
 

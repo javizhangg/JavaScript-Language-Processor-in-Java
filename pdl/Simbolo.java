@@ -1,10 +1,14 @@
 package pdl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Simbolo {
 	private String lexema;
 	private String etiqueta;
     private Tipo tipo; 
-    private Tipo tipoParametro;
+    public Map <Integer,Tipo> tipoParametro;
+    private int contp;
     private Tipo tipoDev;
     private int ambito;  //global, local
     private int direccionMemoria;  //desplazamiento
@@ -15,6 +19,8 @@ public class Simbolo {
     //Constructor que va a llamar el AFD para insertar solamente los lexemas
     public Simbolo(String lexema) {
     	this.lexema = lexema;
+        this.contp = 0;
+        this.tipoParametro = new HashMap<>(); // Inicialización aquí
     }
     /*--------------------------Variable normal--------------------------------------------*/
     //Nos devuelve el lexema 
@@ -36,16 +42,23 @@ public class Simbolo {
        return direccionMemoria;
    }
    public void setDireccionMemoria(int posmem) {
-	   posEnTablaDeSimbolos=posmem;
+	   direccionMemoria=posmem;
    }
 
    /*--------------------------Funciones--------------------------------------------*/
     //Sirve para tipoParamtetro en funciones
     public void setTipoParametro(Tipo tipo){
-    	tipoParametro =tipo;
+    	tipoParametro.put(contp, tipo );
+    	contp++;
     }
     public Tipo getTipoParametro(){
-    	return tipoParametro;
+    	Tipo tipo=null;
+    	if(contp >=0) {
+    	tipo = tipoParametro.get(contp);
+    	tipoParametro.remove(contp);
+    	contp--;
+    	}
+    	return tipo;
     }
     
     //Sirve para tipoDev en funciones
