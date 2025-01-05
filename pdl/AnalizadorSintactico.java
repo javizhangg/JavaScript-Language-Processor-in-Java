@@ -19,27 +19,33 @@ public class AnalizadorSintactico {
 	PrintWriter out;
 	First first = new First();
 	
+	//Guardamos una referencia al simbolo de la funcion
+	Simbolo simboloDeFuncion;
 	
 	private int despL;
 	private int despG;
 	
 	private boolean zona_declarada;
+	private boolean zona_parametro;
 	
 	private int num_parametros;
+	
 	
 	//Tablas de Simbolos en nuestro analizador Sintactico
 	public AnalizadorSemantico As;
 	public TablasDeSimbolos gestorTablas;
 	
 	public AnalizadorSintactico() throws IOException{
-		//archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-		  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-		  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+//		  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//		  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 		  
 		try {
-			//fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//			fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -52,8 +58,9 @@ public class AnalizadorSintactico {
 		
 		this.gestorTablas = new TablasDeSimbolos(fwTS);
 		this.As = new AnalizadorSemantico(gestorTablas);
-		
-		zona_declarada=true;
+		num_parametros = 0;
+		zona_declarada=false;
+		zona_parametro = false;
 		
 		//		System.out.println("Estado: " + al.afdtoken.estado +  " Leido: " + al.afdtoken.leido + " (" + al.afdtoken.c + ")" +  " esSimbolo: " + al.afdtoken.esSimbolo + " eofLeido: " + al.afdtoken.eofLeido + " ult: " + al.afdtoken.ultimaint);
 	}
@@ -75,6 +82,10 @@ public class AnalizadorSintactico {
 	public void AddFuncionTS(String id, Tipo tipo) {
 		if (gestorTablas.gestorTS.get(0).estaSimbolo(id)) {
 			gestorTablas.gestorTS.get(0).getSimbolo(id).setTipoDev(tipo);
+			//Las funciones son de tipo Función
+			gestorTablas.gestorTS.get(0).getSimbolo(id).setTipo(new Tipo("Función"));
+			simboloDeFuncion = gestorTablas.getFuncion();
+			
 		}else {
 			System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla local.");
 		}
@@ -83,24 +94,19 @@ public class AnalizadorSintactico {
 	
 	//Funcion para añadir tipo a un id en caso de que no sea de tipo funcion se necarga de ver si existe o no si no existe se añade y despues de añadirlo se indica el desplazamiento correspondiente
 	public void AddTipoTS(String id, Tipo tipo) {
-		if(!zona_declarada) {
-			num_parametros+=1;
-			gestorTablas.getFuncion().setTipo(tipo);//cojemos el ultimo atributo y le añadimos el tipo del parametro
-		}
+		
 		if (gestorTablas.gestorTS.containsKey(1)) {
 	        if (gestorTablas.gestorTS.get(1).estaSimbolo(id)) {
+	        	
+	        	//Esto permite añadir los tipos de los parametros pasados a la funcion
+	        	if(zona_parametro) {
+	        		simboloDeFuncion.setTipoParametro(tipo);
+	    		}
 	            gestorTablas.gestorTS.get(1).getSimbolo(id).setTipo(tipo);
 	            
-	            if(tipo.getTipo()=="string") {
-	            	gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(despL);
-	            	despL+=64;
-	            }else if(tipo.getTipo()=="int") {
-	            	gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(despL);
-	            	despL+=2;
-	            }else if(tipo.getTipo()=="boolean") {
-	            	gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(despL);
-	            	despL+=2;
-	            }
+	            //El tamaño está guardado en el tipo
+	            gestorTablas.gestorTS.get(1).getSimbolo(id).setDireccionMemoria(despL);
+		        despL+=tipo.gettam();
 	            
 	           
 	        } else {
@@ -108,16 +114,10 @@ public class AnalizadorSintactico {
 	        }
 	    } else if (gestorTablas.gestorTS.get(0).estaSimbolo(id)) {
 	        gestorTablas.gestorTS.get(0).getSimbolo(id).setTipo(tipo);
-	        if(tipo.getTipo()=="string") {
-            	gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(despG);
-            	despG+=64;
-            }else if(tipo.getTipo()=="int") {
-            	gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(despG);
-            	despG+=2;
-            }else if(tipo.getTipo()=="boolean") {
-            	gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(despG);
-            	despG+=2;
-            }
+	        
+	        //El tamaño está guardado en el tipo
+	        gestorTablas.gestorTS.get(0).getSimbolo(id).setDireccionMemoria(despG);
+	        despG+=tipo.gettam();
 	        	
 	    } else {
 	        System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla global.");
@@ -386,6 +386,10 @@ public class AnalizadorSintactico {
 			out.print( 37+" ");
 			//			empareja(sig_token.getCodigo());
 			tipo=T();
+			
+			if(zona_declarada) {
+				num_parametros+=1;
+			}
 			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1);
 			K();
@@ -471,12 +475,12 @@ public class AnalizadorSintactico {
 		gestorTablas.añadirTablaLocalTS();
 		empareja(16);
 		
-		/*Introducimos la zona_declarada a false para que se produzca correctamente la suma de parametros*/
-		zona_declarada=false;
+		zona_parametro = true;
 		A();
+		zona_parametro = false;
+		zona_declarada=false;
 		gestorTablas.getSimboloGL(lexemafuncion).setNumPar(num_parametros);
 		num_parametros=0;
-		zona_declarada=true;
 		
 		
 		empareja(17);
@@ -485,10 +489,6 @@ public class AnalizadorSintactico {
 		empareja(21);
 		out.print(5555+" ");
 		gestorTablas.getTablaTS(1);
-		
-		
-		
-
 	}
 
 	public Tipo H() throws IOException { //; tipo
@@ -514,6 +514,9 @@ public class AnalizadorSintactico {
 			out.print(48+" ");
 			empareja(sig_token.getCodigo());
 			tipo = T();
+			if(zona_declarada) {
+				num_parametros+=1;
+			}
 			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1);
 			K();

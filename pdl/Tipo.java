@@ -6,6 +6,9 @@ public class Tipo {
 	Tipo(){
 		tipo="null";
 	}
+	Tipo(String tipo){
+		this.tipo = tipo;
+	}
 	public void puttam(int tamano) {
 		tam=tamano;
 	}

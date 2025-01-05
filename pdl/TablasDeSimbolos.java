@@ -16,16 +16,13 @@ public class TablasDeSimbolos {
 	public TablasDeSimbolos(FileWriter fw){
 		gestorTS = new HashMap<>();
 		this.fw = fw;
-		numeroTabla = 1;
+		numeroTabla = 0;
 	}
 
 	//Función para añadir tablas locales 
 	public void añadirTablaLocalTS() {
-		
 		gestorTS.put(1, tablaSimboloL);
-		numeroTabla++;
 		esGlobal = false;
-		
 	}
 	//lo implementamos para obtener el simbolo de la funcion 
 	public Simbolo getFuncion() {
@@ -71,16 +68,15 @@ public class TablasDeSimbolos {
 	//Función que devuelve la tabla TS del ambito especificado: 0 -> Global, 1 -> Local
 	//Y lo elimina del gestor de TS
 	public void getTablaTS(int ambito) throws IOException {
-		if(ambito ==0) {
-		imprimirTabla(gestorTS.get(0));
+		//No hace hacer if ambito es 0 o cosas así, esto arregla ademas el error de que solo se imprimiera la tabla global.
+		imprimirTabla(gestorTS.get(ambito));
 		System.out.print("se imprime" + ambito);
 		gestorTS.remove(ambito);
+		
+		//Solo incrementamos esta variable cada vez que llamemos getTablaTS
+		//Esto arregla el error del numero incorrecto
+		numeroTabla++;
 		esGlobal = true;
-		}else {
-			System.out.print("se imprime" + ambito);
-			gestorTS.remove(ambito);
-			esGlobal = true;
-		}
 	}
 	
 
@@ -89,17 +85,18 @@ public class TablasDeSimbolos {
 		fw.write("CONTENIDOS DE LA TABLA GLOBAL#" + numeroTabla + " :" + "\n");
 		}
 		else {
-			fw.write("CONTENIDOS DE LA TABLA#" + numeroTabla + " :" + "\n");
+			fw.write("CONTENIDOS DE LA TABLA LOCAL#" + numeroTabla + " :" + "\n" );
 		}
 		
 		for (String nombre : tablaSimbolo.tablaSimbolo.keySet()) {
 			Simbolo simbolo = tablaSimbolo.getSimbolo(nombre);
-			System.out.print(simbolo.getLexema());
 
-			// Imprimir línea del lexema
 			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
 			StringBuilder atributos = new StringBuilder("  Atributos :" + "\n");
-			if (simbolo.getTipo() != null && simbolo.getDireccionMemoria() >= 0) {
+			if (simbolo.getTipo() != null && simbolo.getDireccionMemoria() >= 0 && simbolo.GetTipoDev()!=null) {
+				atributos.append("      Tipo=").append(simbolo.getTipo().getTipo()).append("\n");
+	        }
+			else if (simbolo.getTipo() != null && simbolo.getDireccionMemoria() >= 0) {
 	            atributos.append("      Tipo=").append(simbolo.getTipo().getTipo()).append("\n");
 	            atributos.append("      DireccionMemoria=").append(simbolo.getDireccionMemoria()).append("\n");
 	        }
