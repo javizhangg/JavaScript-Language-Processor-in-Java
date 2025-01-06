@@ -1,11 +1,12 @@
-var int hola;
+var string hola;
 var boolean encontrado;
+var int suma;
+var int resta;
 
-function void holasinh (int ho, int ha, boolean funciona) {
-		var boolean suma ;
-
-		return suma2;
+if(suma == resta)
+	output hola;
+	
+function boolean Suma (int aux, int fin, boolean b){
+	aux = fin +1;
+    return aux ;
 }
-
-
-

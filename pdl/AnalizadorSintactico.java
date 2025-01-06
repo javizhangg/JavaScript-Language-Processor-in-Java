@@ -36,16 +36,16 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 	
 	public AnalizadorSintactico() throws IOException{
-		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-//		  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//		  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+		  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+		  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 		  
 		try {
-			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-//			fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+			fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -125,6 +125,20 @@ public class AnalizadorSintactico {
 		
 	}
 	
+	public Tipo BuscaFuncionTipoTS(String id) {
+			 return gestorTablas.gestorTS.get(0).getSimbolo(id).GetTipoDev();
+	}
+	public Tipo BuscaTipoTS(String id) {
+		if (gestorTablas.gestorTS.containsKey(1) && gestorTablas.gestorTS.get(1).estaSimbolo(id)) {
+	        return gestorTablas.gestorTS.get(1).getSimbolo(id).getTipo();
+	    } else if (gestorTablas.gestorTS.get(0).estaSimbolo(id)) {
+	        return gestorTablas.gestorTS.get(0).getSimbolo(id).getTipo();
+	    } else {
+	        System.err.println("Error: Identificador '" + id + "' no encontrado.");
+	        return new Tipo("error");
+	    }
+	}
+	
 	
 	public void P2() throws IOException {
 		
@@ -159,198 +173,388 @@ public class AnalizadorSintactico {
 			
 	}
 
-	public void E() throws IOException {
+	public Tipo E() throws IOException {
+		Tipo tipo=new Tipo();
 		out.print(4 + " ");
-		R();
-		E2();
+		Tipo R_tipo = R();
+        Tipo E2_tipo = E2();
+//        System.out.print("R:"+R_tipo.getTipo());
+//        System.out.print("E2:"+E2_tipo.getTipo()+ "\n");
+        if (R_tipo.getTipo().equals("boolean") && E2_tipo.getTipo().equals("boolean")) {
+        	tipo.puttam(2);
+        	tipo.putTipo("boolean");
+            return tipo;
+        } else {
+        	new Error(300,al.getLinea()).getError();
+        	tipo.putTipo("error");
+        	return tipo;
+        }
 	}
 
-	public void E2() throws IOException {
+	public Tipo E2() throws IOException {
+		Tipo tipo =new Tipo();
 		if(first.first.get("E'").contains(sig_token.getCodigo())) {
 			out.print(5 + " ");
 			empareja(sig_token.getCodigo());
-			R();
-			E2();
+			Tipo R_tipo = R();
+            Tipo E2_tipo = E2();
+//            System.out.print("R:"+R_tipo.getTipo());
+//            System.out.print("E2:"+E2_tipo.getTipo()+ "\n");
+			if (R_tipo.getTipo().equals("boolean") && E2_tipo.getTipo().equals("boolean")) {
+	        	tipo.puttam(2);
+	        	tipo.putTipo("boolean");
+	            return tipo;
+	        } else {
+	        	new Error(301,al.getLinea()).getError();
+	        	tipo.putTipo("error");
+	        	return tipo;
+	        }
 		}
 		else if(first.follow.get("E'").contains(sig_token.getCodigo())) //FOLLOW E'
+		{
 			out.print(6 + " ");
+			tipo.puttam(2);
+			tipo.putTipo("boolean");
+			return tipo;
 			//LAMBDA
-		else 
+		}
+		else {
 			new Error(203,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
+			
+		
 	}
 
-	public void R() throws IOException {
+	public Tipo R() throws IOException {
+		Tipo tipo=new Tipo();
 		out.print( 7+" ");
-		U();
-		R2();
+		 Tipo U_tipo = U();
+	     Tipo R2_tipo = R2();
+	     
+//         System.out.print("U:"+U_tipo.getTipo());
+//         System.out.print("R2:"+R2_tipo.getTipo()+ "\n");
+         if (U_tipo.getTipo().equals("int") && R2_tipo.getTipo().equals("int")) {
+	    	 	tipo.puttam(2);
+	    	 	tipo.putTipo("boolean");
+	            return tipo;
+	     } else {
+	        	new Error(302,al.getLinea()).getError();
+	        	tipo.putTipo("error");
+	        	return tipo;
+	     }
 	}
 
-	public void R2() throws IOException {
+	public Tipo R2() throws IOException {
+		Tipo tipo =new Tipo();
 		if(first.first.get("R'").contains(sig_token.getCodigo())) {
 			out.print( 8+" ");
 			empareja(sig_token.getCodigo());
-			U();
-			R2();
+			Tipo U_tipo = U();
+		    Tipo R2_tipo = R2();
+//		    System.out.print("U:"+ U_tipo.getTipo());
+//		    System.out.print("R2:"+R2_tipo.getTipo()+ "\n");
+		    if (U_tipo.getTipo().equals("int")) {
+	    	 	tipo.puttam(2);
+	    	 	tipo.putTipo("int");
+	            return tipo;
+		    } else {
+	        	new Error(303,al.getLinea()).getError();
+	        	tipo.putTipo("error");
+	        	return tipo;
+		    }
 		}
 		else if(first.follow.get("R'").contains(sig_token.getCodigo())) //FOLLOW R'
+		{
 			out.print( 9+" ");
+			tipo.puttam(2);
+			tipo.putTipo("int");
+			return tipo;
 			//LAMBDA
-		else 
+		}
+		else {
 			new Error(204,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
 	}
 
-	public void U() throws IOException {
+	public Tipo U() throws IOException {
+		Tipo tipo=new Tipo();
 		out.print( 10+" ");
-		V();
-		U2();
+		Tipo V_tipo = V();
+        Tipo U2_tipo = U2();
+//        System.out.print("V:"+V_tipo.getTipo());
+//        System.out.print("U2:"+U2_tipo.getTipo()+ "\n");
+        if(V_tipo.getTipo().equals(U2_tipo.getTipo())) {
+        	return U2_tipo;
+        }else{
+        	tipo.putTipo("error");
+        	new Error(304,al.getLinea()).getError();
+        	return tipo;
+        }
+        
 	}
 
-	public void U2() throws IOException {
+	public Tipo U2() throws IOException {
+		Tipo tipo =new Tipo ();
 		if(first.first.get("U'").contains(sig_token.getCodigo())) { // tokens +
 			out.print( 11+" ");
 			empareja(sig_token.getCodigo());
-			V();
-			U2();
+			 Tipo V_tipo = V();
+	         Tipo U2_tipo = U2();
+//	         System.out.print("V:"+V_tipo.getTipo());
+//	         System.out.print("U2:"+U2_tipo.getTipo()+ "\n");
+	         if (V_tipo.getTipo().equals("int")) {
+	             tipo.puttam(2);
+	             tipo.putTipo("int");
+	        	 return tipo;
+	         } else {
+	        	 new Error(305,al.getLinea()).getError();
+	        	 tipo.putTipo("error");
+	             return tipo;
+	         }
 		}
 		else if(first.follow.get("U'").contains(sig_token.getCodigo())) //FOLLOW U'
+		{
 			out.print( 12+" ");
+			tipo.puttam(2);
+			tipo.putTipo("int");
+			return tipo;
 			//LAMBDA
-		else
+		}
+		else {
 			new Error(205,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
 	}
 
-	public void V() throws IOException {
+	public Tipo V() throws IOException {
+		Tipo tipo =new Tipo();
 		if(sig_token.getCodigo()== 1) { //token id
 			out.print( 13+" ");
+			String id = sig_token.getAtributo();
 			empareja(sig_token.getCodigo());
-			V2();
+			return V2(id);
 		}
 		else if(sig_token.getCodigo()==16) {
 			out.print( 14+" ");
 			empareja(sig_token.getCodigo());
-			E();
+			Tipo E_tipo = E();
 			empareja(17); // token )
+			return E_tipo;
 		}
 		else if(sig_token.getCodigo()==2) {
 			out.print( 15+" ");
 			empareja(sig_token.getCodigo());
+			tipo.puttam(2);
+			tipo.putTipo("int");
+			return tipo;
 		}
 		else if(sig_token.getCodigo()==3) {
 			out.print( 16+" ");
 			empareja(sig_token.getCodigo());
+			tipo.puttam(128);
+			tipo.putTipo("string");
+			return tipo;
 		}
-		else if(sig_token.getCodigo()==18){
-			out.print( 17+" ");
-			empareja(18);
-			empareja(1);
-			V2();
-		}
-		else 
+//		else if(sig_token.getCodigo()==18){
+//			out.print( 17+" ");
+//			empareja(18);
+//			empareja(1);
+//			V2();
+//		}
+		else { 
 			new Error(206,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
 	}
 
-	public void V2() throws IOException{
+	public Tipo V2(String id) throws IOException{
+		Tipo tipo =new Tipo();
 		if(sig_token.getCodigo() ==  16) { //token (
 			out.print( 18+" ");
 			empareja(16);
 			L();
 			empareja(17); //token )
+			return BuscaFuncionTipoTS(id);
 		}
 		else if(first.follow.get("V'").contains(sig_token.getCodigo())) //FOLLOW V'
+		{
 			out.print( 19+" ");
+			
+			return BuscaTipoTS(id);
 			//LAMBDA
-		else 
+		}
+		else {
 			new Error(207,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
+			
 	}
 
 	public void S() throws IOException {
 		if(sig_token.getCodigo() == 1) {
 			out.print(20 + " ");
+			String id=sig_token.getAtributo();
 			empareja(1);
-			S2();
+			Tipo S2_tipo= S2(id);
+			if(!S2_tipo.getTipo().equals(BuscaTipoTS(id).getTipo())) {
+				new Error(306,al.getLinea()).getError();
+			}
+			
 		}
 		else if(sig_token.getCodigo() == 14) {
 			out.print(21 + " ");
 			empareja(14);
-			E();
+			Tipo E_tipo=E();
 			empareja(19);
+			if(!E_tipo.getTipo().equals("string")) {
+				new Error(307,al.getLinea()).getError();
+			}
 		}
 		else if(sig_token.getCodigo() == 15) {
 			out.print(22 + " ");
 			empareja(15);
+			String id=sig_token.getAtributo();
 			empareja(1);
 			empareja(19);
+			if(!BuscaTipoTS(id).getTipo().equals("string")) {
+				new Error(308,al.getLinea()).getError();
+			}
 		}
 		else if(sig_token.getCodigo() == 28) { //token return
 			out.print(23 + " ");
 			empareja(28);
-			X();
+			Tipo X_tipo = X();
 			empareja(19);
+			
 		}
 		else
 			new Error(208,al.getLinea()).getError();
 	}
 
-	public void S2() throws IOException {
-
+	public Tipo S2(String id) throws IOException {
+		Tipo tipo =new Tipo();
 		if(sig_token.getCodigo() == 7) {
 			out.print( 24+" ");
 			empareja(7);
-			E();
+			Tipo E_tipo=E();
 			empareja(19);
+			if(!E_tipo.getTipo().equals("boolean")) {
+				new Error(309,al.getLinea()).getError();
+			}
+			return E_tipo;
 		}
 		else if(sig_token.getCodigo() == 8) {
 			out.print( 25+" ");
 			empareja(8);
-			E();
+			Tipo E_tipo=E();
 			empareja(19);	
+			if(!BuscaTipoTS(id).getTipo().equals(E_tipo.getTipo())) {
+				new Error(310,al.getLinea()).getError();
+			}
+			return E_tipo;
 		}
 		else if(sig_token.getCodigo() == 16) {
+			
 			out.print( 26+" ");
 			empareja(16);
 			L();
 			empareja(17);
 			empareja(19);	
-		}else
+			tipo.putTipo("void");
+			return tipo;
+		}else {
 			out.print( 27+" ");
+			tipo.putTipo("void");
+			return tipo;
+		}
+			
 	}
 
-	public void X() throws IOException {
+	public Tipo X() throws IOException {
+		Tipo tipo =new Tipo();
 		if(first.first.get("X").contains(sig_token.getCodigo())) { //tokens ( id ent cad
 			out.print( 28+" ");
-			E();
+			Tipo E_tipo = E();
+	        return E_tipo;
 		}
 		else if(first.follow.get("X").contains(sig_token.getCodigo())) //FOLLOW X
+		{
 			//LAMBDA
 			out.print( 29+" ");
-		else 
-			new Error(210,al.getLinea()).getError();;
+			tipo.putTipo("void");
+			return tipo;
+		}
+		
+		else {
+			new Error(210,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
 	}
 
-	public void L() throws IOException {
+	public  Tipo L() throws IOException {
+		Tipo tipo = new Tipo();
 		if(first.first.get("E").contains(sig_token.getCodigo())) {
+
 			out.print( 30+" ");
-			E();
-			Q();
+			Tipo E_tipo = E();
+	        Tipo Q_tipo = Q();
+	        if(E_tipo.getTipo().equals(Q_tipo.getTipo())) {
+	        	return E_tipo;
+	        }else{
+	            new Error(311, al.getLinea()).getError();
+	            tipo.putTipo("error");
+	            return tipo;
+	        }
 		}
 		else if(first.follow.get("L").contains(sig_token.getCodigo())) //FOLLOW L
+		{
 			out.print( 31+" ");
-		else 
-			new Error(211,al.getLinea()).getError();;
+			tipo.putTipo("void");
+			return tipo;
+		}	
+		else {
+			new Error(211,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
 	}
 
-	public void Q() throws IOException {
+	public Tipo  Q() throws IOException {
+		Tipo tipo=new Tipo();
 		if(sig_token.getCodigo() == 18) {
 			out.print( 32+" ");
 			empareja(sig_token.getCodigo());
-			E();
-			Q();
+			Tipo E_tipo = E();
+	        Tipo Q_tipo = Q();
+	        if(E_tipo.getTipo().equals(Q_tipo.getTipo())) {
+	        	return E_tipo;
+	        }else{
+	            new Error(312, al.getLinea()).getError();
+	            tipo.putTipo("error");
+	            return tipo;
+	        }
 		}
 		else if(first.follow.get("Q").contains(sig_token.getCodigo())) //FOLLOW Q
+		{
 			out.print( 33+" ");
+			tipo.putTipo("void");
+			return tipo;
 			//LAMBDA
-		else 
+		
+		}
+		else {
 			new Error(212,al.getLinea()).getError();
+			tipo.putTipo("error");
+			return tipo;
+		}
 	}
 
 	public Tipo T() throws IOException {  // ;tipo
@@ -371,7 +575,7 @@ public class AnalizadorSintactico {
 			out.print( 36+" ");
 			empareja(12);
 			tipo.putTipo("string");
-			tipo.puttam(64);
+			tipo.puttam(128);
 		}
 		else {
 			new Error(213,al.getLinea()).getError();
@@ -409,12 +613,19 @@ public class AnalizadorSintactico {
 	public void B() throws IOException {
 		Tipo tipo = new Tipo(); 
 		if(sig_token.getCodigo() == 22) { //token if
+			
 			out.print( 39+" ");
 			empareja(22);
 			empareja(16);
-			E();
-			empareja(17);
-			S();
+			Tipo E_tipo=E();
+			if (!E_tipo.getTipo().equals("boolean")) {
+	            new Error(313, al.getLinea()).getError();
+	        }
+				empareja(17);
+				S();
+			
+			
+			
 		}
 		else if(first.first.get("S").contains(sig_token.getCodigo())) { //tokens id output input return
 			out.print( 40+" ");
@@ -436,9 +647,12 @@ public class AnalizadorSintactico {
 			empareja(21);
 			empareja(26);
 			empareja(16);
-			E();
+			Tipo E_tipo = E();
 			empareja(17);
 			empareja(19);
+			if (!E_tipo.getTipo().equals("boolean")) {
+	            new Error(314, al.getLinea()).getError();
+	        }
 		}
 		else 
 			new Error(215,al.getLinea()).getError();
@@ -487,7 +701,7 @@ public class AnalizadorSintactico {
 		empareja(20);
 		C();
 		empareja(21);
-		out.print(5555+" ");
+		
 		gestorTablas.getTablaTS(1);
 	}
 

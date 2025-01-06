@@ -1,50 +1,52 @@
 CONTENIDOS DE LA TABLA LOCAL#0 :
-* LEXEMA : 'ho'
+* LEXEMA : 'aux'
   Atributos :
       Tipo=int
       DireccionMemoria=0
 
   --------- ---------- 
-* LEXEMA : 'ha'
+* LEXEMA : 'fin'
   Atributos :
       Tipo=int
       DireccionMemoria=2
 
   --------- ---------- 
-* LEXEMA : 'funciona'
+* LEXEMA : 'b'
   Atributos :
       Tipo=boolean
       DireccionMemoria=4
 
   --------- ---------- 
-* LEXEMA : 'suma'
-  Atributos :
-      Tipo=boolean
-      DireccionMemoria=6
-
-  --------- ---------- 
-* LEXEMA : 'suma2'
-  Atributos :
-
-  --------- ---------- 
 CONTENIDOS DE LA TABLA GLOBAL#1 :
 * LEXEMA : 'hola'
   Atributos :
-      Tipo=int
+      Tipo=string
       DireccionMemoria=0
 
   --------- ---------- 
 * LEXEMA : 'encontrado'
   Atributos :
       Tipo=boolean
-      DireccionMemoria=2
+      DireccionMemoria=128
 
   --------- ---------- 
-* LEXEMA : 'holasinh'
+* LEXEMA : 'suma'
+  Atributos :
+      Tipo=int
+      DireccionMemoria=130
+
+  --------- ---------- 
+* LEXEMA : 'resta'
+  Atributos :
+      Tipo=int
+      DireccionMemoria=132
+
+  --------- ---------- 
+* LEXEMA : 'Suma'
   Atributos :
       Tipo=Función
       NumParametros=3
-      TipoDev=void
+      TipoDev=boolean
       TipoParametro=int , int , boolean , 
 
   --------- ---------- 

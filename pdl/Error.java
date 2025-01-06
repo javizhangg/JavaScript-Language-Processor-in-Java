@@ -173,7 +173,77 @@ class Error {
 			break;
 		}
 		case 300 -> {
-			error = st.append("- Error Semantico: Error ").append(linea).toString();
+			error = st.append("- Error Semántico: E -> R E2, se esperaba que R y E2 sean booleanos y no lo son. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 301 -> {
+			error = st.append("- Error Semántico: E -> && R E2 , se esperaba que R y E2 sean booleanos y no lo son. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 302 -> {
+			error = st.append("- Error Semántico: R -> U R2 , se esperaba que U.tipo sea iguala a R2.tipo y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 303 -> {
+			error = st.append("- Error Semántico: R -> == U R2 , se esperaba que U.tipo sea de tipo entero y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 304 -> {
+			error = st.append("- Error Semántico: U -> V U2 , se esperaba que U2.tipo sea igual que V.tipo y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 305 -> {
+			error = st.append("- Error Semántico: U -> + V U2 , se esperaba que V.tipo sea de tipo entero y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 306 -> {
+			error = st.append("- Error Semántico: S -> id S2 , se esperaba que id.tipo sea igual a S2.tipo y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 307 -> {
+			error = st.append("- Error Semántico: S -> output E ; , se esperaba que E.tipo sea string y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 308 -> {
+			error = st.append("- Error Semántico: S -> input id ; , se esperaba que id.tipo sea string y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 309 -> {
+			error = st.append("- Error Semántico: S2 -> |= E ; , se esperaba que E.tipo sea boolean y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 310 -> {
+			error = st.append("- Error Semántico: S2 -> = E ; , se esperaba que E.tipo sea boolean y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 311 -> {
+			error = st.append("- Error Semántico: L -> E Q , se esperaba que E.tipo = Q.tipo y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 312 -> {
+			error = st.append("- Error Semántico: Q -> , E Q , se esperaba que E.tipo = Q.tipo y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 313 -> {
+			error = st.append("- Error Semántico: B -> if ( E ) S , se esperaba que E.tipo sea de tipo boolean y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 314 -> {
+			error = st.append("- Error Semántico: B -> do { C } while ( E ) ; , se esperaba que E.tipo sea de tipo boolean y no lo es. ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
