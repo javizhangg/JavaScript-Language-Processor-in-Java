@@ -218,12 +218,12 @@ class Error {
 			break;
 		}
 		case 309 -> {
-			error = st.append("- Error Semántico: S2 -> |= E ; , se esperaba que E.tipo sea boolean y no lo es. ").append(linea).toString();
+			error = st.append("- Error Semántico: S2 -> = E ; , se esperaba que E.tipo sea boolean y no lo es. ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		case 310 -> {
-			error = st.append("- Error Semántico: S2 -> = E ; , se esperaba que E.tipo sea boolean y no lo es. ").append(linea).toString();
+			error = st.append("- Error Semántico: S2 -> |= E ; , se esperaba que E.tipo sea boolean y no lo es. ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -244,6 +244,16 @@ class Error {
 		}
 		case 314 -> {
 			error = st.append("- Error Semántico: B -> do { C } while ( E ) ; , se esperaba que E.tipo sea de tipo boolean y no lo es. ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 315 -> {
+			error = st.append("- Error Semántico: identificador ya declarado. En la linea: ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
+		case 316 -> {
+			error = st.append("- Error Semántico: El tipo de retorno no corresponde al tipo de retorno de la funcion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}

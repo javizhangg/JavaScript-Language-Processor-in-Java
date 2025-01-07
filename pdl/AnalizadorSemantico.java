@@ -2,6 +2,7 @@ package pdl;
 
 public class AnalizadorSemantico {
 	TablasDeSimbolos gestorTablas;
+	
 	public AnalizadorSemantico(TablasDeSimbolos gestorTablas) {
 		this.gestorTablas = gestorTablas;
 	}
@@ -10,6 +11,10 @@ public class AnalizadorSemantico {
 	public TS getTablaActual() {
 	    return gestorTablas.gestorTS.containsKey(1) ? gestorTablas.gestorTS.get(1) : gestorTablas.gestorTS.get(0);
 	}
+	
+	
+	
+	
 	public Simbolo getSimbolo (String lexema) {
 		if(gestorTablas.gestorTS.get(0).estaSimbolo(lexema)) {
 			return gestorTablas.gestorTS.get(0).getSimbolo(lexema);

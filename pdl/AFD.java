@@ -32,19 +32,19 @@ class AFD {
 	// Nos servirá para detectar EOF
 	public boolean ultimaint = false;
 	public int c = 0;
-	
+
 	// Constructor de AFD que inicializa el set y el array de las palabras
 	// reservadas y recibe las lineas del fichero fuente
 	public AFD(BufferedReader br, FileWriter fwTokens,FileWriter fwTS) throws IOException {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
-		
+
 		// Inicializar la matriz de transiciones
-//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		//		this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
-		
+
 		this.palabrasReservadas = new HashMap<>();
 		palabrasReservadas.put("var", 9);
 		palabrasReservadas.put("int", 10);
@@ -64,8 +64,8 @@ class AFD {
 		this.gestorTablas = new TablasDeSimbolos(fwTS);
 		this.As = new AnalizadorSemantico(gestorTablas);
 		this.posEnTablaSimbolo = new TS();
-		
-		
+
+
 
 		this.br = br;
 	}
@@ -83,7 +83,7 @@ class AFD {
 	}
 
 	// Método principal que me devuelve el token generado
-	public Token getToken() throws IOException {
+	public Token getToken(boolean valorZonaDeclarada) throws IOException {
 		char car;
 		Object accion;
 		StringBuilder lexema = new StringBuilder();
@@ -95,7 +95,7 @@ class AFD {
 		while (true) {
 			if (estado == 0 && !leido) 
 				c = leer();
-			
+
 			car = (char) c;
 			accion = accion(estado, identificar(c));
 			if (accion == null) {
@@ -153,22 +153,50 @@ class AFD {
 					auxLexema = lexema.toString();
 					if (esPalabraReservada(auxLexema)) {
 						token = genToken(palabrasReservadas.get(auxLexema), "",auxLexema);
-					} else if (!BuscaTS(auxLexema)) {
-						posEnTablaSimbolo = As.getTablaActual();
-						posEnTablaSimbolo.InsertarTS(auxLexema);
+						//Zona declarada = true
+					} else if (valorZonaDeclarada) {
+						if(!BuscaTS(auxLexema)) {
+							posEnTablaSimbolo = As.getTablaActual();
+							posEnTablaSimbolo.InsertarTS(auxLexema);
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}else {
+							//Error de identificador ya declarado
+							new Error(315, posicionDeLinea).getError();
+						}
+						//Zona declarada = false
+					}else {
+						if(!BuscaTS(auxLexema)) {
+							posEnTablaSimbolo = gestorTablas.tablaSimboloG;
+							posEnTablaSimbolo.InsertarTS(auxLexema);
+							//Variable no declarada, es global y entera
+							token = genToken(2, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
-					}else 
-						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+					}
 					lexema.delete(0, lexema.length());
 					leido = true;
 					return token;
 				case 'D':
 					auxLexema = lexema.toString();
-					if (!BuscaTS(auxLexema)) {
-						posEnTablaSimbolo = As.getTablaActual();
-						posEnTablaSimbolo.InsertarTS(auxLexema);
+					if (valorZonaDeclarada) {
+						if(!BuscaTS(auxLexema)) {
+							posEnTablaSimbolo = As.getTablaActual();
+							posEnTablaSimbolo.InsertarTS(auxLexema);
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}else {
+							//Error de identificador ya declarado
+							new Error(315, posicionDeLinea).getError();
+						}
+						//Zona declarada = false
+					}else {
+						if(!BuscaTS(auxLexema)) {
+							posEnTablaSimbolo = gestorTablas.tablaSimboloG;
+							posEnTablaSimbolo.InsertarTS(auxLexema);
+							//Variable no declarada, es global y entera
+							token = genToken(2, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}
+						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}
-					token = genToken(1,posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					lexema.delete(0, lexema.length());
 					leido = true;
 					return token;
@@ -250,7 +278,7 @@ class AFD {
 				case 'S':
 					token = genToken(29,"","eof");
 					ultimaint=true;
-					
+
 					return token;
 				}
 			}
@@ -267,12 +295,27 @@ class AFD {
 					new Error(106, posicionDeLinea).getError();
 				}else if(auxLexema.length()>0 ) {
 					if (esPalabraReservada(auxLexema)) {
-						token = genToken(palabrasReservadas.get(auxLexema), "", auxLexema);
-					} else if (!BuscaTS(auxLexema)) {
-						posEnTablaSimbolo.InsertarTS(auxLexema);
-						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(), auxLexema);
-					} else 
-						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(), auxLexema);
+						token = genToken(palabrasReservadas.get(auxLexema), "",auxLexema);
+						//Zona declarada = true
+					} else if (valorZonaDeclarada) {
+						if(!BuscaTS(auxLexema)) {
+							posEnTablaSimbolo = As.getTablaActual();
+							posEnTablaSimbolo.InsertarTS(auxLexema);
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}else {
+							//Error de identificador ya declarado
+							new Error(315, posicionDeLinea).getError();
+						}
+						//Zona declarada = false
+					}else {
+						if(!BuscaTS(auxLexema)) {
+							posEnTablaSimbolo = gestorTablas.tablaSimboloG;
+							posEnTablaSimbolo.InsertarTS(auxLexema);
+							//Variable no declarada, es global y entera
+							token = genToken(2, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}
+						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+					}
 				}
 				lexema.delete(0, lexema.length());
 				return token;

@@ -6,7 +6,29 @@ var int resta;
 if(suma == resta)
 	output hola;
 	
-function boolean Suma (int aux, int fin, boolean b){
+function int Suma (int aux, int fin, boolean b){
 	aux = fin +1;
+	
+	 
+	var int holaasd;  
+    return aux ;
+}
+
+//NO PASA ESTA PRUEBA
+function int Suma2 (int aux, int fin, boolean b){
+	aux = fin +1;
+	
+	 
+	var int holaasd;  
+    return aux ;
+}
+
+//NO PASA ESTA PRUEBA
+function int Suma (int aux, int fin, boolean b){
+	aux = fin +1;
+	
+	if(suma == resta)
+	output hola;
+	
     return aux ;
 }

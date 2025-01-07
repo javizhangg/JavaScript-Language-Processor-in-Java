@@ -1,4 +1,4 @@
-Terminales = { && == = + id ent cad output input return |= ; int Boolean string void if do
+Terminales = { && == = + id ent cad output input return |= ; int boolean string void if do
 while function var , { } ( ) }
 NoTerminales = { P E E2 R R2 U U2 V V2 S S2 X L Q T A B C F H K }
 Axioma = P
