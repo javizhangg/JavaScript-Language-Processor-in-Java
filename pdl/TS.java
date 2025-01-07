@@ -29,6 +29,7 @@ public class TS {
 
 	//Función auxiliar, que inserta en la TS el simbolo
 	public void InsertarTS(String lexema) throws IOException {
+		
 		lastsimbolo=lexema;
 //		posEnTablaSimbolo.put(lexema, contsimb);
 		tablaSimbolo.put(lexema, new Simbolo(lexema));

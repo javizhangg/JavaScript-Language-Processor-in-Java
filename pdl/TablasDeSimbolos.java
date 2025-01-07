@@ -11,7 +11,7 @@ public class TablasDeSimbolos {
 	FileWriter fw; 
 	static boolean esGlobal;
 
-	public static TS tablaSimboloL = new TS();
+	
 	public static TS tablaSimboloG = new TS();
 	public TablasDeSimbolos(FileWriter fw){
 		gestorTS = new HashMap<>();
@@ -21,7 +21,7 @@ public class TablasDeSimbolos {
 
 	//Función para añadir tablas locales 
 	public void añadirTablaLocalTS() {
-		gestorTS.put(1, tablaSimboloL);
+		gestorTS.put(1, new TS());
 		esGlobal = false;
 	}
 
