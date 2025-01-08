@@ -79,6 +79,17 @@
 <1,aux> //es el identificador: aux
 <19,> //tipo: ;
 <21,> //tipo: }
+<1,aux5NoDeclarado> //es el identificador: aux5NoDeclarado
+<7,> //tipo: =
+<1,Suma2> //es el identificador: Suma2
+<16,> //tipo: (
+<1,suma> //es el identificador: suma
+<18,> //tipo: ,
+<1,resta> //es el identificador: resta
+<18,> //tipo: ,
+<1,encontrado> //es el identificador: encontrado
+<17,> //tipo: )
+<19,> //tipo: ;
 <27,> //Palabra reservada: function
 <11,> //Palabra reservada: boolean
 <1,Suma3> //es el identificador: Suma3
@@ -99,8 +110,25 @@
 <4,> //tipo: +
 <2,1> //es el numero: entero
 <19,> //tipo: ;
-<28,> //Palabra reservada: return
+<22,> //Palabra reservada: if
+<16,> //tipo: (
+<1,Suma3> //es el identificador: Suma3
+<16,> //tipo: (
+<1,resta> //es el identificador: resta
+<18,> //tipo: ,
+<1,resta> //es el identificador: resta
+<18,> //tipo: ,
 <1,encontrado> //es el identificador: encontrado
+<17,> //tipo: )
+<17,> //tipo: )
+<14,> //Palabra reservada: output
+<1,hola> //es el identificador: hola
+<19,> //tipo: ;
+<1,aux3NoDeclarado> //es el identificador: aux3NoDeclarado
+<7,> //tipo: =
+<1,aux2> //es el identificador: aux2
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
 <1,encontrado> //es el identificador: encontrado
 <19,> //tipo: ;
 <21,> //tipo: }

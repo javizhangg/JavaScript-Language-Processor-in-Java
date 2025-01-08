@@ -1,118 +1,130 @@
 CONTENIDOS DE LA TABLA LOCAL#0 :
 * LEXEMA : 'aux'
   Atributos :
-      Tipo=int
-      DireccionMemoria=0
+      Tipo = int
+      DireccionMemoria = 0
 
   --------- ---------- 
 * LEXEMA : 'fin'
   Atributos :
-      Tipo=int
-      DireccionMemoria=2
+      Tipo = int
+      DireccionMemoria = 2
 
   --------- ---------- 
 * LEXEMA : 'b'
   Atributos :
-      Tipo=boolean
-      DireccionMemoria=4
+      Tipo = boolean
+      DireccionMemoria = 4
 
   --------- ---------- 
 * LEXEMA : 'holaasd'
   Atributos :
-      Tipo=int
-      DireccionMemoria=6
+      Tipo = int
+      DireccionMemoria = 6
 
   --------- ---------- 
 CONTENIDOS DE LA TABLA LOCAL#1 :
 * LEXEMA : 'aux'
   Atributos :
-      Tipo=int
-      DireccionMemoria=0
+      Tipo = int
+      DireccionMemoria = 0
 
   --------- ---------- 
 * LEXEMA : 'fin'
   Atributos :
-      Tipo=int
-      DireccionMemoria=2
+      Tipo = int
+      DireccionMemoria = 2
 
   --------- ---------- 
 * LEXEMA : 'b'
   Atributos :
-      Tipo=boolean
-      DireccionMemoria=4
+      Tipo = boolean
+      DireccionMemoria = 4
 
   --------- ---------- 
 * LEXEMA : 'holaasd'
   Atributos :
-      Tipo=int
-      DireccionMemoria=6
+      Tipo = int
+      DireccionMemoria = 6
 
   --------- ---------- 
 CONTENIDOS DE LA TABLA LOCAL#2 :
 * LEXEMA : 'aux2'
   Atributos :
-      Tipo=int
-      DireccionMemoria=0
+      Tipo = int
+      DireccionMemoria = 0
 
   --------- ---------- 
 * LEXEMA : 'fin'
   Atributos :
-      Tipo=int
-      DireccionMemoria=2
+      Tipo = int
+      DireccionMemoria = 2
 
   --------- ---------- 
 * LEXEMA : 'b'
   Atributos :
-      Tipo=boolean
-      DireccionMemoria=4
+      Tipo = boolean
+      DireccionMemoria = 4
 
   --------- ---------- 
 CONTENIDOS DE LA TABLA GLOBAL#3 :
 * LEXEMA : 'hola'
   Atributos :
-      Tipo=string
-      DireccionMemoria=0
+      Tipo = string
+      DireccionMemoria = 0
 
   --------- ---------- 
 * LEXEMA : 'encontrado'
   Atributos :
-      Tipo=error
-      DireccionMemoria=134
+      Tipo = boolean
+      DireccionMemoria = 128
 
   --------- ---------- 
 * LEXEMA : 'suma'
   Atributos :
-      Tipo=int
-      DireccionMemoria=130
+      Tipo = int
+      DireccionMemoria = 130
 
   --------- ---------- 
 * LEXEMA : 'resta'
   Atributos :
-      Tipo=boolean
-      DireccionMemoria=132
+      Tipo = int
+      DireccionMemoria = 132
 
   --------- ---------- 
 * LEXEMA : 'Suma'
   Atributos :
-      Tipo=Función
-      NumParametros=3
-      TipoDev=int
-      TipoParametro=int , int , boolean , 
+      Tipo = Función
+      NumParametros = 3
+      TipoDev = int
+      TipoParametro = int , int , boolean
 
   --------- ---------- 
 * LEXEMA : 'Suma2'
   Atributos :
-      Tipo=Función
-      NumParametros=3
-      TipoDev=int
-      TipoParametro=int , int , boolean , 
+      Tipo = Función
+      NumParametros = 3
+      TipoDev = int
+      TipoParametro = int , int , boolean
+
+  --------- ---------- 
+* LEXEMA : 'aux5NoDeclarado'
+  Atributos :
+      Tipo = int
+      DireccionMemoria = 134
 
   --------- ---------- 
 * LEXEMA : 'Suma3'
   Atributos :
-      Tipo=Función
-      NumParametros=3
-      TipoDev=boolean
-      TipoParametro=int , int , boolean , 
+      Tipo = Función
+      NumParametros = 3
+      TipoDev = boolean
+      TipoParametro = int , int , boolean
+
+  --------- ---------- 
+* LEXEMA : 'aux3NoDeclarado'
+  Atributos :
+      Tipo = int
+      DireccionMemoria = 136
 
   --------- ---------- 

@@ -74,12 +74,12 @@ class AFD {
 	// y la tabla activa no es la global, sigue buscando
 	public boolean BuscaTS(String lexema) {
 		boolean encontrado = false;
-		if(gestorTablas.gestorTS.containsKey(1)) { 
-			encontrado = gestorTablas.gestorTS.get(1).tablaSimbolo.containsKey(lexema);
+		if(gestorTablas.getGestorTS().containsKey(1)) { 
+			encontrado = gestorTablas.getGestorTS().get(1).tablaSimbolo.containsKey(lexema);
 		}
 		else if(!encontrado)
 		{
-			encontrado =  gestorTablas.gestorTS.get(0).tablaSimbolo.containsKey(lexema);
+			encontrado =  gestorTablas.getGestorTS().get(0).tablaSimbolo.containsKey(lexema);
 		}
 		return encontrado;
 	}
@@ -87,7 +87,7 @@ class AFD {
 	//Busca ese lexema en la tabla de símbolos activa; si no lo encuentra 
 	// y la tabla activa no es la global, sigue buscando
 	public boolean BuscaTSGlobal(String lexema) {
-		return gestorTablas.gestorTS.get(0).tablaSimbolo.containsKey(lexema);
+		return gestorTablas.getGestorTS().get(0).tablaSimbolo.containsKey(lexema);
 	}
 
 
@@ -179,8 +179,9 @@ class AFD {
 						if(!BuscaTS(auxLexema)) {
 							posEnTablaSimbolo = As.getTablaGlobal();
 							posEnTablaSimbolo.InsertarTS(auxLexema);
-							//Variable no declarada, es global y entera
-							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}
+						else{
+							posEnTablaSimbolo = As.getTablaActual();
 						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}
@@ -203,9 +204,9 @@ class AFD {
 						if(!BuscaTS(auxLexema)) {
 							posEnTablaSimbolo = As.getTablaGlobal();
 							posEnTablaSimbolo.InsertarTS(auxLexema);
-
-							//Variable no declarada, es global y entera
-							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}
+						else{
+							posEnTablaSimbolo = As.getTablaActual();
 						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}
@@ -323,9 +324,9 @@ class AFD {
 						if(!BuscaTS(auxLexema)) {
 							posEnTablaSimbolo = As.getTablaGlobal();
 							posEnTablaSimbolo.InsertarTS(auxLexema);
-
-							//Variable no declarada, es global y entera
-							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+						}
+						else{
+							posEnTablaSimbolo = As.getTablaActual();
 						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}

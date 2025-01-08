@@ -23,11 +23,13 @@ function int Suma2 (int aux, int fin, boolean b){
     return aux ;
 }
 
-/*sigue fallando*/
+aux5NoDeclarado = Suma2(suma,resta,encontrado);
 function boolean Suma3 (int aux2, int fin, boolean b){
 	aux2 = fin +1;
 	
-
+	if(Suma3(resta,resta,encontrado))
+	output hola;
 	
+	aux3NoDeclarado = aux2;
     return encontrado ;
 }

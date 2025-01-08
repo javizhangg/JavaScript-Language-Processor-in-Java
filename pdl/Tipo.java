@@ -9,13 +9,13 @@ public class Tipo {
 	Tipo(String tipo){
 		this.tipo = tipo;
 	}
-	public void puttam(int tamano) {
+	public void setTam(int tamano) {
 		tam=tamano;
 	}
-	public int gettam() {
+	public int getTam() {
 		return tam;
 	}
-	public void putTipo(String tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	public String getTipo() {
