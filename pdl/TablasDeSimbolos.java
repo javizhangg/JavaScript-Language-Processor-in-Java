@@ -72,6 +72,7 @@ public class TablasDeSimbolos {
 		//No hace hacer if ambito es 0 o cosas así, esto arregla ademas el error de que solo se imprimiera la tabla global.
 		imprimirTabla(gestorTS.get(ambito));
 		System.out.print("se imprime" + ambito);
+		if(ambito == 1)
 		gestorTS.remove(ambito);
 
 		//Solo incrementamos esta variable cada vez que llamemos getTablaTS

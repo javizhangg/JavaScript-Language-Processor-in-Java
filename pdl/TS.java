@@ -6,12 +6,11 @@ import java.util.Map;
 
 public class TS {
 	public Map<String,Simbolo> tablaSimbolo;
-	
+	int contsimb;
 	private String lastsimbolo;
 	public TS() {
-		
-		
 		this.tablaSimbolo = new LinkedHashMap<>();
+		contsimb = 0;
 	}
 	
 	//Devuelve el ultimo simbolo que en caso de entrar en una funcion sera el simbolo de la funcion 
@@ -29,11 +28,16 @@ public class TS {
 
 	//Función auxiliar, que inserta en la TS el simbolo
 	public void InsertarTS(String lexema) throws IOException {
-		
+		Simbolo simbolo = new Simbolo(lexema,contsimb);
 		lastsimbolo=lexema;
 //		posEnTablaSimbolo.put(lexema, contsimb);
-		tablaSimbolo.put(lexema, new Simbolo(lexema));
-//		contsimb++;
+		tablaSimbolo.put(lexema, simbolo);
+		
+		contsimb++;
+	}
+	
+	public int getCont() {
+		return contsimb;
 	}
 	
 	public void AddTipoTS(String lexema,Tipo tipo) {

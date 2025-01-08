@@ -12,6 +12,10 @@ public class AnalizadorSemantico {
 	    return gestorTablas.gestorTS.containsKey(1) ? gestorTablas.gestorTS.get(1) : gestorTablas.gestorTS.get(0);
 	}
 	
+	public TS getTablaGlobal() {
+		return gestorTablas.gestorTS.get(0);
+	}
+	
 	
 	
 	

@@ -14,13 +14,15 @@ public class Simbolo {
     private int direccionMemoria;  //desplazamiento
     private int posEnTablaDeSimbolos;
     private int numParametros;
+    private int contSimb;
     
 
     //Constructor que va a llamar el AFD para insertar solamente los lexemas
-    public Simbolo(String lexema) {
+    public Simbolo(String lexema,int contSimb) {
     	this.lexema = lexema;
         this.contp = 0;
         this.tipoParametro = new HashMap<>(); // Inicialización aquí
+        this.contSimb = contSimb;
     }
     /*--------------------------Variable normal--------------------------------------------*/
     //Nos devuelve el lexema 
@@ -28,6 +30,9 @@ public class Simbolo {
     	return lexema;
     }
     
+    public int getContSimb() {
+    	return contSimb;
+    }
     //Sirve para Tipo
     public Tipo getTipo() {
         return tipo;

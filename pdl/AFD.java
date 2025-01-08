@@ -40,8 +40,8 @@ class AFD {
 		this.posicionDeLinea = 1;
 
 		// Inicializar la matriz de transiciones
-	//	this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-			this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+		//			this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 
@@ -73,14 +73,24 @@ class AFD {
 	//Busca ese lexema en la tabla de símbolos activa; si no lo encuentra 
 	// y la tabla activa no es la global, sigue buscando
 	public boolean BuscaTS(String lexema) {
+		boolean encontrado = false;
 		if(gestorTablas.gestorTS.containsKey(1)) { 
-			return gestorTablas.gestorTS.get(1).tablaSimbolo.containsKey(lexema);
+			encontrado = gestorTablas.gestorTS.get(1).tablaSimbolo.containsKey(lexema);
 		}
-		else
+		else if(!encontrado)
 		{
-			return gestorTablas.gestorTS.get(0).tablaSimbolo.containsKey(lexema);
+			encontrado =  gestorTablas.gestorTS.get(0).tablaSimbolo.containsKey(lexema);
 		}
+		return encontrado;
 	}
+
+	//Busca ese lexema en la tabla de símbolos activa; si no lo encuentra 
+	// y la tabla activa no es la global, sigue buscando
+	public boolean BuscaTSGlobal(String lexema) {
+		return gestorTablas.gestorTS.get(0).tablaSimbolo.containsKey(lexema);
+	}
+
+
 
 	// Método principal que me devuelve el token generado
 	public Token getToken(boolean valorZonaDeclarada) throws IOException {
@@ -90,12 +100,12 @@ class AFD {
 		String auxLexema;
 		int valor = 0;
 		Token token = null;
-
+		Tipo tipo = new Tipo();
 		// Salimos del bucle después de procesar el último token
 		while (true) {
 			if (estado == 0 && !leido) 
 				c = leer();
-				
+
 			car = (char) c;
 			System.out.print(car);
 			accion = accion(estado, identificar(c));
@@ -167,10 +177,10 @@ class AFD {
 						//Zona declarada = false
 					}else {
 						if(!BuscaTS(auxLexema)) {
-							posEnTablaSimbolo = gestorTablas.tablaSimboloG;
+							posEnTablaSimbolo = As.getTablaGlobal();
 							posEnTablaSimbolo.InsertarTS(auxLexema);
 							//Variable no declarada, es global y entera
-							token = genToken(2, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}
@@ -191,10 +201,11 @@ class AFD {
 						//Zona declarada = false
 					}else {
 						if(!BuscaTS(auxLexema)) {
-							posEnTablaSimbolo = gestorTablas.tablaSimboloG;
+							posEnTablaSimbolo = As.getTablaGlobal();
 							posEnTablaSimbolo.InsertarTS(auxLexema);
+
 							//Variable no declarada, es global y entera
-							token = genToken(2, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}
@@ -310,10 +321,11 @@ class AFD {
 						//Zona declarada = false
 					}else {
 						if(!BuscaTS(auxLexema)) {
-							posEnTablaSimbolo = gestorTablas.tablaSimboloG;
+							posEnTablaSimbolo = As.getTablaGlobal();
 							posEnTablaSimbolo.InsertarTS(auxLexema);
+
 							//Variable no declarada, es global y entera
-							token = genToken(2, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}
 						token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 					}

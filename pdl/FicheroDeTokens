@@ -1,0 +1,107 @@
+<9,> //Palabra reservada: var
+<12,> //Palabra reservada: string
+<1,hola> //es el identificador: hola
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,encontrado> //es el identificador: encontrado
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,suma> //es el identificador: suma
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,resta> //es el identificador: resta
+<19,> //tipo: ;
+<22,> //Palabra reservada: if
+<16,> //tipo: (
+<1,suma> //es el identificador: suma
+<5,> //tipo: ==
+<1,resta> //es el identificador: resta
+<17,> //tipo: )
+<14,> //Palabra reservada: output
+<1,hola> //es el identificador: hola
+<19,> //tipo: ;
+<27,> //Palabra reservada: function
+<10,> //Palabra reservada: int
+<1,Suma> //es el identificador: Suma
+<16,> //tipo: (
+<10,> //Palabra reservada: int
+<1,aux> //es el identificador: aux
+<18,> //tipo: ,
+<10,> //Palabra reservada: int
+<1,fin> //es el identificador: fin
+<18,> //tipo: ,
+<11,> //Palabra reservada: boolean
+<1,b> //es el identificador: b
+<17,> //tipo: )
+<20,> //tipo: {
+<1,aux> //es el identificador: aux
+<7,> //tipo: =
+<1,fin> //es el identificador: fin
+<4,> //tipo: +
+<2,1> //es el numero: entero
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,holaasd> //es el identificador: holaasd
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,aux> //es el identificador: aux
+<19,> //tipo: ;
+<21,> //tipo: }
+<27,> //Palabra reservada: function
+<10,> //Palabra reservada: int
+<1,Suma2> //es el identificador: Suma2
+<16,> //tipo: (
+<10,> //Palabra reservada: int
+<1,aux> //es el identificador: aux
+<18,> //tipo: ,
+<10,> //Palabra reservada: int
+<1,fin> //es el identificador: fin
+<18,> //tipo: ,
+<11,> //Palabra reservada: boolean
+<1,b> //es el identificador: b
+<17,> //tipo: )
+<20,> //tipo: {
+<1,aux> //es el identificador: aux
+<7,> //tipo: =
+<1,fin> //es el identificador: fin
+<4,> //tipo: +
+<2,1> //es el numero: entero
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<10,> //Palabra reservada: int
+<1,holaasd> //es el identificador: holaasd
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,aux> //es el identificador: aux
+<19,> //tipo: ;
+<21,> //tipo: }
+<27,> //Palabra reservada: function
+<11,> //Palabra reservada: boolean
+<1,Suma3> //es el identificador: Suma3
+<16,> //tipo: (
+<10,> //Palabra reservada: int
+<1,aux2> //es el identificador: aux2
+<18,> //tipo: ,
+<10,> //Palabra reservada: int
+<1,fin> //es el identificador: fin
+<18,> //tipo: ,
+<11,> //Palabra reservada: boolean
+<1,b> //es el identificador: b
+<17,> //tipo: )
+<20,> //tipo: {
+<1,aux2> //es el identificador: aux2
+<7,> //tipo: =
+<1,fin> //es el identificador: fin
+<4,> //tipo: +
+<2,1> //es el numero: entero
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,encontrado> //es el identificador: encontrado
+<1,encontrado> //es el identificador: encontrado
+<19,> //tipo: ;
+<21,> //tipo: }
+<29,> //Palabra reservada: eof
