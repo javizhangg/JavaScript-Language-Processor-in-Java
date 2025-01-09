@@ -3,6 +3,7 @@ package pdl;
 public class Tipo {
 	private int tam;
 	private String tipo;
+
 	Tipo(){
 		tipo="null";
 	}

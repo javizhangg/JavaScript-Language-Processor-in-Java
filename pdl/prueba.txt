@@ -6,12 +6,16 @@ var int resta;
 if(suma == resta)
 	output hola;
 	
+do {
+
+	suma = suma;
+	
+	}
+	while( suma == resta);	
+	
 function int Suma (int aux, int fin, boolean b){
 	aux = fin +1;
-	
-	 
 	var int holaasd;  
-    return aux ;
 }
 
 
@@ -32,4 +36,13 @@ function boolean Suma3 (int aux2, int fin, boolean b){
 	
 	aux3NoDeclarado = aux2;
     return encontrado ;
+}
+
+function void Suma4 (void){
+	aux2 = fin +1;
+	
+	if(Suma3(resta,resta,encontrado))
+	output hola;
+	
+	aux3NoDeclarado = aux2;
 }

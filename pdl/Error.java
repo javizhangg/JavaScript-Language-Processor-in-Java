@@ -257,6 +257,11 @@ class Error {
 			System.out.println(error);
 			break;
 		}
+		case 317 -> {
+			error = st.append("- Error Semántico: Se necesita hacer un return en la funcion: ").append(mensaje).append(". En la linea: ").append(linea).toString();
+			System.out.println(error);
+			break;
+		}
 		}
 
 	}

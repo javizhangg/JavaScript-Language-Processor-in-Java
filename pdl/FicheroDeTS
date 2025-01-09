@@ -67,7 +67,8 @@ CONTENIDOS DE LA TABLA LOCAL#2 :
       DireccionMemoria = 4
 
   --------- ---------- 
-CONTENIDOS DE LA TABLA GLOBAL#3 :
+CONTENIDOS DE LA TABLA LOCAL#3 :
+CONTENIDOS DE LA TABLA GLOBAL#4 :
 * LEXEMA : 'hola'
   Atributos :
       Tipo = string
@@ -126,5 +127,25 @@ CONTENIDOS DE LA TABLA GLOBAL#3 :
   Atributos :
       Tipo = int
       DireccionMemoria = 136
+
+  --------- ---------- 
+* LEXEMA : 'Suma4'
+  Atributos :
+      Tipo = Función
+      NumParametros = 0
+      TipoDev = void
+      TipoParametro = 
+
+  --------- ---------- 
+* LEXEMA : 'aux2'
+  Atributos :
+      Tipo = int
+      DireccionMemoria = 140
+
+  --------- ---------- 
+* LEXEMA : 'fin'
+  Atributos :
+      Tipo = int
+      DireccionMemoria = 138
 
   --------- ---------- 
