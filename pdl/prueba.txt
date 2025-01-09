@@ -1,48 +1,66 @@
-var string hola;
-var boolean encontrado;
-var int suma;
-var int resta;
+/* Comentario de linea es con //. */
 
-if(suma == resta)
-	output hola;
-	
-do {
+/* El de bloque va entre /* y */
 
-	suma = suma;
-	
-	}
-	while( suma == resta);	
-	
-function int Suma (int aux, int fin, boolean b){
-	aux = fin +1;
-	var int holaasd;  
+var int entero;
+var string cadena;
+var boolean logico;
+function void pp_(void)
+{
+ var int  X____9  ;
+  abcdefghij________  = 0;
+}function void FuncionNumero (void)
+{
+  var  boolean i;
+  
+  i = logico;
+  logico =  i &&  logico;
+  i =   logico;
 }
-
-
-function int Suma2 (int aux, int fin, boolean b){
-	aux = fin +1;
-	
-	 
-	var int holaasd;  
-    return aux ;
+function string FuncionRetorno (string otracadena, int x, boolean z)
+{
+  x = 33  +  (x  +  entero); return otracadena;
 }
+var boolean boooooo ;
+var string s64 ;
+var int aaaaa ;
+function boolean fbbb (void) {return boooooo;}
 
-aux5NoDeclarado = Suma2(suma,resta,encontrado);
-function boolean Suma3 (int aux2, int fin, boolean b){
-	aux2 = fin +1;
+function int FuncionSentencia (int z_Z, boolean b)
+{
+	var  int a;
 	
-	if(Suma3(resta,resta,encontrado))
-	output hola;
-	
-	aux3NoDeclarado = aux2;
-    return encontrado ;
+  do
+  {
+	a = z_Z;
+	output (a);
+  } while (b);
 }
+if (booooo) aaaaa=0;
+function void Funcion  (int x, boolean b)
+{
+	FuncionNumero();
+  output 
+    (cadena);return;
+}
+var int iii  ;
+var boolean bbb  ;
 
-function void Suma4 (void){
-	aux2 = fin +1;
-	
-	if(Suma3(resta,resta,encontrado))
-	output hola;
-	
-	aux3NoDeclarado = aux2;
-}
+/* 
+esto 
+es 
+un 
+comentario! 
+multi 
+//linea */
+
+input iii;
+output  (  iii  )  ;  
+
+iii = iii;
+bbb |= bbb;
+
+Funcion
+ ( iii, 
+   bbb )
+;

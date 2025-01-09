@@ -1,135 +1,95 @@
 CONTENIDOS DE LA TABLA LOCAL#0 :
-* LEXEMA : 'aux'
-  Atributos :
-      Tipo = int
-      DireccionMemoria = 0
-
-  --------- ---------- 
-* LEXEMA : 'fin'
+* LEXEMA : 'X____9'
   Atributos :
       Tipo = int
       DireccionMemoria = 2
 
   --------- ---------- 
-* LEXEMA : 'b'
-  Atributos :
-      Tipo = boolean
-      DireccionMemoria = 4
-
-  --------- ---------- 
-* LEXEMA : 'holaasd'
+* LEXEMA : 'abcdefghij________'
   Atributos :
       Tipo = int
-      DireccionMemoria = 6
+      DireccionMemoria = 4
 
   --------- ---------- 
 CONTENIDOS DE LA TABLA LOCAL#1 :
-* LEXEMA : 'aux'
-  Atributos :
-      Tipo = int
-      DireccionMemoria = 0
-
-  --------- ---------- 
-* LEXEMA : 'fin'
-  Atributos :
-      Tipo = int
-      DireccionMemoria = 2
-
-  --------- ---------- 
-* LEXEMA : 'b'
+* LEXEMA : 'i'
   Atributos :
       Tipo = boolean
-      DireccionMemoria = 4
-
-  --------- ---------- 
-* LEXEMA : 'holaasd'
-  Atributos :
-      Tipo = int
-      DireccionMemoria = 6
+      DireccionMemoria = 2
 
   --------- ---------- 
 CONTENIDOS DE LA TABLA LOCAL#2 :
-* LEXEMA : 'aux2'
-  Atributos :
-      Tipo = int
-      DireccionMemoria = 0
-
-  --------- ---------- 
-* LEXEMA : 'fin'
-  Atributos :
-      Tipo = int
-      DireccionMemoria = 2
-
-  --------- ---------- 
-* LEXEMA : 'b'
-  Atributos :
-      Tipo = boolean
-      DireccionMemoria = 4
-
-  --------- ---------- 
-CONTENIDOS DE LA TABLA LOCAL#3 :
-CONTENIDOS DE LA TABLA GLOBAL#4 :
-* LEXEMA : 'hola'
+* LEXEMA : 'otracadena'
   Atributos :
       Tipo = string
       DireccionMemoria = 0
 
   --------- ---------- 
-* LEXEMA : 'encontrado'
+* LEXEMA : 'x'
   Atributos :
-      Tipo = boolean
+      Tipo = int
       DireccionMemoria = 128
 
   --------- ---------- 
-* LEXEMA : 'suma'
+* LEXEMA : 'z'
   Atributos :
-      Tipo = int
+      Tipo = boolean
       DireccionMemoria = 130
 
   --------- ---------- 
-* LEXEMA : 'resta'
+CONTENIDOS DE LA TABLA LOCAL#3 :
+CONTENIDOS DE LA TABLA LOCAL#4 :
+* LEXEMA : 'z_Z'
   Atributos :
       Tipo = int
-      DireccionMemoria = 132
+      DireccionMemoria = 0
 
   --------- ---------- 
-* LEXEMA : 'Suma'
+* LEXEMA : 'b'
   Atributos :
-      Tipo = Función
-      NumParametros = 3
-      TipoDev = int
-      TipoParametro = int , int , boolean
+      Tipo = boolean
+      DireccionMemoria = 2
 
   --------- ---------- 
-* LEXEMA : 'Suma2'
+* LEXEMA : 'a'
   Atributos :
-      Tipo = Función
-      NumParametros = 3
-      TipoDev = int
-      TipoParametro = int , int , boolean
+      Tipo = error
+      DireccionMemoria = 6
 
   --------- ---------- 
-* LEXEMA : 'aux5NoDeclarado'
+CONTENIDOS DE LA TABLA LOCAL#5 :
+* LEXEMA : 'x'
   Atributos :
       Tipo = int
-      DireccionMemoria = 134
+      DireccionMemoria = 0
 
   --------- ---------- 
-* LEXEMA : 'Suma3'
+* LEXEMA : 'b'
   Atributos :
-      Tipo = Función
-      NumParametros = 3
-      TipoDev = boolean
-      TipoParametro = int , int , boolean
+      Tipo = boolean
+      DireccionMemoria = 2
 
   --------- ---------- 
-* LEXEMA : 'aux3NoDeclarado'
+CONTENIDOS DE LA TABLA GLOBAL#6 :
+* LEXEMA : 'entero'
   Atributos :
       Tipo = int
+      DireccionMemoria = 2
+
+  --------- ---------- 
+* LEXEMA : 'cadena'
+  Atributos :
+      Tipo = string
+      DireccionMemoria = 6
+
+  --------- ---------- 
+* LEXEMA : 'logico'
+  Atributos :
+      Tipo = boolean
       DireccionMemoria = 136
 
   --------- ---------- 
-* LEXEMA : 'Suma4'
+* LEXEMA : 'pp_'
   Atributos :
       Tipo = Función
       NumParametros = 0
@@ -137,15 +97,79 @@ CONTENIDOS DE LA TABLA GLOBAL#4 :
       TipoParametro = 
 
   --------- ---------- 
-* LEXEMA : 'aux2'
+* LEXEMA : 'FuncionNumero'
   Atributos :
-      Tipo = int
+      Tipo = Función
+      NumParametros = 0
+      TipoDev = void
+      TipoParametro = 
+
+  --------- ---------- 
+* LEXEMA : 'FuncionRetorno'
+  Atributos :
+      Tipo = Función
+      NumParametros = 3
+      TipoDev = string
+      TipoParametro = string , int , boolean
+
+  --------- ---------- 
+* LEXEMA : 'boooooo'
+  Atributos :
+      Tipo = boolean
       DireccionMemoria = 140
 
   --------- ---------- 
-* LEXEMA : 'fin'
+* LEXEMA : 's64'
+  Atributos :
+      Tipo = string
+      DireccionMemoria = 144
+
+  --------- ---------- 
+* LEXEMA : 'aaaaa'
   Atributos :
       Tipo = int
-      DireccionMemoria = 138
+      DireccionMemoria = 274
+
+  --------- ---------- 
+* LEXEMA : 'fbbb'
+  Atributos :
+      Tipo = Función
+      NumParametros = 0
+      TipoDev = boolean
+      TipoParametro = 
+
+  --------- ---------- 
+* LEXEMA : 'FuncionSentencia'
+  Atributos :
+      Tipo = Función
+      NumParametros = 2
+      TipoDev = int
+      TipoParametro = int , boolean
+
+  --------- ---------- 
+* LEXEMA : 'booooo'
+  Atributos :
+      Tipo = error
+      DireccionMemoria = 276
+
+  --------- ---------- 
+* LEXEMA : 'Funcion'
+  Atributos :
+      Tipo = Función
+      NumParametros = 2
+      TipoDev = void
+      TipoParametro = int , boolean
+
+  --------- ---------- 
+* LEXEMA : 'iii'
+  Atributos :
+      Tipo = error
+      DireccionMemoria = 280
+
+  --------- ---------- 
+* LEXEMA : 'bbb'
+  Atributos :
+      Tipo = boolean
+      DireccionMemoria = 284
 
   --------- ---------- 

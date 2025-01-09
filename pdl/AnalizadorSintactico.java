@@ -1,5 +1,7 @@
 package pdl;
 
+import static pdl.TablasDeSimbolos.gestorTS;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,16 +39,16 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
-		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-		//		  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-		//		  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 
 		try {
-			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-			//			fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			//			fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -94,10 +96,18 @@ public class AnalizadorSintactico {
 			System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla local.");
 		}
 	}
-
-
+	
+//	//añade tipo a identificadores sin declarar en casos especificos
+//	public void AddTipoSinDeclarar(String id, Tipo tipo) throws IOException {
+//		
+//		gestorTablas.getGestorTS().get(0).getSimbolo(id).setTipo(tipo);
+//		gestorTablas.getGestorTS().get(0).getSimbolo(id).setDireccionMemoria(despG);
+//		despG+=tipo.getTam();
+//	}
+//	
 	//Funcion para añadir tipo a un id y verifica si existe o no, si no existe se añade y despues de añadirlo se indica el desplazamiento correspondiente
 	public void AddTipoTS(String id, Tipo tipo) {
+		
 		boolean encontrado = false;
 		if (gestorTablas.getGestorTS().containsKey(1)) {
 			if (gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
@@ -135,22 +145,28 @@ public class AnalizadorSintactico {
 
 	//Devuelve el tipo de una variable
 	public Tipo BuscaTipoTS(String id) {
-		if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
-			return gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo();
-		} else if (gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
-			if(gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo() == null ) {
-				//System.out.println("ESTOY EN BUSCATIPO_: " + id);
-				Tipo tipo = new Tipo();
-				tipo.setTam(2);
-				tipo.setTipo("int");
-				AddTipoTS(id,tipo);
-			}
-			return gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
-		} else {
-			System.err.println("Error: Identificador '" + id + "' no encontrado.");
-			return new Tipo("error");
-		}
+	    if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
+	    	if (gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo() == null) {
+	            Tipo tipo = new Tipo();
+	            tipo.setTam(2);
+	            tipo.setTipo("int");
+	            AddTipoTS(id, tipo);
+	        }
+	        return gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo();
+	    } else if (gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
+	        if (gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo() == null) {
+	            Tipo tipo = new Tipo();
+	            tipo.setTam(2);
+	            tipo.setTipo("int");
+	            AddTipoTS(id, tipo);
+	        }
+	        return gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
+	    } else {
+	        System.err.println("Error: Identificador '" + id + "' no encontrado.");
+	        return new Tipo("error");
+	    }
 	}
+
 
 
 	public void P2() throws IOException {
@@ -488,6 +504,12 @@ public class AnalizadorSintactico {
 		if(sig_token.getCodigo() == 1) {
 			out.print(20 + " ");
 			String id=sig_token.getAtributo();
+//			if(BuscaTipoTS(id)==null) {
+//				Tipo tipo1=new Tipo();
+//				tipo1.setTam(2);
+//				tipo1.setTipo("int");
+//				AddTipoSinDeclarar(id,tipo1);
+//			}
 			empareja(1,zona_declarada);
 			tipo = S2(id);
 			//System.out.println("Soy S(): " + tipo.getTipo());
@@ -762,6 +784,9 @@ public class AnalizadorSintactico {
 			out.print( 41+" ");
 			empareja(9,zona_declarada);
 			tipo = T();
+			if(BuscaTipoTS(sig_token.getAtributo())!=null) {
+				new Error(315, al.getLinea()).getError();
+			}
 			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1,zona_declarada);
 			empareja(19,zona_declarada);

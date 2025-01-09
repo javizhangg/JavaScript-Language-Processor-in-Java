@@ -33,6 +33,10 @@ public class TablasDeSimbolos {
 		String ultimoSimbolo =gestorTS.get(0).getLastSimbolo();
 		return gestorTS.get(0).getSimbolo(ultimoSimbolo);
 	}
+	public String getlastsimbolo() {
+		String ultimoSimbolo =gestorTS.get(1).getLastSimbolo();
+		return ultimoSimbolo;
+	}
 	//Funcion para obtener el simbolo, dando igual si es del global o del local
 	public Simbolo getSimboloGL(String lexSimbolo) {
 		Simbolo simbolo;

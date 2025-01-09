@@ -40,8 +40,8 @@ class AFD {
 		this.posicionDeLinea = 1;
 
 		// Inicializar la matriz de transiciones
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-		//			this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+					this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 
@@ -171,8 +171,10 @@ class AFD {
 							posEnTablaSimbolo.InsertarTS(auxLexema);
 							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}else {
+							posEnTablaSimbolo = As.getTablaActual();
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 							//Error de identificador ya declarado
-							new Error(315, posicionDeLinea).getError();
+							//new Error(315, posicionDeLinea).getError();
 						}
 						//Zona declarada = false
 					}else {
@@ -197,7 +199,9 @@ class AFD {
 							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}else {
 							//Error de identificador ya declarado
-							new Error(315, posicionDeLinea).getError();
+							posEnTablaSimbolo = As.getTablaActual();
+							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema); //codigo hecho por mi
+							//new Error(315, posicionDeLinea).getError(); Codigo Xiaolei
 						}
 						//Zona declarada = false
 					}else {
