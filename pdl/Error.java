@@ -188,7 +188,7 @@ class Error {
 			break;
 		}
 		case 303 -> {
-			error = st.append("- Error Semántico: R -> == U R2 , se esperaba que U.tipo sea de tipo entero y no lo es. ").append(linea).toString();
+			error = st.append("- Error Semántico: R2 -> == U R2 , se esperaba que U.tipo sea de tipo entero y no lo es. ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
@@ -198,7 +198,7 @@ class Error {
 			break;
 		}
 		case 305 -> {
-			error = st.append("- Error Semántico: U -> + V U2 , se esperaba que V.tipo sea de tipo entero y no lo es. ").append(linea).toString();
+			error = st.append("- Error Semántico: U2 -> + V U2 , se esperaba que V.tipo sea de tipo entero y no lo es. ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
