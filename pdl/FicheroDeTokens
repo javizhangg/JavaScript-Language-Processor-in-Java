@@ -23,6 +23,9 @@
 <16,> //tipo: (
 <12,> //Palabra reservada: string
 <1,sss> //es el identificador: sss
+<18,> //tipo: ,
+<11,> //Palabra reservada: boolean
+<1,id> //es el identificador: id
 <17,> //tipo: )
 <20,> //tipo: {
 <28,> //Palabra reservada: return
@@ -37,6 +40,10 @@
 <7,> //tipo: =
 <1,ff> //es el identificador: ff
 <16,> //tipo: (
+<1,cadena> //es el identificador: cadena
+<18,> //tipo: ,
+<1,logico1> //es el identificador: logico1
+<18,> //tipo: ,
 <1,logico1> //es el identificador: logico1
 <17,> //tipo: )
 <19,> //tipo: ;

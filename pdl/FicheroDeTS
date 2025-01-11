@@ -5,6 +5,12 @@ CONTENIDOS DE LA TABLA LOCAL#2 :
       DireccionMemoria = 0
 
   --------- ---------- 
+* LEXEMA : 'id'
+  Atributos :
+      Tipo = boolean
+      DireccionMemoria = 128
+
+  --------- ---------- 
 CONTENIDOS DE LA TABLA GLOBAL#1 :
 * LEXEMA : 'int1'
   Atributos :
@@ -33,9 +39,9 @@ CONTENIDOS DE LA TABLA GLOBAL#1 :
 * LEXEMA : 'ff'
   Atributos :
       Tipo = funcion
-      NumParametros = 1
+      NumParametros = 2
       TipoDev = string
-      TipoParametro = string
+      TipoParametro = string , boolean
 
   --------- ---------- 
 * LEXEMA : 'hola'

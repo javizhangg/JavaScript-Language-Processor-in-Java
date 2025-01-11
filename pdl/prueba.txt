@@ -2,10 +2,10 @@ var int int1;
 var string cadena;input cadena;
 var boolean logico1;var boolean logico2 ;
 
-function string ff(string sss)
+function string ff(string sss, boolean id)
 {
 	return sss;
 }
 /* DEBERIA DAR ERROR PERO NO LO HACE*/
 var string hola;
-hola = ff(logico1);
+hola = ff(cadena,logico1,logico1);

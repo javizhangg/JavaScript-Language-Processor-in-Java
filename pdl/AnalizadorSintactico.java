@@ -657,9 +657,6 @@ public class AnalizadorSintactico {
 		else if(sig_token.getCodigo() == 16) {
 			out.print( 26+" ");
 			empareja(16,zona_declarada);
-			Tipo L_tipo = L(BuscaFuncionTS(id));
-			empareja(17,zona_declarada);
-			empareja(19,zona_declarada);
 			Tipo funcion_tipo = BuscaFuncionTipoTS(id); // Obtiene tipo de retorno
 			
 	        if (funcion_tipo == null || funcion_tipo.getTipo().equals("error")) {
@@ -667,6 +664,10 @@ public class AnalizadorSintactico {
 	            tipo.setTipo("error");
 	            funcion_tipo= tipo;
 	        }
+			Tipo L_tipo = L(BuscaFuncionTS(id));
+			empareja(17,zona_declarada);
+			empareja(19,zona_declarada);
+			
 	        // Validación adicional si L_tipo no coincide con los parámetros esperados (implementación pendiente)
 	        return funcion_tipo;
 		}else {
@@ -724,7 +725,9 @@ public class AnalizadorSintactico {
 			out.print( 30+" ");
 			num_parametros=1;
 			Tipo E_tipo = E(); // Evalúa la primera expresión
-			if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
+			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error")) {
+			}
+			else if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
 				new Error(320, al.getLinea()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
@@ -775,7 +778,9 @@ public class AnalizadorSintactico {
 			empareja(sig_token.getCodigo(),zona_declarada);
 			Tipo E_tipo = E();
 			num_parametros++;
-			if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
+			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error") || Funcion.getNumPar()<num_parametros) {
+			}
+			else if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
 				new Error(320, al.getLinea()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
