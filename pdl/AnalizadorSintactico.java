@@ -40,16 +40,16 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
-		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-//				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 
 		try {
-			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-//						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -126,7 +126,12 @@ public class AnalizadorSintactico {
 	public Tipo BuscaFuncionTipoTS(String id) {
 		return gestorTablas.getGestorTS().get(0).getSimbolo(id).GetTipoDev();
 	}
-
+	
+	//Devuelve el tipo de una función
+		public Simbolo BuscaFuncionTS(String id) {
+			return gestorTablas.getGestorTS().get(0).getSimbolo(id);
+		}
+		
 	//Devuelve el tipo de una variable
 	public Tipo BuscaTipoTS(String id) throws IOException {
 	    if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
@@ -478,7 +483,7 @@ public class AnalizadorSintactico {
 		if(sig_token.getCodigo() ==  16) { //token (
 			out.print( 18+" ");
 			empareja(16,zona_declarada);
-			Tipo L_tipo = L();
+			Tipo L_tipo = L(BuscaFuncionTS(id));
 			empareja(17,zona_declarada); //token )
 			if(L_tipo.getTipo().equals("error")) {
 				return tipo;
@@ -652,15 +657,15 @@ public class AnalizadorSintactico {
 		else if(sig_token.getCodigo() == 16) {
 			out.print( 26+" ");
 			empareja(16,zona_declarada);
-			Tipo L_tipo = L();
+			Tipo L_tipo = L(BuscaFuncionTS(id));
 			empareja(17,zona_declarada);
 			empareja(19,zona_declarada);
 			Tipo funcion_tipo = BuscaFuncionTipoTS(id); // Obtiene tipo de retorno
-			System.out.println(funcion_tipo.getTipo() + "asdlasdpoaskdopa");
+			
 	        if (funcion_tipo == null || funcion_tipo.getTipo().equals("error")) {
 	            new Error(318, al.getLinea()).getError(); // Error si la función no existe
 	            tipo.setTipo("error");
-	            return tipo;
+	            funcion_tipo= tipo;
 	        }
 	        // Validación adicional si L_tipo no coincide con los parámetros esperados (implementación pendiente)
 	        return funcion_tipo;
@@ -712,19 +717,28 @@ public class AnalizadorSintactico {
 	 * 3. Si el token no pertenece ni a FIRST ni a FOLLOW de `L`:
 	 *    - Lanza un error y retorna "error".
 	 */
-	public  Tipo L() throws IOException {
+	public  Tipo L(Simbolo Funcion) throws IOException {
 		Tipo tipo = new Tipo();
 		if(first.first.get("E").contains(sig_token.getCodigo())) {
 
 			out.print( 30+" ");
+			num_parametros=1;
 			Tipo E_tipo = E(); // Evalúa la primera expresión
+			if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
+				new Error(320, al.getLinea()).getError();
+			}
+			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
+			if(Funcion.getNumPar()!=num_parametros && Funcion.getTipo()!=null) {
+				new Error(319, al.getLinea()).getError();
+			}
+			num_parametros=0;
 	        if (E_tipo.getTipo().equals("error")) {
 	            new Error(311, al.getLinea()).getError(); // Error en la expresión
 	            tipo.setTipo("error");
-	            return tipo;
+	            Q_tipo =tipo;
 	        }
-	        tipo = Q(E_tipo); // Procesa el resto de la lista
-	        return tipo;
+	        
+	        return Q_tipo;
 		}
 		else if(first.follow.get("L").contains(sig_token.getCodigo())) //FOLLOW L
 		{
@@ -753,19 +767,26 @@ public class AnalizadorSintactico {
 	 * 3. Si el token no pertenece ni a una coma ni al conjunto FOLLOW de `Q`:
 	 *    - Lanza un error y retorna "error".
 	 */
-	public Tipo  Q(Tipo tipoHeredado) throws IOException {
+	public Tipo  Q(Tipo tipoHeredado,Simbolo Funcion ) throws IOException {
 		Tipo tipo=new Tipo();
 		if(sig_token.getCodigo() == 18) {
+			
 			out.print( 32+" ");
 			empareja(sig_token.getCodigo(),zona_declarada);
 			Tipo E_tipo = E();
+			num_parametros++;
+			if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
+				new Error(320, al.getLinea()).getError();
+			}
+			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
+			
 			
 			if (E_tipo.getTipo().equals("error")) {
 	            tipo.setTipo("error");
-	            return tipo;
+	            Q_tipo= tipo;
 	        }
-	        tipo = Q(E_tipo); // Procesa el resto de la lista
-	        return tipo;
+	        
+	        return Q_tipo;
 		}
 		else if(first.follow.get("Q").contains(sig_token.getCodigo())) //FOLLOW Q
 		{

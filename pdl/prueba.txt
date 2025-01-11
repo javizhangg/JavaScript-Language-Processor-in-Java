@@ -8,5 +8,4 @@ function string ff(string sss)
 }
 /* DEBERIA DAR ERROR PERO NO LO HACE*/
 var string hola;
-hola = ff(logico1,xd,xd,xd);
- 
+hola = ff(logico1);

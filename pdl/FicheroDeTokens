@@ -38,12 +38,6 @@
 <1,ff> //es el identificador: ff
 <16,> //tipo: (
 <1,logico1> //es el identificador: logico1
-<18,> //tipo: ,
-<1,xd> //es el identificador: xd
-<18,> //tipo: ,
-<1,xd> //es el identificador: xd
-<18,> //tipo: ,
-<1,xd> //es el identificador: xd
 <17,> //tipo: )
 <19,> //tipo: ;
 <29,> //Palabra reservada: eof

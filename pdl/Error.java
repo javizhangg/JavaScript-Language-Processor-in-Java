@@ -222,6 +222,16 @@ class Error {
 		    System.out.println(error);
 		    break;
 		}
+		case 319 -> {
+			error = st.append("- Error Semántico: El numero de parametros al llamar la funcion no coincide con el de la funcion ").append(mensaje).append(". En la línea: ").append(linea).toString();
+		    System.out.println(error);
+		    break;
+		}
+		case 320 -> {
+			error = st.append("- Error Semántico: El tipo de parametros al llamar la funcion no coincide con el de la funcion declarada").append(mensaje).append(". En la línea: ").append(linea).toString();
+		    System.out.println(error);
+		    break;
+		}
 		}
 
 	}

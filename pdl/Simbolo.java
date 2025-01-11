@@ -19,7 +19,7 @@ public class Simbolo {
     //Constructor que va a llamar el AFD para insertar solamente los lexemas
     public Simbolo(String lexema) {
     	this.lexema = lexema;
-        this.contp = 0;
+        this.contp = 1;
         this.tipoParametro = new HashMap<>(); // Inicialización aquí
     }
     /*--------------------------Variable normal--------------------------------------------*/
@@ -52,14 +52,9 @@ public class Simbolo {
     	tipoParametro.put(contp, tipo );
     	contp++;
     }
-    public Tipo getTipoParametro(){
-    	Tipo tipo=null;
-    	if(contp >=0) {
-    	tipo = tipoParametro.get(contp);
-    	tipoParametro.remove(contp);
-    	contp--;
-    	}
-    	return tipo;
+    public Tipo getTipoParametro(int index){
+ 
+    	return tipoParametro.get(index);
     }
     
     //Sirve para tipoDev en funciones
