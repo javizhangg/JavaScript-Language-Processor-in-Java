@@ -19,7 +19,7 @@ public class TablasDeSimbolos {
 	public TablasDeSimbolos(FileWriter fw){
 		gestorTS = new HashMap<>();
 		this.fw = fw;
-		numeroTabla = 0;
+		numeroTabla = 2;
 	}
 
 	//Función para añadir tablas locales 
@@ -74,7 +74,6 @@ public class TablasDeSimbolos {
 	public void getTablaTS(int ambito) throws IOException {
 		//No hace hacer if ambito es 0 o cosas así, esto arregla ademas el error de que solo se imprimiera la tabla global.
 		imprimirTabla(gestorTS.get(ambito));
-		System.out.print("se imprime" + ambito);
 		gestorTS.remove(ambito);
 
 		//Solo incrementamos esta variable cada vez que llamemos getTablaTS
@@ -87,7 +86,7 @@ public class TablasDeSimbolos {
 	public void imprimirTabla(TS tablaSimbolo) throws IOException {
 		boolean primeraInstancia = false;
 		if(esGlobal) {
-			fw.write("CONTENIDOS DE LA TABLA GLOBAL#" + numeroTabla + " :" + "\n");
+			fw.write("CONTENIDOS DE LA TABLA GLOBAL#" + 1 + " :" + "\n");
 		}
 		else {
 			fw.write("CONTENIDOS DE LA TABLA LOCAL#" + numeroTabla + " :" + "\n" );

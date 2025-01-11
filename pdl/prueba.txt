@@ -1,66 +1,12 @@
-/* Comentario de linea es con //. */
+var int int1;
+var string cadena;input cadena;
+var boolean logico1;var boolean logico2 ;
 
-/* El de bloque va entre /* y */
-
-var int entero;
-var string cadena;
-var boolean logico;
-function void pp_(void)
+function string ff(string sss)
 {
- var int  X____9  ;
-  abcdefghij________  = 0;
-}function void FuncionNumero (void)
-{
-  var  boolean i;
-  
-  i = logico;
-  logico =  i &&  logico;
-  i =   logico;
+	return sss;
 }
-function string FuncionRetorno (string otracadena, int x, boolean z)
-{
-  x = 33  +  (x  +  entero); return otracadena;
-}
-var boolean boooooo ;
-var string s64 ;
-var int aaaaa ;
-function boolean fbbb (void) {return boooooo;}
-
-function int FuncionSentencia (int z_Z, boolean b)
-{
-	var  int a;
-	
-  do
-  {
-	a = z_Z;
-	output (a);
-  } while (b);
-}
-if (booooo) aaaaa=0;
-function void Funcion  (int x, boolean b)
-{
-	FuncionNumero();
-  output 
-    (cadena);return;
-}
-var int iii  ;
-var boolean bbb  ;
-
-/* 
-esto 
-es 
-un 
-comentario! 
-multi 
-//linea */
-
-input iii;
-output  (  iii  )  ;  
-
-iii = iii;
-bbb |= bbb;
-
-Funcion
- ( iii, 
-   bbb )
-;
+/* DEBERIA DAR ERROR PERO NO LO HACE*/
+var string hola;
+hola = ff(logico1,xd,xd,xd);
+ 

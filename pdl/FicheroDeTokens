@@ -1,201 +1,49 @@
 <9,> //Palabra reservada: var
 <10,> //Palabra reservada: int
-<1,entero> //es el identificador: entero
+<1,int1> //es el identificador: int1
 <19,> //tipo: ;
 <9,> //Palabra reservada: var
 <12,> //Palabra reservada: string
 <1,cadena> //es el identificador: cadena
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,logico> //es el identificador: logico
-<19,> //tipo: ;
-<27,> //Palabra reservada: function
-<13,> //Palabra reservada: void
-<1,pp_> //es el identificador: pp_
-<16,> //tipo: (
-<13,> //Palabra reservada: void
-<17,> //tipo: )
-<20,> //tipo: {
-<9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,X____9> //es el identificador: X____9
-<19,> //tipo: ;
-<1,abcdefghij________> //es el identificador: abcdefghij________
-<7,> //tipo: =
-<2,0> //es el numero: entero
-<19,> //tipo: ;
-<21,> //tipo: }
-<27,> //Palabra reservada: function
-<13,> //Palabra reservada: void
-<1,FuncionNumero> //es el identificador: FuncionNumero
-<16,> //tipo: (
-<13,> //Palabra reservada: void
-<17,> //tipo: )
-<20,> //tipo: {
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,i> //es el identificador: i
-<19,> //tipo: ;
-<1,i> //es el identificador: i
-<7,> //tipo: =
-<1,logico> //es el identificador: logico
-<19,> //tipo: ;
-<1,logico> //es el identificador: logico
-<7,> //tipo: =
-<1,i> //es el identificador: i
-<6,> //tipo: &&
-<1,logico> //es el identificador: logico
-<19,> //tipo: ;
-<1,i> //es el identificador: i
-<7,> //tipo: =
-<1,logico> //es el identificador: logico
-<19,> //tipo: ;
-<21,> //tipo: }
-<27,> //Palabra reservada: function
-<12,> //Palabra reservada: string
-<1,FuncionRetorno> //es el identificador: FuncionRetorno
-<16,> //tipo: (
-<12,> //Palabra reservada: string
-<1,otracadena> //es el identificador: otracadena
-<18,> //tipo: ,
-<10,> //Palabra reservada: int
-<1,x> //es el identificador: x
-<18,> //tipo: ,
-<11,> //Palabra reservada: boolean
-<1,z> //es el identificador: z
-<17,> //tipo: )
-<20,> //tipo: {
-<1,x> //es el identificador: x
-<7,> //tipo: =
-<2,33> //es el numero: entero
-<4,> //tipo: +
-<16,> //tipo: (
-<1,x> //es el identificador: x
-<4,> //tipo: +
-<1,entero> //es el identificador: entero
-<17,> //tipo: )
-<19,> //tipo: ;
-<28,> //Palabra reservada: return
-<1,otracadena> //es el identificador: otracadena
-<19,> //tipo: ;
-<21,> //tipo: }
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,boooooo> //es el identificador: boooooo
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<12,> //Palabra reservada: string
-<1,s64> //es el identificador: s64
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,aaaaa> //es el identificador: aaaaa
-<19,> //tipo: ;
-<27,> //Palabra reservada: function
-<11,> //Palabra reservada: boolean
-<1,fbbb> //es el identificador: fbbb
-<16,> //tipo: (
-<13,> //Palabra reservada: void
-<17,> //tipo: )
-<20,> //tipo: {
-<28,> //Palabra reservada: return
-<1,boooooo> //es el identificador: boooooo
-<19,> //tipo: ;
-<21,> //tipo: }
-<27,> //Palabra reservada: function
-<10,> //Palabra reservada: int
-<1,FuncionSentencia> //es el identificador: FuncionSentencia
-<16,> //tipo: (
-<10,> //Palabra reservada: int
-<1,z_Z> //es el identificador: z_Z
-<18,> //tipo: ,
-<11,> //Palabra reservada: boolean
-<1,b> //es el identificador: b
-<17,> //tipo: )
-<20,> //tipo: {
-<9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,a> //es el identificador: a
-<19,> //tipo: ;
-<25,> //Palabra reservada: do
-<20,> //tipo: {
-<1,a> //es el identificador: a
-<7,> //tipo: =
-<1,z_Z> //es el identificador: z_Z
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<16,> //tipo: (
-<1,a> //es el identificador: a
-<17,> //tipo: )
-<19,> //tipo: ;
-<21,> //tipo: }
-<26,> //Palabra reservada: while
-<16,> //tipo: (
-<1,b> //es el identificador: b
-<17,> //tipo: )
-<19,> //tipo: ;
-<21,> //tipo: }
-<22,> //Palabra reservada: if
-<16,> //tipo: (
-<1,booooo> //es el identificador: booooo
-<17,> //tipo: )
-<1,aaaaa> //es el identificador: aaaaa
-<7,> //tipo: =
-<2,0> //es el numero: entero
-<19,> //tipo: ;
-<27,> //Palabra reservada: function
-<13,> //Palabra reservada: void
-<1,Funcion> //es el identificador: Funcion
-<16,> //tipo: (
-<10,> //Palabra reservada: int
-<1,x> //es el identificador: x
-<18,> //tipo: ,
-<11,> //Palabra reservada: boolean
-<1,b> //es el identificador: b
-<17,> //tipo: )
-<20,> //tipo: {
-<1,FuncionNumero> //es el identificador: FuncionNumero
-<16,> //tipo: (
-<17,> //tipo: )
-<19,> //tipo: ;
-<14,> //Palabra reservada: output
-<16,> //tipo: (
-<1,cadena> //es el identificador: cadena
-<17,> //tipo: )
-<19,> //tipo: ;
-<28,> //Palabra reservada: return
-<19,> //tipo: ;
-<21,> //tipo: }
-<9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,iii> //es el identificador: iii
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,bbb> //es el identificador: bbb
 <19,> //tipo: ;
 <15,> //Palabra reservada: input
-<1,iii> //es el identificador: iii
+<1,cadena> //es el identificador: cadena
 <19,> //tipo: ;
-<14,> //Palabra reservada: output
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,logico1> //es el identificador: logico1
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,logico2> //es el identificador: logico2
+<19,> //tipo: ;
+<27,> //Palabra reservada: function
+<12,> //Palabra reservada: string
+<1,ff> //es el identificador: ff
 <16,> //tipo: (
-<1,iii> //es el identificador: iii
+<12,> //Palabra reservada: string
+<1,sss> //es el identificador: sss
 <17,> //tipo: )
+<20,> //tipo: {
+<28,> //Palabra reservada: return
+<1,sss> //es el identificador: sss
 <19,> //tipo: ;
-<1,iii> //es el identificador: iii
+<21,> //tipo: }
+<9,> //Palabra reservada: var
+<12,> //Palabra reservada: string
+<1,hola> //es el identificador: hola
+<19,> //tipo: ;
+<1,hola> //es el identificador: hola
 <7,> //tipo: =
-<1,iii> //es el identificador: iii
-<19,> //tipo: ;
-<1,bbb> //es el identificador: bbb
-<8,> //tipo: |=
-<1,bbb> //es el identificador: bbb
-<19,> //tipo: ;
-<1,Funcion> //es el identificador: Funcion
+<1,ff> //es el identificador: ff
 <16,> //tipo: (
-<1,iii> //es el identificador: iii
+<1,logico1> //es el identificador: logico1
 <18,> //tipo: ,
-<1,bbb> //es el identificador: bbb
+<1,xd> //es el identificador: xd
+<18,> //tipo: ,
+<1,xd> //es el identificador: xd
+<18,> //tipo: ,
+<1,xd> //es el identificador: xd
 <17,> //tipo: )
 <19,> //tipo: ;
 <29,> //Palabra reservada: eof
