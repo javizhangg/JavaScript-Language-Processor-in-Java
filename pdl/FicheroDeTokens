@@ -1,50 +1,29 @@
 <9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,int1> //es el identificador: int1
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
 <12,> //Palabra reservada: string
-<1,cadena> //es el identificador: cadena
+<1,mensaje> //es el identificador: mensaje
 <19,> //tipo: ;
-<15,> //Palabra reservada: input
-<1,cadena> //es el identificador: cadena
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,logico1> //es el identificador: logico1
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,logico2> //es el identificador: logico2
-<19,> //tipo: ;
-<27,> //Palabra reservada: function
-<12,> //Palabra reservada: string
-<1,ff> //es el identificador: ff
-<16,> //tipo: (
-<12,> //Palabra reservada: string
-<1,sss> //es el identificador: sss
-<18,> //tipo: ,
-<11,> //Palabra reservada: boolean
-<1,id> //es el identificador: id
-<17,> //tipo: )
-<20,> //tipo: {
-<28,> //Palabra reservada: return
-<1,sss> //es el identificador: sss
-<19,> //tipo: ;
-<21,> //tipo: }
-<9,> //Palabra reservada: var
-<12,> //Palabra reservada: string
-<1,hola> //es el identificador: hola
-<19,> //tipo: ;
-<1,hola> //es el identificador: hola
+<1,mensaje> //es el identificador: mensaje
 <7,> //tipo: =
-<1,ff> //es el identificador: ff
+<3,'Feliz 2025 <3'> //es la cadena: 'Feliz 2025 <3'
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,logico> //es el identificador: logico
+<19,> //tipo: ;
+<1,logico> //es el identificador: logico
+<7,> //tipo: =
+<1,logico> //es el identificador: logico
+<6,> //tipo: &&
+<1,logico> //es el identificador: logico
+<19,> //tipo: ;
+<1,global_1> //es el identificador: global_1
+<7,> //tipo: =
 <16,> //tipo: (
-<1,cadena> //es el identificador: cadena
-<18,> //tipo: ,
-<1,logico1> //es el identificador: logico1
-<18,> //tipo: ,
-<1,logico1> //es el identificador: logico1
+<1,global_2> //es el identificador: global_2
+<4,> //tipo: +
+<1,global_2> //es el identificador: global_2
 <17,> //tipo: )
+<4,> //tipo: +
+<1,global_2> //es el identificador: global_2
 <19,> //tipo: ;
 <29,> //Palabra reservada: eof

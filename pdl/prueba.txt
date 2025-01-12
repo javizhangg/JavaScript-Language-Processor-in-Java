@@ -1,11 +1,9 @@
-var int int1;
-var string cadena;input cadena;
-var boolean logico1;var boolean logico2 ;
+var string mensaje;
+mensaje = 'Feliz 2025 <3'				; /*<- Menos a los que hacen esto*/
+/* global_3??
 
-function string ff(string sss, boolean id)
-{
-	return sss;
-}
-/* DEBERIA DAR ERROR PERO NO LO HACE*/
-var string hola;
-hola = ff(cadena,logico1,logico1);
+Es
+Broma lo anterior */
+var boolean logico;
+logico = logico && logico;
+global_1 = (global_2 + global_2) + global_2;

@@ -83,13 +83,27 @@ public class Simbolo {
     public void setAmbito(int ambito) {
         this.ambito = ambito;
     }
-
     
+	public String getEtiqueta() {
+		return etiqueta;
+	}
+	public void setEtiqueta(String etiqueta) {
+		this.etiqueta = etiqueta;
+	}
 
-
-    @Override
-    public String toString() {
-        return "";
+    //Imprime los parametros necesarios de la función
+    public String imprimirContenido() {
+        int key = 1; 
+        StringBuilder st = new StringBuilder();
+        st.append("La funcion: " + getLexema() + ", espera los siguientes párametros: ");
+        while (tipoParametro.containsKey(key)) { 
+            Tipo valor = tipoParametro.get(key); // 
+            st.append("Parámetro: " + key + ", Tipo: " + valor.getTipo() + ". "); 
+            key++; // Incrementa para la siguiente clave
+        }
+        return st.toString();
     }
+
+
 }
 

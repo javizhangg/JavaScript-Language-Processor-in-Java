@@ -1,52 +1,21 @@
-CONTENIDOS DE LA TABLA LOCAL#2 :
-* LEXEMA : 'sss'
+CONTENIDOS DE LA TABLA GLOBAL #1 :
+* LEXEMA: 'mensaje'
   Atributos :
-      Tipo = string
-      DireccionMemoria = 0
-
+      + Tipo: 'string'
+      + Despl: 0
   --------- ---------- 
-* LEXEMA : 'id'
+* LEXEMA: 'logico'
   Atributos :
-      Tipo = boolean
-      DireccionMemoria = 128
-
+      + Tipo: 'boolean'
+      + Despl: 64
   --------- ---------- 
-CONTENIDOS DE LA TABLA GLOBAL#1 :
-* LEXEMA : 'int1'
+* LEXEMA: 'global_1'
   Atributos :
-      Tipo = int
-      DireccionMemoria = 0
-
+      + Tipo: 'int'
+      + Despl: 66
   --------- ---------- 
-* LEXEMA : 'cadena'
+* LEXEMA: 'global_2'
   Atributos :
-      Tipo = string
-      DireccionMemoria = 2
-
-  --------- ---------- 
-* LEXEMA : 'logico1'
-  Atributos :
-      Tipo = boolean
-      DireccionMemoria = 130
-
-  --------- ---------- 
-* LEXEMA : 'logico2'
-  Atributos :
-      Tipo = boolean
-      DireccionMemoria = 132
-
-  --------- ---------- 
-* LEXEMA : 'ff'
-  Atributos :
-      Tipo = funcion
-      NumParametros = 2
-      TipoDev = string
-      TipoParametro = string , boolean
-
-  --------- ---------- 
-* LEXEMA : 'hola'
-  Atributos :
-      Tipo = string
-      DireccionMemoria = 134
-
+      + Tipo: 'int'
+      + Despl: 65
   --------- ---------- 

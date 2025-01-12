@@ -40,8 +40,8 @@ class AFD {
 		this.posicionDeLinea = 1;
 
 		// Inicializar la matriz de transiciones
-//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-					this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+//					this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 
@@ -83,7 +83,6 @@ class AFD {
 		}
 		return encontrado;
 	}
-
 	//Busca ese lexema en la tabla de símbolos activa; si no lo encuentra 
 	// y la tabla activa no es la global, sigue buscando
 	public boolean BuscaTSGlobal(String lexema) {
@@ -98,10 +97,10 @@ class AFD {
 		Object accion;
 		StringBuilder lexema = new StringBuilder();
 		String auxLexema;
-		int valor = 0;
+		double valor = 0;
 		Token token = null;
 		Tipo tipo = new Tipo();
-		// Salimos del bucle después de procesar el último token
+		// Salimos del bucle después de procesar un token
 		while (true) {
 			if (estado == 0 && !leido) 
 				c = leer();
@@ -172,8 +171,6 @@ class AFD {
 						}else {
 							posEnTablaSimbolo = As.getTablaActual();
 							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
-							//Error de identificador ya declarado
-							//new Error(315, posicionDeLinea).getError();
 						}
 						//Zona declarada = false
 					}else {
@@ -234,7 +231,7 @@ class AFD {
 						token = genToken(2, String.valueOf(valor),"entero");
 						valor = 0;
 					} else {
-						new Error(106, posicionDeLinea).getError();
+						new Error(107, posicionDeLinea, String.valueOf(valor)).getError();
 						valor = 0;
 						lexema.delete(0, lexema.length());
 						estado = 0;
@@ -255,7 +252,7 @@ class AFD {
 					if (auxLexema.length() <= 64) {
 						token = genToken(3, auxLexema,auxLexema);
 					} else {
-						new Error(106, posicionDeLinea).getError();
+						new Error(108, posicionDeLinea,auxLexema).getError();
 						estado = 0;
 					}
 					lexema.delete(0, lexema.length());
@@ -301,10 +298,12 @@ class AFD {
 			if(c==-1) {
 				if(!ultimaint) 
 					continue;
-				if(valor != 0) {
+				if(valor != 0 && valor <= 32767) {
 					token = genToken(2,String.valueOf(valor),"entero");
 					valor = 0;
 					return token;
+				}else if(valor!=0) {
+					new Error(107, posicionDeLinea, String.valueOf(valor)).getError();
 				}
 				auxLexema = lexema.toString();
 				if(!esSimbolo) {
@@ -345,8 +344,8 @@ class AFD {
 		switch (c) {
 		case -1:
 			return 'c';
-		case 34:
-			return '"';
+		case 39:
+			return '\'';
 		case 43:
 			return '+';
 		case 61:

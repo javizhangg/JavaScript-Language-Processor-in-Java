@@ -40,16 +40,16 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
-//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+//				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 
 		try {
-//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -82,17 +82,16 @@ public class AnalizadorSintactico {
 		if (gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
 			gestorTablas.getGestorTS().get(0).getSimbolo(id).setTipoDev(tipo);
 			//Las funciones son de tipo Función
-			gestorTablas.getGestorTS().get(0).getSimbolo(id).setTipo(new Tipo("funcion"));
+			gestorTablas.getGestorTS().get(0).getSimbolo(id).setTipo(new Tipo("función"));
 			simboloDeFuncion = gestorTablas.getFuncion();
-
+			simboloDeFuncion.setEtiqueta("Et"+id+"01");
 		}else {
-			System.err.println("Error: El símbolo con id '" + id + "' no existe en la tabla local.");
+			new Error(322,al.getLinea(),id);
 		}
 	}
 	
 	//Funcion para añadir tipo a un id y verifica si existe o no, si no existe se añade y despues de añadirlo se indica el desplazamiento correspondiente
 	public void AddTipoTS(String id, Tipo tipo) {
-		
 		boolean encontrado = false;
 		if (gestorTablas.getGestorTS().containsKey(1)) {
 			if (gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
@@ -105,10 +104,8 @@ public class AnalizadorSintactico {
 
 				//El tamaño está guardado en el tipo
 				gestorTablas.getGestorTS().get(1).getSimbolo(id).setDireccionMemoria(despL);
-
 				despL+=tipo.getTam();
 				encontrado = true;
-
 			} 
 		}
 		if (!encontrado && gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
@@ -134,58 +131,58 @@ public class AnalizadorSintactico {
 		
 	//Devuelve el tipo de una variable
 	public Tipo BuscaTipoTS(String id) throws IOException {
+		Tipo tipo = new Tipo();
 	    if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
 	    	if (gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo() == null) {
 	    		gestorTablas.getGestorTS().get(1).tablaSimbolo.remove(id);
 	    		gestorTablas.getGestorTS().get(0).InsertarTS(id);
-	            Tipo tipo = new Tipo();
-	            tipo.setTam(2);
+	            tipo.setTam(1);
 	            tipo.setTipo("int");
 	            AddTipoTS(id, tipo);
-	            return gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
+	            tipo = gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
 	        }else {
-	        	return gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo();	
+	        	tipo = gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo();	
 	        }
-	        
 	    } else if (gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
 	        if (gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo() == null) {
-	            Tipo tipo = new Tipo();
-	            tipo.setTam(2);
+	            tipo.setTam(1);
 	            tipo.setTipo("int");
 	            AddTipoTS(id, tipo);
-	            return gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
+	            tipo = gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
 	        }else {
-	        	 return gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
+	        	tipo = gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
 	        }
-	        
 	    } else {
-	        System.err.println("Error: Identificador '" + id + "' no encontrado.");
-	        return new Tipo("error");
+	    	new Error(321,al.getLinea(),id);
+	    	tipo.setTipo("error");
 	    }
+	    return tipo;
 	}
 	public Tipo ExistiaTipoTS(String id) {
+		Tipo tipo = new Tipo();
 		if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
-			return gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo();
+			tipo = gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo();
 		} else if (gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
-			return gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
+			tipo = gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
 		} else {
 			return null;
 		}
+		return tipo;
 	}
 
-	/* 
-	 * La función P2 se encarga de inicializar el análisis del programa. 
-	 * 1. Crea la tabla global de símbolos llamando a `añadirTablaGlobalTS`.
-	 * 2. Inicializa el desplazamiento global (`despG`) a 0, utilizado para asignar direcciones de memoria a las variables globales.
-	 * 3. Llama a la función `P`, que procesa las reglas del programa según la gramática definida.
-	 * 4. Finalmente, imprime la tabla de símbolos global con `getTablaTS(0)`.
-	 */
-	public void P2() throws IOException {
-		gestorTablas.añadirTablaGlobalTS();
-		despG=0;
-		P();
-		gestorTablas.getTablaTS(0);
-	}
+//	/* 
+//	 * La función P2 se encarga de inicializar el análisis del programa. 
+//	 * 1. Crea la tabla global de símbolos llamando a `añadirTablaGlobalTS`.
+//	 * 2. Inicializa el desplazamiento global (`despG`) a 0, utilizado para asignar direcciones de memoria a las variables globales.
+//	 * 3. Llama a la función `P`, que procesa las reglas del programa según la gramática definida.
+//	 * 4. Finalmente, imprime la tabla de símbolos global con `getTablaTS(0)`.
+//	 */
+//	public void P2() throws IOException {
+//		gestorTablas.añadirTablaGlobalTS();
+//		despG=0;
+//		P();
+//		gestorTablas.getTablaTS(0);
+//	}
 	/* 
 	 * La función P analiza las reglas principales del programa: 
 	 * 1. Si el token actual pertenece a la regla `B`, procesa `B` y llama recursivamente a `P`.
@@ -194,6 +191,10 @@ public class AnalizadorSintactico {
 	 * 4. Si no coincide con ninguna regla, lanza un error.
 	 */
 	public void P() throws IOException {
+		if(!gestorTablas.getGestorTS().containsKey(0)) {
+		gestorTablas.añadirTablaGlobalTS();
+		despG=0;
+		}
 		if(first.first.get("B").contains(sig_token.getCodigo())) {
 			out.print(1 + " ");
 			B();
@@ -207,11 +208,11 @@ public class AnalizadorSintactico {
 		else if(sig_token.getCodigo() == 29)  {
 			out.print(3 + " ");
 			//LAMBDA
+			gestorTablas.getTablaTS(0);
 		}
 		else {
 			new Error(202,al.getLinea()).getError();
 		}
-
 
 	}
 	
@@ -256,7 +257,7 @@ public class AnalizadorSintactico {
 			Tipo E2_tipo = E2(R_tipo);
 			
 			if (tipoHeredado.getTipo().equals(R_tipo.getTipo())) {
-				tipo.setTam(2);
+				tipo.setTam(1);
 				tipo.setTipo("boolean");
 				return tipo;
 			} else {
@@ -317,7 +318,7 @@ public class AnalizadorSintactico {
 			Tipo U_tipo = U();
 			Tipo R2_tipo = R2(U_tipo);
 			if (tipoHeredado.getTipo().equals(U_tipo.getTipo())) {
-				tipo.setTam(2);
+				tipo.setTam(1);
 				tipo.setTipo("boolean");
 				return tipo;
 			} else {
@@ -332,7 +333,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(204,al.getLinea()).getError();
+			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -379,7 +380,7 @@ public class AnalizadorSintactico {
 			Tipo V_tipo = V();
 			Tipo U2_tipo = U2(V_tipo);
 			if (tipoHeredado.getTipo().equals(V_tipo.getTipo())) {
-				tipo.setTam(2);
+				tipo.setTam(1);
 			    tipo.setTipo("int");
 				return tipo;
 			} else {
@@ -394,7 +395,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(205,al.getLinea()).getError();
+			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -439,14 +440,14 @@ public class AnalizadorSintactico {
 		else if(sig_token.getCodigo()==2) {
 			out.print( 15+" ");
 			empareja(sig_token.getCodigo(),zona_declarada);
-			tipo.setTam(2);
+			tipo.setTam(1);
 			tipo.setTipo("int");
 			return tipo;
 		}
 		else if(sig_token.getCodigo()==3) {
 			out.print( 16+" ");
 			empareja(sig_token.getCodigo(),zona_declarada);
-			tipo.setTam(128);
+			tipo.setTam(64);
 			tipo.setTipo("string");
 			return tipo;
 		}
@@ -459,7 +460,7 @@ public class AnalizadorSintactico {
 			return V2_tipo;
 		}
 		else { 
-			new Error(206,al.getLinea()).getError();
+			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -488,7 +489,7 @@ public class AnalizadorSintactico {
 			if(L_tipo.getTipo().equals("error")) {
 				return tipo;
 			}
-			else if(BuscaTipoTS(id).getTipo().equals("funcion")){
+			else if(BuscaTipoTS(id).getTipo().equals("función")){
 				tipo = BuscaFuncionTipoTS(id);
 			}
 			else {
@@ -505,7 +506,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
-			new Error(207,al.getLinea()).getError();
+			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -551,15 +552,12 @@ public class AnalizadorSintactico {
 			out.print(21 + " ");
 			empareja(14,zona_declarada);
 			tipo = E();
-			empareja(19,zona_declarada);
-			if(tipo.getTipo().equals("error")  ) {
+			if(tipo.getTipo().equals("boolean")  ) {
 				new Error(307,al.getLinea()).getError();
 				tipo.setTipo("error");
-				return tipo;
 			}
-			else {
+			empareja(19,zona_declarada);
 				return tipo;
-			}
 		}
 		else if(sig_token.getCodigo() == 15) {
 			out.print(22 + " ");
@@ -583,17 +581,16 @@ public class AnalizadorSintactico {
 
 			Tipo X_tipo = X();
 
-			empareja(19,zona_declarada);
 			returnDetectado = true;
-			
 			if(X_tipo.getTipo().equals(simboloDeFuncion.GetTipoDev().getTipo())) {
-				return X_tipo;
 			}
 			else {
 				new Error(316,al.getLinea()).getError();
 				tipo.setTipo("error");
-				return tipo;
+				X_tipo =  tipo;
 			}
+			empareja(19,zona_declarada);
+			return X_tipo;
 		}
 		else {
 			new Error(208,al.getLinea()).getError();
@@ -728,11 +725,11 @@ public class AnalizadorSintactico {
 			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error")) {
 			}
 			else if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
-				new Error(320, al.getLinea()).getError();
+				new Error(320, al.getLinea(),Funcion.imprimirContenido()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
 			if(Funcion.getNumPar()!=num_parametros && Funcion.getTipo()!=null) {
-				new Error(319, al.getLinea()).getError();
+				new Error(319, al.getLinea(),Funcion.getLexema()).getError();
 			}
 			num_parametros=0;
 	        if (E_tipo.getTipo().equals("error")) {
@@ -740,7 +737,6 @@ public class AnalizadorSintactico {
 	            tipo.setTipo("error");
 	            Q_tipo =tipo;
 	        }
-	        
 	        return Q_tipo;
 		}
 		else if(first.follow.get("L").contains(sig_token.getCodigo())) //FOLLOW L
@@ -750,7 +746,7 @@ public class AnalizadorSintactico {
 			return tipo;
 		}	
 		else {
-			new Error(211,al.getLinea()).getError();
+			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -781,7 +777,7 @@ public class AnalizadorSintactico {
 			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error") || Funcion.getNumPar()<num_parametros) {
 			}
 			else if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
-				new Error(320, al.getLinea()).getError();
+				new Error(320, al.getLinea(), Funcion.getLexema()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
 			
@@ -828,19 +824,19 @@ public class AnalizadorSintactico {
 			out.print( 34+" ");
 			empareja(10, zona_declarada);	
 			tipo.setTipo("int");
-			tipo.setTam(2);
+			tipo.setTam(1);
 		}
 		else if (sig_token.getCodigo() == 11) { //token boolean 
 			out.print( 35+" ");
 			empareja(11,zona_declarada);
 			tipo.setTipo("boolean");
-			tipo.setTam(2);
+			tipo.setTam(1);
 		}
 		else if(sig_token.getCodigo() == 12) { //token string 
 			out.print( 36+" ");
 			empareja(12,zona_declarada);
 			tipo.setTipo("string");
-			tipo.setTam(128);
+			tipo.setTam(64);
 		}
 		else {
 			new Error(213,al.getLinea()).getError();
@@ -869,7 +865,6 @@ public class AnalizadorSintactico {
 		Tipo tipo = new Tipo(); 
 		if(first.first.get("T").contains(sig_token.getCodigo())) {
 			out.print( 37+" ");
-			//			empareja(sig_token.getCodigo());
 			tipo = T();
 
 			if(zona_declarada) {
@@ -1039,12 +1034,12 @@ public class AnalizadorSintactico {
 		tipo = H();
 		lexemafuncion=sig_token.getAtributo();
 		AddFuncionTS(lexemafuncion,tipo);
+		empareja(1,zona_declarada);
 		//Una funcion que no es void necesita hacer un return
 		if(!simboloDeFuncion.GetTipoDev().getTipo().equals("void")) {
 			zona_funcion = true;
 		}
-
-		empareja(1,zona_declarada);
+		
 		gestorTablas.añadirTablaLocalTS();
 		despL = 0;
 		empareja(16,zona_declarada);
@@ -1133,7 +1128,7 @@ public class AnalizadorSintactico {
 
 	public static void main(String[] args) throws IOException {
 		AnalizadorSintactico as = new AnalizadorSintactico();
-		as.P2();
+		as.P();
 
 		as.out.flush();
 		as.out.close(); 

@@ -16,7 +16,7 @@ public class Matriz {
 	
 	Matriz(String directorio) throws IOException{
 		this.directorio=directorio;
-		this.chars = new Character[] { 'a', 'b', '"', '+', '=', '&', '|', '(', ')', ',', ';', '{', '}', '/', '*', '_', ' ',
+		this.chars = new Character[] { 'a', 'b', '\'', '+', '=', '&', '|', '(', ')', ',', ';', '{', '}', '/', '*', '_', ' ',
 				'\r' ,'c','z'};
 		this.mt = new ArrayList<>();
 		this.matriz();

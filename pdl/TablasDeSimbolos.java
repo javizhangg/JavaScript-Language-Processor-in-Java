@@ -85,52 +85,41 @@ public class TablasDeSimbolos {
 
 	public void imprimirTabla(TS tablaSimbolo) throws IOException {
 		boolean primeraInstancia = false;
+		int cont = 1;
 		if(esGlobal) {
-			fw.write("CONTENIDOS DE LA TABLA GLOBAL#" + 1 + " :" + "\n");
+			fw.write("CONTENIDOS DE LA TABLA GLOBAL #" + 1 + " :" + "\n");
 		}
 		else {
-			fw.write("CONTENIDOS DE LA TABLA LOCAL#" + numeroTabla + " :" + "\n" );
+			fw.write("CONTENIDOS DE LA TABLA LOCAL #" + numeroTabla + " :" + "\n" );
 		}
 
 		for (String nombre : tablaSimbolo.tablaSimbolo.keySet()) {
 			Simbolo simbolo = tablaSimbolo.getSimbolo(nombre);
 
-			fw.write("* LEXEMA : '" + nombre + "'" + "\n");
+			fw.write("* LEXEMA: '" + nombre + "'" + "\n");
 			StringBuilder atributos = new StringBuilder("  Atributos :" + "\n");
 			if (simbolo.getTipo() != null && simbolo.getDireccionMemoria() >= 0 && simbolo.GetTipoDev()!=null) {
-				atributos.append("      Tipo = ").append(simbolo.getTipo().getTipo()).append("\n");
+				atributos.append("      + Tipo: " + "'"+ simbolo.getTipo().getTipo() + "'" + "\n");
 			}
 			else if (simbolo.getTipo() != null && simbolo.getDireccionMemoria() >= 0) {
-				atributos.append("      Tipo = ").append(simbolo.getTipo().getTipo()).append("\n");
-				atributos.append("      DireccionMemoria = ").append(simbolo.getDireccionMemoria()).append("\n");
+				atributos.append("      + Tipo: " + "'" + simbolo.getTipo().getTipo()+ "'" + "\n");
+				atributos.append("      + Despl: ").append(simbolo.getDireccionMemoria()).append("\n");
 			}
 
 			if (simbolo.getNumPar() >= 0 && simbolo.GetTipoDev()!=null ) {
-				atributos.append("      NumParametros = ").append(simbolo.getNumPar()).append("\n");
-				atributos.append("      TipoDev = ").append(simbolo.GetTipoDev().getTipo()).append("\n");
-				atributos.append("      TipoParametro = ");
+				atributos.append("      + numParam: ").append(simbolo.getNumPar()).append("\n");
 				for(Tipo tipo : simbolo.tipoParametro.values() ) {
-					if(!primeraInstancia) {
-						atributos.append(tipo.getTipo());
-						primeraInstancia = true;
-					}
-					else
-					atributos.append(" , ").append(tipo.getTipo());
+					atributos.append("      		+ TipoParam" +cont+ ": " + "'" + tipo.getTipo() + "'" +  "\n");
+					cont++;
 				}
-				primeraInstancia = false;
-				atributos.append("\n");
-
+				atributos.append("      + TipoRetorno: " + "'" + simbolo.GetTipoDev().getTipo() + "'" +"\n");
+				atributos.append("      + EtiqFuncion: " + "'" + simbolo.getEtiqueta() + "'" +"\n");
 			}
 
 			// Imprimir línea de atributos
-			fw.write(atributos.toString() + "\n");
-
+			fw.write(atributos.toString());
 			fw.write("  --------- ---------- " + "\n");
-			
 		}
-		
-		
-
 	}
 
 }
