@@ -23,7 +23,7 @@ public class TablasDeSimbolos {
 	}
 
 	//Función para añadir tablas locales 
-	public void añadirTablaLocalTS() {
+	public void CrearTSLocal() {
 		gestorTS.put(1, new TS());
 		esGlobal = false;
 	}
@@ -63,7 +63,7 @@ public class TablasDeSimbolos {
 	}
 
 	//Función para la tabla global
-	public void añadirTablaGlobalTS() {
+	public void CrearTSGlobal() {
 		gestorTS.put(0, new TS());
 		esGlobal = true;
 
@@ -71,7 +71,7 @@ public class TablasDeSimbolos {
 
 	//Función que devuelve la tabla TS del ambito especificado: 0 -> Global, 1 -> Local
 	//Y lo elimina del gestor de TS
-	public void getTablaTS(int ambito) throws IOException {
+	public void LiberaTablaTS(int ambito) throws IOException {
 		//No hace hacer if ambito es 0 o cosas así, esto arregla ademas el error de que solo se imprimiera la tabla global.
 		imprimirTabla(gestorTS.get(ambito));
 		gestorTS.remove(ambito);

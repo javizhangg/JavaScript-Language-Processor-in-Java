@@ -207,6 +207,11 @@ class Error {
 		    System.out.println(error);
 		    break;
 		}
+		case 323 -> {
+			error = st.append("- Error Semántico: La funcion: " + mensaje  + ", ha sido declarado ya anteriormente. En la línea: " + linea).toString();
+		    System.out.println(error);
+		    break;
+		}
 		}
 	}
 }

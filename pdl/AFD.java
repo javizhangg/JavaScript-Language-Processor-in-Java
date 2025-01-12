@@ -40,8 +40,8 @@ class AFD {
 		this.posicionDeLinea = 1;
 
 		// Inicializar la matriz de transiciones
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-//					this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+//		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
+					this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 
@@ -106,6 +106,7 @@ class AFD {
 				c = leer();
 
 			car = (char) c;
+			//System.out.print(car);
 			accion = accion(estado, identificar(c));
 			if (accion == null) {
 				new Error(106, posicionDeLinea,String.valueOf(c)).getError();
@@ -345,6 +346,7 @@ class AFD {
 		case -1:
 			return 'c';
 		case 39:
+		case 34:
 			return '\'';
 		case 43:
 			return '+';

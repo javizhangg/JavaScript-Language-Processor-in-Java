@@ -33,6 +33,7 @@ public class AnalizadorSintactico {
 	private boolean returnDetectado;
 	
 	private int num_parametros;
+	private int cont_parametros;
 
 
 	//Tablas de Simbolos en nuestro analizador Sintactico
@@ -40,16 +41,16 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
-		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-//				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 
 		try {
-			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-//						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -63,6 +64,7 @@ public class AnalizadorSintactico {
 		this.gestorTablas = new TablasDeSimbolos(fwTS);
 		this.As = new AnalizadorSemantico(gestorTablas);
 		num_parametros = 0;
+		cont_parametros=1;
 		zona_declarada=false;
 		zona_parametro = false;
 		zona_funcion = false;
@@ -132,7 +134,7 @@ public class AnalizadorSintactico {
 	//Devuelve el tipo de una variable
 	public Tipo BuscaTipoTS(String id) throws IOException {
 		Tipo tipo = new Tipo();
-	    if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id)) {
+	    if (gestorTablas.getGestorTS().containsKey(1) && gestorTablas.getGestorTS().get(1).estaSimbolo(id) && !gestorTablas.getGestorTS().get(0).estaSimbolo(id)) {
 	    	if (gestorTablas.getGestorTS().get(1).getSimbolo(id).getTipo() == null) {
 	    		gestorTablas.getGestorTS().get(1).tablaSimbolo.remove(id);
 	    		gestorTablas.getGestorTS().get(0).InsertarTS(id);
@@ -172,16 +174,16 @@ public class AnalizadorSintactico {
 
 //	/* 
 //	 * La función P2 se encarga de inicializar el análisis del programa. 
-//	 * 1. Crea la tabla global de símbolos llamando a `añadirTablaGlobalTS`.
+//	 * 1. Crea la tabla global de símbolos llamando a `CrearTSGlobal`.
 //	 * 2. Inicializa el desplazamiento global (`despG`) a 0, utilizado para asignar direcciones de memoria a las variables globales.
 //	 * 3. Llama a la función `P`, que procesa las reglas del programa según la gramática definida.
-//	 * 4. Finalmente, imprime la tabla de símbolos global con `getTablaTS(0)`.
+//	 * 4. Finalmente, imprime la tabla de símbolos global con `LiberaTablaTS(0)`.
 //	 */
 //	public void P2() throws IOException {
-//		gestorTablas.añadirTablaGlobalTS();
+//		gestorTablas.CrearTSGlobal();
 //		despG=0;
 //		P();
-//		gestorTablas.getTablaTS(0);
+//		gestorTablas.LiberaTablaTS(0);
 //	}
 	/* 
 	 * La función P analiza las reglas principales del programa: 
@@ -192,7 +194,7 @@ public class AnalizadorSintactico {
 	 */
 	public void P() throws IOException {
 		if(!gestorTablas.getGestorTS().containsKey(0)) {
-		gestorTablas.añadirTablaGlobalTS();
+		gestorTablas.CrearTSGlobal();
 		despG=0;
 		}
 		if(first.first.get("B").contains(sig_token.getCodigo())) {
@@ -208,7 +210,7 @@ public class AnalizadorSintactico {
 		else if(sig_token.getCodigo() == 29)  {
 			out.print(3 + " ");
 			//LAMBDA
-			gestorTablas.getTablaTS(0);
+			gestorTablas.LiberaTablaTS(0);
 		}
 		else {
 			new Error(202,al.getLinea()).getError();
@@ -255,7 +257,6 @@ public class AnalizadorSintactico {
 			empareja(sig_token.getCodigo(),zona_declarada);
 			Tipo R_tipo = R();
 			Tipo E2_tipo = E2(R_tipo);
-			
 			if (tipoHeredado.getTipo().equals(R_tipo.getTipo())) {
 				tipo.setTam(1);
 				tipo.setTipo("boolean");
@@ -724,14 +725,14 @@ public class AnalizadorSintactico {
 			Tipo E_tipo = E(); // Evalúa la primera expresión
 			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error")) {
 			}
-			else if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
+			else if(!Funcion.getTipoParametro(cont_parametros).getTipo().equals(E_tipo.getTipo())) {
 				new Error(320, al.getLinea(),Funcion.imprimirContenido()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
-			if(Funcion.getNumPar()!=num_parametros && Funcion.getTipo()!=null) {
+			if(Funcion.getNumPar()!=cont_parametros && Funcion.getTipo()!=null) {
 				new Error(319, al.getLinea(),Funcion.getLexema()).getError();
 			}
-			num_parametros=0;
+			cont_parametros=1;
 	        if (E_tipo.getTipo().equals("error")) {
 	            new Error(311, al.getLinea()).getError(); // Error en la expresión
 	            tipo.setTipo("error");
@@ -773,10 +774,10 @@ public class AnalizadorSintactico {
 			out.print( 32+" ");
 			empareja(sig_token.getCodigo(),zona_declarada);
 			Tipo E_tipo = E();
-			num_parametros++;
-			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error") || Funcion.getNumPar()<num_parametros) {
+			cont_parametros++;
+			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error") || Funcion.getNumPar()<cont_parametros) {
 			}
-			else if(!Funcion.getTipoParametro(num_parametros).getTipo().equals(E_tipo.getTipo())) {
+			else if(!Funcion.getTipoParametro(cont_parametros).getTipo().equals(E_tipo.getTipo())) {
 				new Error(320, al.getLinea(), Funcion.getLexema()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
@@ -1033,14 +1034,18 @@ public class AnalizadorSintactico {
 		empareja(27,zona_declarada);
 		tipo = H();
 		lexemafuncion=sig_token.getAtributo();
+		if(gestorTablas.gestorTS.get(0).getSimbolo(lexemafuncion).getTipo()!=null) {
+			new Error(323, al.getLinea(), BuscaFuncionTS(lexemafuncion).getLexema()).getError();
+		}
 		AddFuncionTS(lexemafuncion,tipo);
 		empareja(1,zona_declarada);
+		
 		//Una funcion que no es void necesita hacer un return
 		if(!simboloDeFuncion.GetTipoDev().getTipo().equals("void")) {
 			zona_funcion = true;
 		}
 		
-		gestorTablas.añadirTablaLocalTS();
+		gestorTablas.CrearTSLocal();
 		despL = 0;
 		empareja(16,zona_declarada);
 
@@ -1057,7 +1062,7 @@ public class AnalizadorSintactico {
 		C();
 		empareja(21,zona_declarada);
 		
-		gestorTablas.getTablaTS(1);
+		gestorTablas.LiberaTablaTS(1);
 	}
 	
 	/* 

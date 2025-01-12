@@ -1,21 +1,21 @@
 CONTENIDOS DE LA TABLA GLOBAL #1 :
-* LEXEMA: 'mensaje'
+* LEXEMA: 'a'
   Atributos :
-      + Tipo: 'string'
+      + Tipo: 'int'
       + Despl: 0
   --------- ---------- 
-* LEXEMA: 'logico'
+* LEXEMA: 'b'
+  Atributos :
+      + Tipo: 'int'
+      + Despl: 1
+  --------- ---------- 
+* LEXEMA: 'bbb'
   Atributos :
       + Tipo: 'boolean'
-      + Despl: 64
+      + Despl: 2
   --------- ---------- 
-* LEXEMA: 'global_1'
+* LEXEMA: 'c'
   Atributos :
-      + Tipo: 'int'
-      + Despl: 66
-  --------- ---------- 
-* LEXEMA: 'global_2'
-  Atributos :
-      + Tipo: 'int'
-      + Despl: 65
+      + Tipo: 'boolean'
+      + Despl: 3
   --------- ---------- 
