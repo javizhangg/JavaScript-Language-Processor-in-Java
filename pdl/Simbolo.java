@@ -95,7 +95,7 @@ public class Simbolo {
     public String imprimirContenido() {
         int key = 1; 
         StringBuilder st = new StringBuilder();
-        st.append("La funcion: " + getLexema() + ", espera los siguientes párametros: ");
+        st.append("La funcion: " + getLexema() + ", espera los siguientes parámetros: ");
         while (tipoParametro.containsKey(key)) { 
             Tipo valor = tipoParametro.get(key); // 
             st.append("Parámetro: " + key + ", Tipo: " + valor.getTipo() + ". "); 

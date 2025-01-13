@@ -111,6 +111,7 @@ class AFD {
 	        // Acción nula (carácter no reconocido)
 	        if (accion == null) {
 	            if (!errorReportado) {
+	            	token = genToken(100, "error","");
 	                new Error(106, posicionDeLinea, String.valueOf(c)).getError();
 	                errorReportado = true; // Marcar como reportado
 	            }
@@ -123,6 +124,7 @@ class AFD {
 	        // Acción de error (Integer)
 	        if (accion instanceof Integer) {
 	            if (!errorReportado) {
+	            	token = genToken(100, "error","");
 	                new Error((int) accion, posicionDeLinea).getError();
 	                errorReportado = true; // Marcar como reportado
 	            }
@@ -137,6 +139,7 @@ class AFD {
 				esSimbolo=false;
 			if (estado == -1) {
 				 if (!errorReportado) {
+					 token = genToken(100, "error","");
 		                new Error(106, posicionDeLinea).getError();
 		                errorReportado = true; // Marcar como reportado
 		            }
@@ -234,6 +237,7 @@ class AFD {
 						valor = 0;
 					} else {
 						new Error(107, posicionDeLinea, String.valueOf(valor)).getError();
+						token = genToken(100, "error","");
 						valor = 0;
 						lexema.delete(0, lexema.length());
 						estado = 0;
@@ -255,6 +259,7 @@ class AFD {
 						token = genToken(3, auxLexema,auxLexema);
 					} else {
 						new Error(108, posicionDeLinea,auxLexema).getError();
+						token = genToken(100, "error","");
 						estado = 0;
 					}
 					lexema.delete(0, lexema.length());
@@ -305,10 +310,12 @@ class AFD {
 					valor = 0;
 					return token;
 				}else if(valor!=0) {
+					token = genToken(100, "error","");
 					new Error(107, posicionDeLinea, String.valueOf(valor)).getError();
 				}
 				auxLexema = lexema.toString();
 				if(!esSimbolo) {
+					token = genToken(100, "error","");
 					new Error(106, posicionDeLinea).getError();
 				}else if(auxLexema.length()>0 ) {
 					if (esPalabraReservada(auxLexema)) {
@@ -321,6 +328,7 @@ class AFD {
 							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}else {
 							//Error de identificador ya declarado
+							token = genToken(100, "error","");
 							new Error(305, posicionDeLinea).getError();
 						}
 						//Zona declarada = false
@@ -468,6 +476,9 @@ class AFD {
 			break;
 		case 21:
 			fwTokens.write(token + " //tipo: " + comentario + "\n");
+			break;
+		case 100:
+			fwTokens.write(token + " //Es un token de error que nos sirve para seguir compilando " + comentario + "\n");
 			break;
 		default:
 			fwTokens.write(token + " //Palabra reservada: " + comentario + "\n");

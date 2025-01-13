@@ -1,32 +1,46 @@
 <9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,activo> //es el identificador: activo
-<19,> //tipo: ;
-<1,mensaje> //es el identificador: mensaje
-<7,> //tipo: =
-<27,> //Palabra reservada: function
 <10,> //Palabra reservada: int
-<1,calcular> //es el identificador: calcular
+<1,contador> //es el identificador: contador
+<19,> //tipo: ;
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,true> //es el identificador: true
+<19,> //tipo: ;
+<27,> //Palabra reservada: function
+<11,> //Palabra reservada: boolean
+<1,contHasta100> //es el identificador: contHasta100
 <16,> //tipo: (
 <10,> //Palabra reservada: int
-<1,num> //es el identificador: num
-<18,> //tipo: ,
-<12,> //Palabra reservada: string
-<1,texto> //es el identificador: texto
+<1,cont> //es el identificador: cont
 <17,> //tipo: )
 <20,> //tipo: {
-<9,> //Palabra reservada: var
-<10,> //Palabra reservada: int
-<1,resultado> //es el identificador: resultado
-<19,> //tipo: ;
-<1,resultado> //es el identificador: resultado
-<7,> //tipo: =
-<1,num> //es el identificador: num
-<4,> //tipo: +
-<1,texto> //es el identificador: texto
+<22,> //Palabra reservada: if
+<16,> //tipo: (
+<1,cont> //es el identificador: cont
+<5,> //tipo: ==
+<2,100.0> //es el numero: entero
+<17,> //tipo: )
+<28,> //Palabra reservada: return
+<1,true> //es el identificador: true
 <19,> //tipo: ;
 <28,> //Palabra reservada: return
-<1,resultado> //es el identificador: resultado
+<1,contHasta100> //es el identificador: contHasta100
+<16,> //tipo: (
+<1,cont> //es el identificador: cont
+<4,> //tipo: +
+<2,1.0> //es el numero: entero
+<17,> //tipo: )
 <19,> //tipo: ;
 <21,> //tipo: }
+<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,encontrado> //es el identificador: encontrado
+<19,> //tipo: ;
+<1,encontrado> //es el identificador: encontrado
+<7,> //tipo: =
+<1,contHasta100> //es el identificador: contHasta100
+<16,> //tipo: (
+<1,contador> //es el identificador: contador
+<17,> //tipo: )
+<19,> //tipo: ;
 <29,> //Palabra reservada: eof

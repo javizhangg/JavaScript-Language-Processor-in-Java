@@ -1,36 +1,30 @@
 CONTENIDOS DE LA TABLA LOCAL #2 :
-* LEXEMA: 'num'
+* LEXEMA: 'cont'
   Atributos :
       + Tipo: 'int'
       + Despl: 0
-  --------- ---------- 
-* LEXEMA: 'texto'
-  Atributos :
-      + Tipo: 'string'
-      + Despl: 1
-  --------- ---------- 
-* LEXEMA: 'resultado'
-  Atributos :
-      + Tipo: 'int'
-      + Despl: 65
   --------- ---------- 
 CONTENIDOS DE LA TABLA GLOBAL #1 :
-* LEXEMA: 'activo'
-  Atributos :
-      + Tipo: 'boolean'
-      + Despl: 0
-  --------- ---------- 
-* LEXEMA: 'mensaje'
+* LEXEMA: 'contador'
   Atributos :
       + Tipo: 'int'
+      + Despl: 0
+  --------- ---------- 
+* LEXEMA: 'true'
+  Atributos :
+      + Tipo: 'boolean'
       + Despl: 1
   --------- ---------- 
-* LEXEMA: 'calcular'
+* LEXEMA: 'contHasta100'
   Atributos :
       + Tipo: 'función'
-      + numParam: 2
+      + numParam: 1
       		+ TipoParam1: 'int'
-      		+ TipoParam2: 'string'
-      + TipoRetorno: 'int'
-      + EtiqFuncion: 'Etcalcular01'
+      + TipoRetorno: 'boolean'
+      + EtiqFuncion: 'EtcontHasta10001'
+  --------- ---------- 
+* LEXEMA: 'encontrado'
+  Atributos :
+      + Tipo: 'boolean'
+      + Despl: 2
   --------- ---------- 

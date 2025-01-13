@@ -1,11 +1,14 @@
-var boolean activo;
-
-mensaje = 'Hola mundo;
-
-function int calcular(int num, string texto) {
-    var int resultado;
-    resultado = num + texto;
-    
-    return resultado;
+var int contador;
+var boolean true;
+function boolean contHasta100(int cont){
+	if(cont == 100)
+	return true;
+	return contHasta100(cont + 1);
 }
+
+var boolean encontrado;
+encontrado = contHasta100(contador);
+
+
+
 

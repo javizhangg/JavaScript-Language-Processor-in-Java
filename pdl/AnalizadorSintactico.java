@@ -41,10 +41,14 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
+//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
 		archivoSalidaParse = new File(System.getProperty("user.dir") + "/src/pdl/FicheroParse");
 		archivoSalidaTS = new File(System.getProperty("user.dir") + "/src/pdl/FicheroDeTS");;
 
 		try {
+//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			fwParse = new FileWriter(System.getProperty("user.dir") + "/src/pdl/FicheroParse");
 			fwTS = new FileWriter(System.getProperty("user.dir") + "/src/pdl/FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
@@ -256,6 +260,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
@@ -317,6 +322,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
@@ -379,6 +385,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
@@ -444,6 +451,7 @@ public class AnalizadorSintactico {
 			return V2_tipo;
 		}
 		else { 
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
@@ -490,6 +498,7 @@ public class AnalizadorSintactico {
 			//LAMBDA
 		}
 		else {
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
@@ -730,6 +739,7 @@ public class AnalizadorSintactico {
 			return tipo;
 		}	
 		else {
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(203,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
@@ -822,7 +832,13 @@ public class AnalizadorSintactico {
 			tipo.setTipo("string");
 			tipo.setTam(64);
 		}
+		else if(sig_token.getCodigo() == 13) { //token void 
+			empareja(13,zona_declarada);
+			new Error(214,al.getLinea()).getError();
+			tipo.setTipo("error");
+		}
 		else {
+			empareja(sig_token.getCodigo(),zona_declarada);
 			new Error(207,al.getLinea()).getError();
 			tipo.setTipo("error");
 		}
@@ -949,6 +965,7 @@ public class AnalizadorSintactico {
 			empareja(19,zona_declarada);
 		}
 		else {
+			
 			tipo.setTipo("error");
 			new Error(209,al.getLinea()).getError();
 		}
