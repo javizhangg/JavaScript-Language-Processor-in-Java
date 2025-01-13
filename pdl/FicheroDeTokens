@@ -1,16 +1,32 @@
 <9,> //Palabra reservada: var
-<9,> //Palabra reservada: var
+<11,> //Palabra reservada: boolean
+<1,activo> //es el identificador: activo
 <19,> //tipo: ;
+<1,mensaje> //es el identificador: mensaje
+<7,> //tipo: =
 <27,> //Palabra reservada: function
-<1,FuncionAux> //es el identificador: FuncionAux
+<10,> //Palabra reservada: int
+<1,calcular> //es el identificador: calcular
 <16,> //tipo: (
+<10,> //Palabra reservada: int
+<1,num> //es el identificador: num
+<18,> //tipo: ,
+<12,> //Palabra reservada: string
+<1,texto> //es el identificador: texto
 <17,> //tipo: )
 <20,> //tipo: {
-<21,> //tipo: }
-<25,> //Palabra reservada: do
-<20,> //tipo: {
-<21,> //tipo: }
-<26,> //Palabra reservada: while
-<16,> //tipo: (
 <9,> //Palabra reservada: var
-<17,> //tipo: )
+<10,> //Palabra reservada: int
+<1,resultado> //es el identificador: resultado
+<19,> //tipo: ;
+<1,resultado> //es el identificador: resultado
+<7,> //tipo: =
+<1,num> //es el identificador: num
+<4,> //tipo: +
+<1,texto> //es el identificador: texto
+<19,> //tipo: ;
+<28,> //Palabra reservada: return
+<1,resultado> //es el identificador: resultado
+<19,> //tipo: ;
+<21,> //tipo: }
+<29,> //Palabra reservada: eof

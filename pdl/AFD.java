@@ -39,9 +39,7 @@ class AFD {
 		this.estado = 0;
 		this.posicionDeLinea = 1;
 
-		// Inicializar la matriz de transiciones
-		this.mt = new Matriz("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\Matriz.txt");
-//					this.mt = new Matriz("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\Matriz.txt");
+		this.mt = new Matriz(System.getProperty("user.dir")  + "/src/pdl/Matriz.txt");
 		this.fwTokens = fwTokens;
 		this.fwTS = fwTS;
 

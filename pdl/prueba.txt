@@ -1,8 +1,11 @@
-var var;
+var boolean activo;
 
-function FuncionAux(){
+mensaje = 'Hola mundo;
+
+function int calcular(int num, string texto) {
+    var int resultado;
+    resultado = num + texto;
+    
+    return resultado;
 }
 
-do{
-
-} while(var);
