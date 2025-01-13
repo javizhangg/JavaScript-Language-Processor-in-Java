@@ -86,128 +86,128 @@ class Error {
 			System.out.println(error);
 			break;
 		}
-		case 208 -> {
+		case 204 -> {
 			error = st.append("- Error Sintáctico: Falta una sentencia simple o falta el return. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 209 -> {
-			error = st.append("- Error Sintáctico: Se esperaba los siguientes simbolos: =, |=, (. En la linea: ").append(linea).toString();
-			System.out.println(error);
-			break;
-		}
-		case 210 -> {
+//		case 205 -> {
+//			error = st.append("- Error Sintáctico: Se esperaba los siguientes simbolos: =, |=, (. En la linea: ").append(linea).toString();
+//			System.out.println(error);
+//			break;
+//		}
+		case 205 -> {
 			error = st.append("- Error Sintáctico: Error en la expresion del return. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 212 -> {
+		case 206 -> {
 			error = st.append("- Error Sintáctico: Falta cerrar el parentesis. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 213 -> {
+		case 207 -> {
 			error = st.append("- Error Sintáctico: Se esperaba el tipo de la variable o el tipo de retorno de funcion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 214 -> {
+		case 208 -> {
 			error = st.append("- Error Sintáctico: Se esperaba la especificación de los parámetros si los hubiera, en otro caso, void. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 215 -> {
+		case 209 -> {
 			error = st.append("- Error Sintáctico: Se esperaba nombre de variable o las palabras 'var', 'output', 'input', 'if', 'do' o 'return'. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 216 -> {
+		case 210 -> {
 			error = st.append("- Error Sintáctico: Falta una sentencia simple o falta el return. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 217 -> {
+		case 211 -> {
 			error = st.append("- Error Sintáctico: Se esperaba el tipo de retorno de la funcion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 218 -> {
+		case 212 -> {
 			error = st.append("- Error Sintáctico: Error al definir los parametros de la funcion. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
-		case 219 -> {
+		case 213 -> {
 			error = st.append("- Error Sintáctico: No se permiten definir funciones anidadas. En la linea: ").append(linea).toString();
 			System.out.println(error);
 			break;
 		}
 		//ERRORES SEMÁNTICOS
-		case 307 -> {
+		case 300 -> {
 		    error = st.append("- Error Semántico: No se puede utilizar output con una variable booleana. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 309 -> {
+		case 301 -> {
 		    error = st.append("- Error Semántico: Se esperaba que la expresion despues del '=' fuera del mismo tipo que la variable, pero no lo es. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 310 -> {
+		case 302 -> {
 		    error = st.append("- Error Semántico: Se esperaba que la expresion despues del '|=' fuera del mismo tipo que la variable, pero no lo es. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 313 -> {
+		case 303 -> {
 		    error = st.append("- Error Semántico: La expresion del if se esperaba que fuera de tipo 'boolean', pero no lo es. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 314 -> {
+		case 304 -> {
 		    error = st.append("- Error Semántico: Se esperaba que la expresión adentro del while fuera de tipo 'boolean', pero no lo es. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 315 -> {
+		case 305 -> {
 		    error = st.append("- Error Semántico: El identificador ya ha sido declarado previamente. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 316 -> {
+		case 306 -> {
 		    error = st.append("- Error Semántico: El tipo de retorno no coincide con el tipo declarado en la definición de la función. En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 317 -> {
+		case 307 -> {
 		    error = st.append("- Error Semántico: Falta una sentencia 'return' en la función: ").append(mensaje).append(". En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 318 -> {
+		case 308 -> {
 			error = st.append("- Error Semántico: Se está intentando llamar a una función no declarada: ").append(mensaje).append(". En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 319 -> {
+		case 309 -> {
 			error = st.append("- Error Semántico: El numero de parametros al llamar la funcion no coincide con el de la funcion: ").append(mensaje).append(". En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 320 -> {
+		case 310 -> {
 			error = st.append("- Error Semántico: " +mensaje).append("En la línea: ").append(linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 321 -> {
+		case 311 -> {
 			error = st.append("- Error Semántico: El identificador: " + mensaje  + ", no ha sido encontrado. En la línea: " + linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 322 -> {
+		case 312 -> {
 			error = st.append("- Error Semántico: La funcion: " + mensaje  + ", no ha sido encontrada. En la línea: " + linea).toString();
 		    System.out.println(error);
 		    break;
 		}
-		case 323 -> {
+		case 313 -> {
 			error = st.append("- Error Semántico: La funcion: " + mensaje  + ", ha sido declarado ya anteriormente. En la línea: " + linea).toString();
 		    System.out.println(error);
 		    break;

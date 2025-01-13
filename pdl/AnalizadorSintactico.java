@@ -88,7 +88,7 @@ public class AnalizadorSintactico {
 			simboloDeFuncion = gestorTablas.getFuncion();
 			simboloDeFuncion.setEtiqueta("Et"+id+"01");
 		}else {
-			new Error(322,al.getLinea(),id);
+			new Error(312,al.getLinea(),id);
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class AnalizadorSintactico {
 	        	tipo = gestorTablas.getGestorTS().get(0).getSimbolo(id).getTipo();
 	        }
 	    } else {
-	    	new Error(321,al.getLinea(),id);
+	    	new Error(311,al.getLinea(),id);
 	    	tipo.setTipo("error");
 	    }
 	    return tipo;
@@ -494,7 +494,7 @@ public class AnalizadorSintactico {
 				tipo = BuscaFuncionTipoTS(id);
 			}
 			else {
-				new Error(318,al.getLinea(),id).getError();
+				new Error(308,al.getLinea(),id).getError();
 				tipo.setTipo("error");
 			}
 			return tipo;
@@ -554,7 +554,7 @@ public class AnalizadorSintactico {
 			empareja(14,zona_declarada);
 			tipo = E();
 			if(tipo.getTipo().equals("boolean")  ) {
-				new Error(307,al.getLinea()).getError();
+				new Error(300,al.getLinea()).getError();
 				tipo.setTipo("error");
 			}
 			empareja(19,zona_declarada);
@@ -586,7 +586,7 @@ public class AnalizadorSintactico {
 			if(X_tipo.getTipo().equals(simboloDeFuncion.GetTipoDev().getTipo())) {
 			}
 			else {
-				new Error(316,al.getLinea()).getError();
+				new Error(306,al.getLinea()).getError();
 				tipo.setTipo("error");
 				X_tipo =  tipo;
 			}
@@ -633,7 +633,7 @@ public class AnalizadorSintactico {
 			empareja(7,zona_declarada);
 			Tipo E_tipo = E();
 			if(!BuscaTipoTS(id).getTipo().equals(E_tipo.getTipo())) {
-				new Error(309,al.getLinea()).getError();
+				new Error(301,al.getLinea()).getError();
 				tipo.setTipo("error");
 				E_tipo = tipo;
 			}
@@ -646,7 +646,7 @@ public class AnalizadorSintactico {
 			tipo = E();
 			empareja(19,zona_declarada);	
 			if(!BuscaTipoTS(id).getTipo().equals(tipo.getTipo())) {
-				new Error(310,al.getLinea()).getError();
+				new Error(302,al.getLinea()).getError();
 				tipo.setTipo("error");
 				return tipo;
 			}
@@ -658,7 +658,7 @@ public class AnalizadorSintactico {
 			Tipo funcion_tipo = BuscaFuncionTipoTS(id); // Obtiene tipo de retorno
 			
 	        if (funcion_tipo == null || funcion_tipo.getTipo().equals("error")) {
-	            new Error(318, al.getLinea()).getError(); // Error si la función no existe
+	            new Error(308, al.getLinea()).getError(); // Error si la función no existe
 	            tipo.setTipo("error");
 	            funcion_tipo= tipo;
 	        }
@@ -698,7 +698,7 @@ public class AnalizadorSintactico {
 			return tipo;
 		}
 		else {
-			new Error(210,al.getLinea()).getError();
+			new Error(205,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -721,16 +721,16 @@ public class AnalizadorSintactico {
 		if(first.first.get("E").contains(sig_token.getCodigo())) {
 
 			out.print( 30+" ");
-			num_parametros=1;
+			cont_parametros=1;
 			Tipo E_tipo = E(); // Evalúa la primera expresión
 			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error")) {
 			}
 			else if(!Funcion.getTipoParametro(cont_parametros).getTipo().equals(E_tipo.getTipo())) {
-				new Error(320, al.getLinea(),Funcion.imprimirContenido()).getError();
+				new Error(310, al.getLinea(),Funcion.imprimirContenido()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
 			if(Funcion.getNumPar()!=cont_parametros && Funcion.getTipo()!=null) {
-				new Error(319, al.getLinea(),Funcion.getLexema()).getError();
+				new Error(309, al.getLinea(),Funcion.getLexema()).getError();
 			}
 			cont_parametros=1;
 	        if (E_tipo.getTipo().equals("error")) {
@@ -778,7 +778,7 @@ public class AnalizadorSintactico {
 			if(Funcion.getTipo() == null || Funcion.getTipo().equals("error") || Funcion.getNumPar()<cont_parametros) {
 			}
 			else if(!Funcion.getTipoParametro(cont_parametros).getTipo().equals(E_tipo.getTipo())) {
-				new Error(320, al.getLinea(), Funcion.getLexema()).getError();
+				new Error(310, al.getLinea(), Funcion.getLexema()).getError();
 			}
 			Tipo Q_tipo = Q(E_tipo,Funcion); // Procesa el resto de la lista
 			
@@ -798,7 +798,7 @@ public class AnalizadorSintactico {
 
 		}
 		else {
-			new Error(212,al.getLinea()).getError();
+			new Error(206,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
@@ -840,7 +840,7 @@ public class AnalizadorSintactico {
 			tipo.setTam(64);
 		}
 		else {
-			new Error(213,al.getLinea()).getError();
+			new Error(207,al.getLinea()).getError();
 			tipo.setTipo("error");
 		}
 
@@ -882,7 +882,7 @@ public class AnalizadorSintactico {
 			tipo.setTam(0);
 		}
 		else {
-			new Error(214,al.getLinea()).getError();
+			new Error(208,al.getLinea()).getError();
 			tipo.setTipo("error");
 		}
 
@@ -926,7 +926,7 @@ public class AnalizadorSintactico {
 			Tipo E_tipo = E();
 			if (!E_tipo.getTipo().equals("boolean")) {
 				tipo.setTipo("error");
-				new Error(313, al.getLinea()).getError();
+				new Error(303, al.getLinea()).getError();
 			}
 			empareja(17,zona_declarada);
 			tipo = S();
@@ -942,7 +942,7 @@ public class AnalizadorSintactico {
 			empareja(9,zona_declarada);
 			tipo = T();
 			if(ExistiaTipoTS(sig_token.getAtributo())!=null) {
-				new Error(315, al.getLinea()).getError();
+				new Error(305, al.getLinea()).getError();
 			}
 			AddTipoTS(sig_token.getAtributo(),tipo);
 			empareja(1,zona_declarada);
@@ -960,14 +960,14 @@ public class AnalizadorSintactico {
 			tipo = E();
 			if (!tipo.getTipo().equals("boolean")) {
 				tipo.setTipo("error");
-				new Error(314, al.getLinea()).getError();
+				new Error(304, al.getLinea()).getError();
 			}
 			empareja(17,zona_declarada);
 			empareja(19,zona_declarada);
 		}
 		else {
 			tipo.setTipo("error");
-			new Error(215,al.getLinea()).getError();
+			new Error(209,al.getLinea()).getError();
 		}
 		
 		return tipo;
@@ -998,11 +998,11 @@ public class AnalizadorSintactico {
 		else {
 			if(sig_token.getCodigo()==27) {
 				tipo.setTipo("error");
-				new Error(219,al.getLinea()).getError();
+				new Error(213,al.getLinea()).getError();
 			}
 			else {
 				tipo.setTipo("error");
-				new Error(216,al.getLinea()).getError();
+				new Error(210,al.getLinea()).getError();
 			}
 		}
 
@@ -1035,7 +1035,7 @@ public class AnalizadorSintactico {
 		tipo = H();
 		lexemafuncion=sig_token.getAtributo();
 		if(gestorTablas.gestorTS.get(0).getSimbolo(lexemafuncion).getTipo()!=null) {
-			new Error(323, al.getLinea(), BuscaFuncionTS(lexemafuncion).getLexema()).getError();
+			new Error(313, al.getLinea(), BuscaFuncionTS(lexemafuncion).getLexema()).getError();
 		}
 		AddFuncionTS(lexemafuncion,tipo);
 		empareja(1,zona_declarada);
@@ -1087,7 +1087,7 @@ public class AnalizadorSintactico {
 			tipo.setTipo("void");
 		}
 		else {
-			new Error(217,al.getLinea()).getError();
+			new Error(211,al.getLinea()).getError();
 			tipo.setTipo("error");
 		}
 
@@ -1125,7 +1125,7 @@ public class AnalizadorSintactico {
 		else if(first.follow.get("K").contains(sig_token.getCodigo())) //FOLLOW K token )
 			out.print(49+" ");
 		else {
-			new Error(218,al.getLinea()).getError();
+			new Error(212,al.getLinea()).getError();
 			tipo.setTipo("error");
 		}
 		return tipo;

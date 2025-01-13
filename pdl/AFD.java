@@ -100,6 +100,7 @@ class AFD {
 		double valor = 0;
 		Token token = null;
 		Tipo tipo = new Tipo();
+		 boolean errorReportado = false;
 		// Salimos del bucle después de procesar un token
 		while (true) {
 			if (estado == 0 && !leido) 
@@ -108,40 +109,43 @@ class AFD {
 			car = (char) c;
 			//System.out.print(car);
 			accion = accion(estado, identificar(c));
-			if (accion == null) {
-				new Error(106, posicionDeLinea,String.valueOf(c)).getError();
-				esSimbolo=true;
-				valor = 0;
-				lexema.delete(0, lexema.length());
-				leido = false;
-				estado = 0;
-				continue;
-			}
-			if (accion instanceof Integer) {
-				new Error((int) accion, posicionDeLinea).getError();
-				esSimbolo=true;
-				valor = 0;
-				lexema.delete(0, lexema.length());
-				leido = true;
 
-				if(car == '*') 
-					c = leer();
-				if(car == '_') 
-					c = leer();
-				estado = 0;
-				continue;
-			}
-			estado = estado(estado, identificar(c));
+	        // Acción nula (carácter no reconocido)
+	        if (accion == null) {
+	            if (!errorReportado) {
+	                new Error(106, posicionDeLinea, String.valueOf(c)).getError();
+	                errorReportado = true; // Marcar como reportado
+	            }
+	            c = leer(); // Avanzar para evitar bucle
+	            estado = 0; // Reiniciar estado
+	            lexema.setLength(0); // Limpiar lexema
+	            continue;
+	        }
+
+	        // Acción de error (Integer)
+	        if (accion instanceof Integer) {
+	            if (!errorReportado) {
+	                new Error((int) accion, posicionDeLinea).getError();
+	                errorReportado = true; // Marcar como reportado
+	            }
+	            c = leer(); // Avanzar para evitar bucle
+	            estado = 0; // Reiniciar estado
+	            lexema.setLength(0); // Limpiar lexema
+	            continue;
+	        }
+			 estado = estado(estado, identificar(c));
+		        errorReportado = false; // Reiniciar bandera si avanzamos correctamente
 			if(estado==3) 
 				esSimbolo=false;
 			if (estado == -1) {
-				new Error(106, posicionDeLinea).getError();
-				esSimbolo=false;
-				valor = 0;
-				lexema.delete(0, lexema.length());
-				leido = false;
-				estado = 0;
-				continue;
+				 if (!errorReportado) {
+		                new Error(106, posicionDeLinea).getError();
+		                errorReportado = true; // Marcar como reportado
+		            }
+		            c = leer(); // Avanzar para evitar bucle
+		            estado = 0; // Reiniciar estado
+		            lexema.setLength(0); // Limpiar lexema
+		            continue;
 			} else {
 				switch ((char) accion) {
 				case 'A':
@@ -198,7 +202,7 @@ class AFD {
 							//Error de identificador ya declarado
 							posEnTablaSimbolo = As.getTablaActual();
 							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema); //codigo hecho por mi
-							//new Error(315, posicionDeLinea).getError(); Codigo Xiaolei
+							//new Error(305, posicionDeLinea).getError(); Codigo Xiaolei
 						}
 						//Zona declarada = false
 					}else {
@@ -320,7 +324,7 @@ class AFD {
 							token = genToken(1, posEnTablaSimbolo.tablaSimbolo.get(auxLexema).getLexema(),auxLexema);
 						}else {
 							//Error de identificador ya declarado
-							new Error(315, posicionDeLinea).getError();
+							new Error(305, posicionDeLinea).getError();
 						}
 						//Zona declarada = false
 					}else {
@@ -346,7 +350,6 @@ class AFD {
 		case -1:
 			return 'c';
 		case 39:
-		case 34:
 			return '\'';
 		case 43:
 			return '+';

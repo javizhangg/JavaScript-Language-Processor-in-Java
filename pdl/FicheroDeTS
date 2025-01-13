@@ -1,21 +1,55 @@
-CONTENIDOS DE LA TABLA GLOBAL #1 :
-* LEXEMA: 'a'
+CONTENIDOS DE LA TABLA LOCAL #2 :
+* LEXEMA: 'meme'
   Atributos :
-      + Tipo: 'int'
+      + Tipo: 'boolean'
       + Despl: 0
   --------- ---------- 
-* LEXEMA: 'b'
+* LEXEMA: 'pepe'
   Atributos :
-      + Tipo: 'int'
+      + Tipo: 'string'
       + Despl: 1
   --------- ---------- 
-* LEXEMA: 'bbb'
+CONTENIDOS DE LA TABLA GLOBAL #1 :
+* LEXEMA: 'mensaje'
   Atributos :
-      + Tipo: 'boolean'
-      + Despl: 2
+      + Tipo: 'string'
+      + Despl: 0
   --------- ---------- 
-* LEXEMA: 'c'
+* LEXEMA: 'logico'
   Atributos :
       + Tipo: 'boolean'
-      + Despl: 3
+      + Despl: 64
+  --------- ---------- 
+* LEXEMA: 'global_1'
+  Atributos :
+      + Tipo: 'int'
+      + Despl: 66
+  --------- ---------- 
+* LEXEMA: 'global_2'
+  Atributos :
+      + Tipo: 'int'
+      + Despl: 65
+  --------- ---------- 
+* LEXEMA: 'hola'
+  Atributos :
+      + Tipo: 'función'
+      + numParam: 1
+      		+ TipoParam1: 'boolean'
+      + TipoRetorno: 'string'
+      + EtiqFuncion: 'Ethola01'
+  --------- ---------- 
+* LEXEMA: 'francisco'
+  Atributos :
+      + Tipo: 'int'
+      + Despl: 68
+  --------- ---------- 
+* LEXEMA: 'franciszaaco'
+  Atributos :
+      + Tipo: 'int'
+      + Despl: 67
+  --------- ---------- 
+* LEXEMA: 'logicorniso'
+  Atributos :
+      + Tipo: 'boolean'
+      + Despl: 69
   --------- ---------- 
