@@ -21,16 +21,10 @@ public class AnalizadorLexico{
 
 	//Constructor del Analizador Lexico con la ruta del fichero fuente
 	public AnalizadorLexico() throws IOException {
-//		archivoEntrada = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
-//		archivoSalidaTokens = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
-//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
 		archivoEntrada = new File(System.getProperty("user.dir")  + "/src/pdl/prueba.txt");
 		archivoSalidaTokens = new File(System.getProperty("user.dir")  + "/src/pdl/FicheroDeTokens");
 		archivoSalidaTS = new File(System.getProperty("user.dir")  + "/src/pdl/FicheroDeTS");
 		try {
-//			fr = new FileReader("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\prueba.txt");
-//			fwTokens = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTokens");
-//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
 			fr = new FileReader(System.getProperty("user.dir")  + "/src/pdl/prueba.txt");
 			fwTokens = new FileWriter(System.getProperty("user.dir")  + "/src/pdl/FicheroDeTokens");
 			fwTS = new FileWriter(System.getProperty("user.dir")  + "/src/pdl/FicheroDeTS");

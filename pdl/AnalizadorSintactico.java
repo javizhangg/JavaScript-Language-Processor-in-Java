@@ -41,14 +41,10 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
-//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
 		archivoSalidaParse = new File(System.getProperty("user.dir") + "/src/pdl/FicheroParse");
 		archivoSalidaTS = new File(System.getProperty("user.dir") + "/src/pdl/FicheroDeTS");;
 
 		try {
-//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			fwParse = new FileWriter(System.getProperty("user.dir") + "/src/pdl/FicheroParse");
 			fwTS = new FileWriter(System.getProperty("user.dir") + "/src/pdl/FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
