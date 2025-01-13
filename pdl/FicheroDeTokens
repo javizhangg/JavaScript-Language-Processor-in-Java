@@ -1,58 +1,16 @@
 <9,> //Palabra reservada: var
-<12,> //Palabra reservada: string
-<1,mensaje> //es el identificador: mensaje
-<19,> //tipo: ;
-<1,mensaje> //es el identificador: mensaje
-<7,> //tipo: =
-<3,'Feliz 2025 <3'> //es la cadena: 'Feliz 2025 <3'
-<19,> //tipo: ;
 <9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,logico> //es el identificador: logico
-<19,> //tipo: ;
-<1,logico> //es el identificador: logico
-<7,> //tipo: =
-<1,logico> //es el identificador: logico
-<6,> //tipo: &&
-<1,logico> //es el identificador: logico
-<19,> //tipo: ;
-<1,global_1> //es el identificador: global_1
-<7,> //tipo: =
-<16,> //tipo: (
-<1,global_2> //es el identificador: global_2
-<4,> //tipo: +
-<1,global_2> //es el identificador: global_2
-<17,> //tipo: )
-<4,> //tipo: +
-<1,global_2> //es el identificador: global_2
 <19,> //tipo: ;
 <27,> //Palabra reservada: function
-<12,> //Palabra reservada: string
-<1,hola> //es el identificador: hola
+<1,FuncionAux> //es el identificador: FuncionAux
 <16,> //tipo: (
-<11,> //Palabra reservada: boolean
-<1,meme> //es el identificador: meme
 <17,> //tipo: )
 <20,> //tipo: {
-<1,francisco> //es el identificador: francisco
-<7,> //tipo: =
-<1,franciszaaco> //es el identificador: franciszaaco
-<19,> //tipo: ;
-<9,> //Palabra reservada: var
-<12,> //Palabra reservada: string
-<1,pepe> //es el identificador: pepe
-<19,> //tipo: ;
-<28,> //Palabra reservada: return
-<1,mensaje> //es el identificador: mensaje
-<19,> //tipo: ;
 <21,> //tipo: }
-<9,> //Palabra reservada: var
-<11,> //Palabra reservada: boolean
-<1,logicorniso> //es el identificador: logicorniso
-<19,> //tipo: ;
-<1,hola> //es el identificador: hola
+<25,> //Palabra reservada: do
+<20,> //tipo: {
+<21,> //tipo: }
+<26,> //Palabra reservada: while
 <16,> //tipo: (
-<1,logicorniso> //es el identificador: logicorniso
+<9,> //Palabra reservada: var
 <17,> //tipo: )
-<19,> //tipo: ;
-<29,> //Palabra reservada: eof

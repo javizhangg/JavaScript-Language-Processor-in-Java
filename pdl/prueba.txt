@@ -1,16 +1,8 @@
-var string mensaje;
-mensaje = 'Feliz 2025 <3'				; /*<- Menos a los que hacen esto*/
-/* global_3??
+var var;
 
-Es
-Broma lo anterior */
-var boolean logico;
-logico = logico && logico;
-global_1 = (global_2 + global_2) + global_2;
-function string hola(boolean meme){
-francisco = franciszaaco;
-var string pepe;
-return mensaje;
+function FuncionAux(){
 }
-var boolean logicorniso;
-hola(logicorniso);
+
+do{
+
+} while(var);

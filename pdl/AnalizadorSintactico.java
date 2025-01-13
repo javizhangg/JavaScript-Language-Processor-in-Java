@@ -41,16 +41,16 @@ public class AnalizadorSintactico {
 	public TablasDeSimbolos gestorTablas;
 
 	public AnalizadorSintactico() throws IOException{
-//		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
-//		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
-				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+		archivoSalidaParse = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroParse");
+		archivoSalidaTS = new File("C:\\Users\\xiaol\\eclipse-workspace\\PDL\\src\\pdl\\FicheroDeTS");
+//				  archivoSalidaParse = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//				  archivoSalidaTS = new File("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 
 		try {
-//			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-//			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
-						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
-						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+			fwParse = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+			fwTS = new FileWriter("C:\\Users\\xiaol\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
+//						fwParse = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroParse");
+//						fwTS = new FileWriter("C:\\Users\\javi2\\eclipse-workspace\\pdl\\src\\pdl\\FicheroDeTS");
 			bw=new BufferedWriter(fwParse);
 			out = new PrintWriter(bw);
 		} catch (FileNotFoundException e) {
@@ -172,19 +172,6 @@ public class AnalizadorSintactico {
 		return tipo;
 	}
 
-//	/* 
-//	 * La función P2 se encarga de inicializar el análisis del programa. 
-//	 * 1. Crea la tabla global de símbolos llamando a `CrearTSGlobal`.
-//	 * 2. Inicializa el desplazamiento global (`despG`) a 0, utilizado para asignar direcciones de memoria a las variables globales.
-//	 * 3. Llama a la función `P`, que procesa las reglas del programa según la gramática definida.
-//	 * 4. Finalmente, imprime la tabla de símbolos global con `LiberaTablaTS(0)`.
-//	 */
-//	public void P2() throws IOException {
-//		gestorTablas.CrearTSGlobal();
-//		despG=0;
-//		P();
-//		gestorTablas.LiberaTablaTS(0);
-//	}
 	/* 
 	 * La función P analiza las reglas principales del programa: 
 	 * 1. Si el token actual pertenece a la regla `B`, procesa `B` y llama recursivamente a `P`.
@@ -594,7 +581,7 @@ public class AnalizadorSintactico {
 			return X_tipo;
 		}
 		else {
-			new Error(208,al.getLinea()).getError();
+			new Error(209,al.getLinea()).getError();
 			tipo.setTipo("error");
 			return tipo;
 		}
