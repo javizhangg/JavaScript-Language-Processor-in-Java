@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as described below."
+title: "JavaScript Language Processor"
+abstract: "A JavaScript implementation of a language processor."
+version: "0.1.0"
+date-released: "2025-04-17"
+license: Apache-2.0
+repository-code: "https://github.com/<your‑username>/Procesador-de-Lenguaje-JavaScript"
+authors:
+  - family-names: Zhang
+    given-names: Zhiwe
+    # orcid: "https://orcid.org/0000-0000-0000-0000"   # optional
+  - family-names: Zhu
+    given-names: Xiaolei
+    # orcid: "https://orcid.org/0000-0000-0000-0000"   # optional
